@@ -26,13 +26,19 @@ export const googleProvider = new GoogleAuthProvider()
 export const db = getFirestore(app)
 
 /**
- * Crea `accounts/{uid}` con `{ uid, roles: [] }` solo se il documento non esiste.
+ * Crea `accounts/{uid}` con i campi predefiniti solo se il documento non esiste.
  */
 export async function ensureAccountExists(uid) {
   const ref = doc(db, 'accounts', uid)
   const snap = await getDoc(ref)
   if (!snap.exists()) {
-    await setDoc(ref, { uid, roles: [] })
+    await setDoc(ref, {
+      uid,
+      roles: [],
+      quiz_completed: false,
+      price_redeemed: false,
+      qrcodes: [],
+    })
   }
 }
 
