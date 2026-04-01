@@ -39,7 +39,7 @@ export class Routing {
         {
           path: '/qrcodes/:code',
           name: 'qrcode_by_code',
-          component: QrcodesView,
+            component: QrcodesView,
         },
       ],
     })
