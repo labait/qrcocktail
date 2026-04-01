@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, provide } from 'vue'
+import { ref, onMounted, inject } from 'vue'
 import {
   onAuthStateChanged,
   signInWithPopup,
@@ -9,23 +9,21 @@ import { auth, googleProvider, ensureAccountExists } from './firebase'
 
 import Loading from './components/loading.vue'
 
-const global = ref({
-  user: null,
-  isLoading: true,
-})
+const appGlobal = inject('global')
+const authLoading = ref(true)
 
 onMounted(() => {
   onAuthStateChanged(auth, (u) => {
-    global.value.user = u
+    appGlobal.user = u
     if (u) {
       ensureAccountExists(u.uid).then(() => {
-        global.value.isLoading = false
+        authLoading.value = false
       }).catch((err) => {
         console.error(err)
-        global.value.isLoading = false
+        authLoading.value = false
       })
     } else {
-      global.value.isLoading = false
+      authLoading.value = false
     }
   })
 })
@@ -40,9 +38,9 @@ async function logout() {
 </script>
 
 <template>
-  <Loading v-if="global.isLoading" />
+  <Loading v-if="authLoading" />
   <div class="flex flex-col items-center gap-4">
-    <template v-if="!global.user">
+    <template v-if="!appGlobal.user">
       <button
         type="button"
         class="cursor-pointer rounded-lg bg-slate-900 px-5 py-2.5 text-sm font-medium text-white shadow transition hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2"
@@ -54,9 +52,9 @@ async function logout() {
     <template v-else>
       <div class="flex items-center gap-3">
         <img
-          v-if="global.user.photoURL"
-          :src="global.user.photoURL"
-          :alt="global.user.displayName || 'Avatar'"
+          v-if="appGlobal.user.photoURL"
+          :src="appGlobal.user.photoURL"
+          :alt="appGlobal.user.displayName || 'Avatar'"
           class="h-14 w-14 rounded-full border-2 border-slate-200 object-cover shadow"
           width="56"
           height="56"
@@ -67,7 +65,7 @@ async function logout() {
           class="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border-2 border-slate-200 bg-slate-100 text-base font-semibold text-slate-600 shadow"
           aria-hidden="true"
         >
-          {{ (global.user.displayName || global.user.email || '?').charAt(0).toUpperCase() }}
+          {{ (appGlobal.user.displayName || appGlobal.user.email || '?').charAt(0).toUpperCase() }}
         </div>
         <a
           href="#"
