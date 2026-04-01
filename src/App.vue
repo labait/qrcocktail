@@ -8,7 +8,7 @@ import Auth from './Auth.vue'
 import Loading from './components/loading.vue'
 
 const global = reactive({
-  base_url: 'http://localhost:5173',
+  base_url: import.meta.env.VITE_BASE_URL,
   user: null,
   /** Ruoli da `accounts/{uid}.roles` in Firestore */
   roles: [],
