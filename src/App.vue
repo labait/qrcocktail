@@ -10,6 +10,10 @@ import Loading from './components/loading.vue'
 const global = reactive({
   base_url: 'http://localhost:5173',
   user: null,
+  /** Ruoli da `accounts/{uid}.roles` in Firestore */
+  roles: [],
+  /** True dopo il primo aggiornamento utente/ruoli da `onAuthStateChanged` */
+  accountReady: false,
   settings: {
     qrcode_size: 400,
   },
@@ -19,6 +23,7 @@ const global = reactive({
 const isLoading = ref(true)
 
 provide('global', global)
+provide('reloadQrCodes', loadQrCodes)
 
 async function loadQrCodes() {
   isLoading.value = true

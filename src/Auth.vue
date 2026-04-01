@@ -1,30 +1,47 @@
 <script setup>
-import { ref, onMounted, inject } from 'vue'
+import { ref, onMounted, inject, computed } from 'vue'
+import { RouterLink } from 'vue-router'
 import {
   onAuthStateChanged,
   signInWithPopup,
   signOut as firebaseSignOut,
 } from 'firebase/auth'
-import { auth, googleProvider, ensureAccountExists } from './firebase'
+import { doc, getDoc } from 'firebase/firestore'
+import { auth, db, googleProvider, ensureAccountExists } from './firebase'
 
 import Loading from './components/loading.vue'
 
 const appGlobal = inject('global')
 const authLoading = ref(true)
 
+const isAdmin = computed(
+  () => Array.isArray(appGlobal.roles) && appGlobal.roles.includes('admin'),
+)
+
 onMounted(() => {
   onAuthStateChanged(auth, (u) => {
     appGlobal.user = u
-    if (u) {
-      ensureAccountExists(u.uid).then(() => {
+    ;(async () => {
+      if (u) {
+        appGlobal.accountReady = false
+        try {
+          await ensureAccountExists(u.uid)
+          const snap = await getDoc(doc(db, 'accounts', u.uid))
+          const raw = snap.exists() ? snap.data().roles : []
+          appGlobal.roles = Array.isArray(raw) ? raw : []
+        } catch (err) {
+          console.error(err)
+          appGlobal.roles = []
+        } finally {
+          appGlobal.accountReady = true
+          authLoading.value = false
+        }
+      } else {
+        appGlobal.roles = []
+        appGlobal.accountReady = true
         authLoading.value = false
-      }).catch((err) => {
-        console.error(err)
-        authLoading.value = false
-      })
-    } else {
-      authLoading.value = false
-    }
+      }
+    })()
   })
 })
 
@@ -43,7 +60,7 @@ async function logout() {
     <template v-if="!appGlobal.user">
       <button
         type="button"
-        class="cursor-pointer rounded-lg bg-slate-900 px-5 py-2.5 text-sm font-medium text-white shadow transition hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2"
+        class="cursor-pointer rounded-lg bg-slate-900 px-5 py-2.5 text-base font-medium text-white shadow transition hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2"
         @click="connectGoogle"
       >
         Connect with Google
@@ -75,6 +92,13 @@ async function logout() {
           Logout
         </a>
       </div>
+      <RouterLink
+        v-if="isAdmin"
+        :to="{ name: 'qrcodes_admin' }"
+        class="text-base font-medium text-slate-700 underline underline-offset-2 hover:text-slate-900"
+      >
+        Amministrazione QR code
+      </RouterLink>
     </template>
   </div>
 </template>

@@ -9,11 +9,19 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  /** Larghezza/altezza QR in px; se omesso usa `global.settings.qrcode_size` o 200 */
+  size: {
+    type: Number,
+    default: null,
+  },
 })
 
 const global = inject('global')
 
-const qrSize = computed(() => Number(global?.settings?.qrcode_size) || 200)
+const qrSize = computed(() => {
+  if (props.size != null && props.size > 0) return Math.round(props.size)
+  return Number(global?.settings?.qrcode_size) || 200
+})
 
 const absoluteUrl = computed(() => {
   const base = global?.base_url != null ? String(global.base_url).replace(/\/$/, '') : ''
