@@ -1,0 +1,123 @@
+<script setup>
+import { onBeforeUnmount, onMounted, ref } from 'vue'
+
+const emit = defineEmits(['detected', 'error', 'started', 'stopped'])
+
+const props = defineProps({
+  facingMode: {
+    type: String,
+    default: 'environment',
+  },
+  scanIntervalMs: {
+    type: Number,
+    default: 250,
+  },
+  autoStart: {
+    type: Boolean,
+    default: true,
+  },
+})
+
+const videoRef = ref(null)
+const streamRef = ref(null)
+const isScanning = ref(false)
+const isBusy = ref(false)
+const canUseBarcodeDetector = typeof window !== 'undefined' && 'BarcodeDetector' in window
+const detector = canUseBarcodeDetector ? new window.BarcodeDetector({ formats: ['qr_code'] }) : null
+
+let intervalId = null
+
+function stopStreamTracks() {
+  if (!streamRef.value) return
+  for (const track of streamRef.value.getTracks()) {
+    track.stop()
+  }
+  streamRef.value = null
+}
+
+async function start() {
+  if (isScanning.value) return
+  if (!navigator?.mediaDevices?.getUserMedia) {
+    emit('error', new Error('Camera API non supportata dal browser'))
+    return
+  }
+  if (!canUseBarcodeDetector) {
+    emit('error', new Error('BarcodeDetector non supportato: usa Chrome/Edge mobile o desktop recente'))
+    return
+  }
+
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({
+      video: {
+        facingMode: { ideal: props.facingMode },
+      },
+      audio: false,
+    })
+
+    streamRef.value = stream
+    if (videoRef.value) {
+      videoRef.value.srcObject = stream
+      await videoRef.value.play()
+    }
+
+    isScanning.value = true
+    intervalId = window.setInterval(scanFrame, props.scanIntervalMs)
+    emit('started')
+  } catch (error) {
+    emit('error', error)
+  }
+}
+
+function stop() {
+  if (intervalId) {
+    window.clearInterval(intervalId)
+    intervalId = null
+  }
+  isScanning.value = false
+  stopStreamTracks()
+  emit('stopped')
+}
+
+async function scanFrame() {
+  if (!videoRef.value || !detector || isBusy.value) return
+  if (videoRef.value.readyState < HTMLMediaElement.HAVE_CURRENT_DATA) return
+
+  isBusy.value = true
+  try {
+    const barcodes = await detector.detect(videoRef.value)
+    const match = barcodes?.find((item) => item?.rawValue)
+    if (!match?.rawValue) return
+
+    emit('detected', match.rawValue)
+    stop()
+  } catch (error) {
+    emit('error', error)
+  } finally {
+    isBusy.value = false
+  }
+}
+
+onMounted(() => {
+  if (props.autoStart) {
+    start()
+  }
+})
+
+onBeforeUnmount(() => {
+  stop()
+})
+
+defineExpose({ start, stop })
+</script>
+
+<template>
+  <div class="w-full max-w-md overflow-hidden rounded-xl bg-black">
+    <video
+      ref="videoRef"
+      class="h-full w-full object-cover"
+      autoplay
+      playsinline
+      muted
+    />
+  </div>
+</template>
