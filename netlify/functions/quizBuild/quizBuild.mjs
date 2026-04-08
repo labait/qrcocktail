@@ -44,8 +44,12 @@ function jsonResponse(payload, status = 200) {
 
 export default async (request) => {
   try {
-    const apiKey = process.env.OPENAI_KEY
+    // if querystring key debug is present, return debug.json file
     const url = new URL(request.url)
+    const debug = url.searchParams.has("debug")
+    if (debug) return jsonResponse(require("./debug.json"), 200)
+
+    const apiKey = process.env.OPENAI_KEY
     const cocktail = (url.searchParams.get("cocktail") || "").trim()
 
     if (!apiKey) {

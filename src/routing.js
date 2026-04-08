@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from './views/home.vue'
+import Home from './views/Home.vue'
 import QrcodeRedeem from './views/QrcodeRedeem.vue'
 import QrcodesView from './views/QrcodesView.vue'
 import QrcodesList from './views/QrcodesList.vue'

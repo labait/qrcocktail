@@ -8,6 +8,8 @@ import Auth from './Auth.vue'
 import Loading from './components/loading.vue'
 
 const global = reactive({
+  debug: true,
+  loading: false,
   base_url: import.meta.env.VITE_BASE_URL,
   user: null,
   /** Ruoli da `accounts/{uid}.roles` in Firestore */
@@ -20,13 +22,12 @@ const global = reactive({
   qrcodes: [],
 })
 
-const isLoading = ref(true)
 
 provide('global', global)
 provide('reloadQrCodes', loadQrCodes)
 
 async function loadQrCodes() {
-  isLoading.value = true
+  global.loading = true
   try {
     const snap = await getDocs(collection(db, 'qrcodes'))
     global.qrcodes = snap.docs.map((d) => ({
@@ -37,7 +38,7 @@ async function loadQrCodes() {
     console.error(err)
     global.qrcodes = []
   } finally {
-    isLoading.value = false
+    global.loading = false
   }
 }
 
@@ -49,7 +50,7 @@ onMounted(async () => {
 
 <template>
   <main class="relative flex min-h-screen flex-col items-center">
-    <Loading v-if="isLoading" />
+    <Loading v-if="global.loading" />
     <div class="flex w-full shrink-0 flex-col items-center pt-6">
       <Auth />
     </div>
