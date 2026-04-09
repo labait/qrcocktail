@@ -29,25 +29,29 @@ async function removeRow(id) {
 </script>
 
 <template>
-  <div class="w-full max-w-4xl px-4 py-6">
-    <div class="mb-6 flex flex-wrap items-center justify-between gap-3">
-      <h1 class="text-xl font-semibold text-slate-900">Amministrazione QR code</h1>
+  <div class="w-full">
+    <!-- Admin Header Block -->
+    <div class="mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-6 bg-slate-900 p-6 rounded-2xl shadow-xl border-b-4 border-brand">
+      <h1 class="text-xl font-black tracking-widest uppercase text-white">
+        Console <span class="text-brand">QR</span>
+      </h1>
       <RouterLink
         :to="{ name: 'qrcodes_new' }"
-        class="rounded-lg bg-slate-900 px-4 py-2 text-base font-medium text-white hover:bg-slate-800"
+        class="rounded-full bg-brand px-6 py-3 text-xs font-bold uppercase tracking-widest text-white hover:opacity-90 transition shadow-md whitespace-nowrap text-center"
       >
-        new qrcode
+        + Nuovo Codice
       </RouterLink>
     </div>
 
-    <div class="overflow-x-auto rounded-lg border border-slate-200 shadow-sm">
-      <table class="min-w-full divide-y divide-slate-200 text-left text-base">
-        <thead class="bg-slate-50">
+    <!-- Data Table -->
+    <div class="overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm">
+      <table class="min-w-full divide-y divide-slate-100 text-left text-sm">
+        <thead class="bg-slate-50 uppercase tracking-widest text-[10px] font-black text-slate-500">
           <tr>
-            <th class="px-4 py-3 font-medium text-slate-700">QR</th>
-            <th class="px-4 py-3 font-medium text-slate-700">Nome</th>
-            <th class="px-4 py-3 font-medium text-slate-700">Codice</th>
-            <th class="px-4 py-3 font-medium text-slate-700 text-right">Azioni</th>
+            <th class="px-5 py-4">Grafica</th>
+            <th class="px-5 py-4">Nome</th>
+            <th class="px-5 py-4">ID</th>
+            <th class="px-5 py-4 text-right">Amministra</th>
           </tr>
         </thead>
         <tbody class="divide-y divide-slate-100 bg-white">
@@ -66,7 +70,7 @@ async function removeRow(id) {
               <RouterLink
                 v-if="row.code"
                 :to="{ name: 'qrcode_by_code', params: { code: String(row.code) } }"
-                class="font-medium text-blue-600 underline underline-offset-2 hover:text-blue-800"
+                class="font-medium text-orange-600 underline underline-offset-2 hover:text-orange-800"
               >
                 {{ row.code }}
               </RouterLink>
@@ -76,7 +80,7 @@ async function removeRow(id) {
               <RouterLink
                 v-if="row.id"
                 :to="{ name: 'qrcodes_edit', params: { id: row.id } }"
-                class="mr-3 text-blue-600 underline underline-offset-2 hover:text-blue-800"
+                class="mr-3 text-orange-600 underline underline-offset-2 hover:text-orange-800"
               >
                 Modifica
               </RouterLink>
