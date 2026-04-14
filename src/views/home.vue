@@ -153,16 +153,6 @@ const fillPercent = computed(() => Math.min((points.value / 3) * 100, 100))
 
           <!-- Pulsante scansiona -->
           <div class="dash-actions">
-            <!-- Avatar utente -->
-            <div class="dash-avatar">
-              <img
-                v-if="global.user?.photoURL"
-                :src="global.user.photoURL"
-                :alt="global.user.displayName || 'Avatar'"
-                referrerpolicy="no-referrer"
-              />
-              <span v-else>{{ (global.user?.displayName || global.user?.email || '?').charAt(0).toUpperCase() }}</span>
-            </div>
 
             <button class="dash-scan-btn" @click="startScanner">
               Scansiona il QRcode
