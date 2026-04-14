@@ -4,7 +4,6 @@ import { collection, getDocs } from 'firebase/firestore'
 import { db } from './firebase'
 
 import { RouterView } from 'vue-router'
-import Auth from './Auth.vue'
 import Loading from './components/loading.vue'
 
 const global = reactive({
@@ -25,6 +24,36 @@ const global = reactive({
 
 provide('global', global)
 provide('reloadQrCodes', loadQrCodes)
+
+/* ── Auth state listener ── */
+import { onAuthStateChanged } from 'firebase/auth'
+import { doc, getDoc } from 'firebase/firestore'
+import { auth, ensureAccountExists } from './firebase'
+
+onMounted(() => {
+  onAuthStateChanged(auth, (u) => {
+    global.user = u
+    ;(async () => {
+      if (u) {
+        global.accountReady = false
+        try {
+          await ensureAccountExists(u.uid)
+          const snap = await getDoc(doc(db, 'accounts', u.uid))
+          const raw = snap.exists() ? snap.data().roles : []
+          global.roles = Array.isArray(raw) ? raw : []
+        } catch (err) {
+          console.error(err)
+          global.roles = []
+        } finally {
+          global.accountReady = true
+        }
+      } else {
+        global.roles = []
+        global.accountReady = true
+      }
+    })()
+  })
+})
 
 async function loadQrCodes() {
   global.loading = true
@@ -49,30 +78,9 @@ onMounted(async () => {
 </script>
 
 <template>
-  <main class="relative flex min-h-screen flex-col mx-auto max-w-lg w-full bg-white text-slate-900 font-sans">
-    
-    <!-- Top centered logo placeholder -->
-    <header class="w-full flex justify-center pt-10 pb-8">
-      <img 
-        src="https://placehold.co/240x80/ffffff/ff7230?font=inter&text=BRAND+LOGO" 
-        alt="Brand Logo" 
-        class="h-14 w-auto object-contain select-none" 
-      />
-    </header>
-
+  <main class="app-shell">
     <Loading v-if="global.loading" />
-    
-    <!-- Auth Profile Area -->
-    <div class="flex w-full shrink-0 flex-col items-center px-6">
-      <Auth />
-    </div>
-    
-    <!-- Edge-to-edge separator -->
-    <div class="w-full h-px bg-slate-100 my-6"></div>
-    
-    <!-- Main View Content -->
-    <div class="flex w-full flex-1 flex-col items-center justify-start px-6 pb-12">
-      <RouterView />
-    </div>
+    <RouterView />
   </main>
 </template>
+

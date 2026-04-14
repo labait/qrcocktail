@@ -8,3 +8,573 @@
 body {
   @apply text-slate-900 bg-white;
 }
+
+/* ═══════════════════════════════════════════════════
+   App Shell  (App.vue)
+═══════════════════════════════════════════════════ */
+.app-shell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+  width: 100%;
+  max-width: 430px;
+  margin: 0 auto;
+  background: #f5f5f5;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+/* ═══════════════════════════════════════════════════
+   Home — Root
+═══════════════════════════════════════════════════ */
+.home-root {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100%;
+}
+
+/* ── Hero arancione ───────────────────────────────── */
+.hero-section {
+  background-color: #ff7230;
+  width: 100%;
+  padding: 40px 28px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.hero-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-laba {
+  font-size: 28px;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.logo-subtitle {
+  display: flex;
+  flex-direction: column;
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.hero-title {
+  font-size: clamp(40px, 12vw, 56px);
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: -0.03em;
+  line-height: 1.0;
+  margin: 0;
+}
+
+.hero-sub {
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.5;
+  max-width: 260px;
+  margin: 0;
+}
+
+/* ── Steps section ────────────────────────────────── */
+.steps-section {
+  background: #f5f5f5;
+  flex: 1;
+  padding: 36px 28px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.steps-label {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: #222;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.steps-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.step-item {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.step-number {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: 700;
+  color: #222;
+  flex-shrink: 0;
+}
+
+.step-text {
+  font-size: 16px;
+  font-weight: 600;
+  color: #111;
+  line-height: 1.3;
+}
+
+/* ── CTA Google ───────────────────────────────────── */
+.cta-wrapper {
+  margin-top: auto;
+  padding-top: 16px;
+}
+
+.google-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  background: #1a1a1a;
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  padding: 16px 24px;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.google-btn:hover {
+  background: #111;
+  transform: scale(1.02);
+}
+
+.google-btn:active {
+  transform: scale(0.98);
+}
+
+.google-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+/* ── Dashboard (post-login) ───────────────────────── */
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  padding: 24px 20px 80px;
+}
+
+.points-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 16px 20px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.points-label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #888;
+}
+
+.points-value {
+  font-size: 28px;
+  font-weight: 900;
+  color: #ff7230;
+  letter-spacing: -0.02em;
+}
+
+.points-max {
+  font-size: 16px;
+  font-weight: 600;
+  color: #ccc;
+}
+
+.scan-btn {
+  width: 100%;
+  background: #ff7230;
+  color: #fff;
+  border: none;
+  border-radius: 16px;
+  padding: 20px;
+  font-size: 18px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  box-shadow: 0 10px 30px -10px rgba(255, 114, 48, 0.5);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.scan-btn:hover {
+  transform: scale(1.02);
+  box-shadow: 0 14px 36px -10px rgba(255, 114, 48, 0.6);
+}
+
+.scan-btn:active {
+  transform: scale(0.97);
+}
+
+.scanner-frame {
+  overflow: hidden;
+  border-radius: 24px;
+  border: 4px solid #ff7230;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+}
+
+.cancel-btn {
+  width: 100%;
+  background: transparent;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 16px;
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #94a3b8;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.cancel-btn:hover {
+  border-color: #cbd5e1;
+  color: #475569;
+}
+
+/* ── Admin Panel ──────────────────────────────────── */
+.admin-panel {
+  width: 100%;
+  margin-top: 16px;
+  padding: 24px;
+  border-radius: 24px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+.admin-label {
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: #94a3b8;
+  margin: 0 0 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.admin-rule {
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: #cbd5e1;
+}
+
+.admin-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.admin-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+  border-radius: 16px;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  gap: 10px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #475569;
+  text-decoration: none;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.admin-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  border-color: rgba(255, 114, 48, 0.2);
+}
+
+.admin-icon {
+  width: 24px;
+  height: 24px;
+  color: #94a3b8;
+}
+
+.admin-card:hover .admin-icon {
+  color: #ff7230;
+}
+
+/* ═══════════════════════════════════════════════════
+   Dashboard Post-Login  (sfondo viola)
+═══════════════════════════════════════════════════ */
+.dash-root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: 100svh;
+  background: #7c6fe0;
+  padding: 48px 28px 40px;
+  gap: 28px;
+}
+
+/* Testo istruzioni */
+.dash-instructions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: center;
+}
+
+.dash-instr-primary {
+  font-size: 17px;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.45;
+  margin: 0;
+}
+
+.dash-instr-secondary {
+  font-size: 15px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* Bicchiere SVG */
+.glass-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.glass-svg {
+  width: 200px;
+  height: 220px;
+  filter: drop-shadow(0 8px 32px rgba(255, 114, 48, 0.35));
+}
+
+/* Azioni: avatar + pulsante scan */
+.dash-actions {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.dash-avatar {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translate(12px, -50%);
+  z-index: 10;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #ff7230;
+  border: 3px solid rgba(255, 255, 255, 0.4);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 16px;
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+}
+
+.dash-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dash-scan-btn {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  border-radius: 50px;
+  padding: 16px 24px 16px 64px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  text-align: center;
+}
+
+.dash-scan-btn:hover {
+  background: rgba(255, 255, 255, 0.27);
+  transform: scale(1.02);
+}
+
+.dash-scan-btn:active {
+  transform: scale(0.98);
+}
+
+/* Progress contatore e dots */
+.dash-progress {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.dash-count {
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
+.dash-dots {
+  display: flex;
+  gap: 8px;
+}
+
+.dash-dot {
+  width: 32px;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.3);
+  transition: background 0.4s;
+}
+
+.dash-dot.filled {
+  background: #fff;
+}
+
+/* Scanner overlay */
+.scanner-overlay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  padding: 24px 0;
+}
+
+/* Logout button */
+.logout-btn {
+  margin-top: 8px;
+  background: transparent;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50px;
+  padding: 12px 32px;
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+
+.logout-btn:hover {
+  border-color: rgba(255, 255, 255, 0.6);
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Admin dark panel (dentro il viola) */
+.admin-panel-dark {
+  width: 100%;
+  padding: 20px;
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.admin-label-dark {
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.admin-card-dark {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.admin-card-dark:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.admin-card-dark .admin-icon {
+  color: rgba(255, 255, 255, 0.7);
+}
