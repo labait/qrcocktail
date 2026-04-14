@@ -766,8 +766,8 @@ body {
 }
 
 .admin-hero-title {
-  font-size: 28px;
-  font-weight: 900;
+  font-size: 24px;
+  font-weight: 500;
   color: #fff;
   letter-spacing: -0.02em;
   margin: 0;
@@ -905,14 +905,13 @@ body {
   padding: 40px 28px 44px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 40px;
 }
 
 .form-title {
-  font-size: 28px;
-  font-weight: 900;
+  font-size: 24px;
+  font-weight: 500;
   color: #fff;
-  letter-spacing: -0.02em;
   margin: 0;
 }
 

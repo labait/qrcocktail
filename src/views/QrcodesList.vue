@@ -35,7 +35,7 @@ async function removeRow(id) {
     <section class="admin-hero">
       <img src="../assets/Laba-logo.svg" class="logo-laba" alt="LABA Logo" />
       <div class="admin-hero-row">
-        <h1 class="admin-hero-title">Console <span class="admin-accent">QR</span></h1>
+        <h1 class="admin-hero-title">Console QR</h1>
         <RouterLink :to="{ name: 'qrcodes_new' }" class="admin-new-btn">
           + Nuovo
         </RouterLink>
