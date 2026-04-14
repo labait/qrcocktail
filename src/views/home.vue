@@ -101,6 +101,9 @@ const fillPercent = computed(() => Math.min((points.value / 3) * 100, 100))
 
         <!-- Scanner attivo (fullscreen overlay) -->
         <div v-if="isScanning" class="scanner-overlay">
+          <img src="../assets/Laba-logo.svg" class="logo-laba scanner-logo" alt="LABA Logo" />
+          <h2 class="scanner-title">Scannerizza un QRcode</h2>
+          
           <div class="scanner-frame">
             <Scan @detected="onQrDetected" />
           </div>
@@ -109,7 +112,8 @@ const fillPercent = computed(() => Math.min((points.value / 3) * 100, 100))
 
         <!-- Schermata principale viola -->
         <template v-else>
-
+          <img src="../assets/Laba-logo.svg" class="logo-laba dash-logo" alt="LABA Logo" />
+          
           <!-- Testo istruzioni -->
           <div class="dash-instructions">
             <p class="dash-instr-primary">Scansiona almeno 3 QR Code<br>sparsi per LABA.</p>

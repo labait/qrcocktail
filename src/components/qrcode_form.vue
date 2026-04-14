@@ -138,7 +138,7 @@ onMounted(async () => {
             {{ isSaving ? 'Salvataggio…' : 'Salva' }}
           </button>
           <RouterLink :to="{ name: 'qrcodes_admin' }" class="form-cancel">
-            Annulla
+            Ciao
           </RouterLink>
         </div>
 
