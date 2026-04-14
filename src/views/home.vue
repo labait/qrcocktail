@@ -51,16 +51,11 @@ const fillPercent = computed(() => Math.min((points.value / 3) * 100, 100))
       <!-- Hero arancione -->
       <section class="hero-section">
         <div class="hero-logo">
-          <span class="logo-laba">LABA</span>
-          <div class="logo-subtitle">
-            <span>LIBERA</span>
-            <span>ACCADEMIA</span>
-            <span>BELLE ARTI</span>
-          </div>
+          <img src="../assets/Laba-logo.svg" class="logo-laba" alt="LABA Logo" />
         </div>
 
         <div class="hero-text">
-          <h1 class="hero-title">Take a<br>Cocktail</h1>
+          <h1 class="hero-title">Take a Cocktail</h1>
           <p class="hero-sub">Partecipa al QUIZ e vinci un coupon omaggio!</p>
         </div>
       </section>

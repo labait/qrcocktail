@@ -48,15 +48,15 @@ body {
 .hero-logo {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
 }
 
 .logo-laba {
-  font-size: 28px;
-  font-weight: 900;
-  color: #fff;
-  letter-spacing: -0.02em;
-  line-height: 1;
+  height: 32px;
+  width: auto;
+  justify-content: center;
+  object-fit: contain;
 }
 
 .logo-subtitle {
@@ -77,20 +77,19 @@ body {
 }
 
 .hero-title {
-  font-size: clamp(40px, 12vw, 56px);
-  font-weight: 900;
+  font-size: 46px;
+  font-weight: 700;
   color: #fff;
-  letter-spacing: -0.03em;
-  line-height: 1.0;
+  display: flex;
+  justify-content: center;
   margin: 0;
 }
 
 .hero-sub {
-  font-size: 16px;
-  font-weight: 400;
+  font-size: 18px;
+  font-weight: 300;
   color: rgba(255, 255, 255, 0.9);
-  line-height: 1.5;
-  max-width: 260px;
+  text-align: center;
   margin: 0;
 }
 
@@ -98,18 +97,17 @@ body {
 .steps-section {
   background: #f5f5f5;
   flex: 1;
-  padding: 36px 28px 40px;
+  padding: 36px 28px 40px 20px;
   display: flex;
   flex-direction: column;
   gap: 24px;
 }
 
 .steps-label {
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.12em;
+  font-size: 14px;
+  font-weight: 300;
   color: #222;
-  text-transform: uppercase;
+  letter-spacing: 0.15em;
   margin: 0;
 }
 
@@ -119,11 +117,12 @@ body {
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 30px;
 }
 
 .step-item {
   display: flex;
+  flex-direction: column;
   align-items: center;
   gap: 18px;
 }
@@ -369,13 +368,13 @@ body {
 .dash-instructions {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 15px;
   text-align: center;
 }
 
 .dash-instr-primary {
-  font-size: 17px;
-  font-weight: 600;
+  font-size: 24px;
+  font-weight: 800;
   color: #fff;
   line-height: 1.45;
   margin: 0;
