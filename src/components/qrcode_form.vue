@@ -1,8 +1,10 @@
 <script setup>
-import { inject, ref, onMounted } from 'vue'
+import { inject, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { collection, addDoc, doc, getDoc, updateDoc } from 'firebase/firestore'
 import { db } from '../firebase'
+import { RouterLink } from 'vue-router'
+import { onMounted } from 'vue'
 
 const props = defineProps({
   mode: {
@@ -36,16 +38,10 @@ function isCodeTakenByOther(candidate, excludeDocumentId) {
 async function submit() {
   loadError.value = ''
   const trimmed = name.value.trim()
-  if (!trimmed) {
-    loadError.value = 'Inserisci un nome.'
-    return
-  }
+  if (!trimmed) { loadError.value = 'Inserisci un nome.'; return }
 
   const codeTrimmed = code.value.trim()
-  if (!codeTrimmed) {
-    loadError.value = 'Inserisci un codice.'
-    return
-  }
+  if (!codeTrimmed) { loadError.value = 'Inserisci un codice.'; return }
 
   if (isCodeTakenByOther(codeTrimmed, props.documentId)) {
     loadError.value = 'Questo codice è già in uso.'
@@ -55,15 +51,9 @@ async function submit() {
   isSaving.value = true
   try {
     if (props.mode === 'create') {
-      await addDoc(collection(db, 'qrcodes'), {
-        name: trimmed,
-        code: codeTrimmed,
-      })
+      await addDoc(collection(db, 'qrcodes'), { name: trimmed, code: codeTrimmed })
     } else if (props.documentId) {
-      await updateDoc(doc(db, 'qrcodes', props.documentId), {
-        name: trimmed,
-        code: codeTrimmed,
-      })
+      await updateDoc(doc(db, 'qrcodes', props.documentId), { name: trimmed, code: codeTrimmed })
     }
     await reloadQrCodes()
     router.push({ name: 'qrcodes_admin' })
@@ -97,53 +87,63 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="w-full max-w-md space-y-4 px-4 py-6">
-    <h1 class="text-xl font-semibold text-slate-900">
-      {{ mode === 'create' ? 'Nuovo QR code' : 'Modifica QR code' }}
-    </h1>
+  <div class="form-root">
 
-    <form class="space-y-4" @submit.prevent="submit">
-      <div>
-        <label for="qrcode-name" class="mb-1 block text-base font-medium text-slate-700">Nome</label>
-        <input
-          id="qrcode-name"
-          v-model="name"
-          type="text"
-          autocomplete="off"
-          class="w-full rounded-lg border border-slate-300 px-3 py-2 text-slate-900 shadow-sm focus:border-slate-500 focus:outline-none focus:ring-1 focus:ring-slate-500"
-          :disabled="isSaving || isLoadingDoc"
-        />
-      </div>
+    <!-- Header viola con logo -->
+    <section class="form-header">
+      <img src="../assets/Laba-logo.svg" class="logo-laba" alt="LABA Logo" />
+      <h1 class="form-title">
+        {{ mode === 'create' ? 'Nuovo QR Code' : 'Modifica QR Code' }}
+      </h1>
+    </section>
 
-      <div>
-        <label for="qrcode-code" class="mb-1 block text-base font-medium text-slate-700">Codice</label>
-        <input
-          id="qrcode-code"
-          v-model="code"
-          type="text"
-          autocomplete="off"
-          class="w-full rounded-lg border border-slate-300 px-3 py-2 text-slate-900 shadow-sm focus:border-slate-500 focus:outline-none focus:ring-1 focus:ring-slate-500"
-          :disabled="isSaving || isLoadingDoc"
-        />
-      </div>
+    <!-- Form body -->
+    <section class="form-body">
+      <form class="form-fields" @submit.prevent="submit">
 
-      <p v-if="loadError" class="text-base text-red-600">{{ loadError }}</p>
+        <div class="field-group">
+          <label for="qrcode-name" class="field-label">Nome</label>
+          <input
+            id="qrcode-name"
+            v-model="name"
+            type="text"
+            autocomplete="off"
+            class="field-input"
+            :disabled="isSaving || isLoadingDoc"
+            placeholder="Es. Bancone Nord"
+          />
+        </div>
 
-      <div class="flex gap-3">
-        <button
-          type="submit"
-          class="rounded-lg bg-slate-900 px-4 py-2 text-base font-medium text-white hover:bg-slate-800 disabled:opacity-50"
-          :disabled="isSaving || isLoadingDoc"
-        >
-          Salva
-        </button>
-        <RouterLink
-          :to="{ name: 'qrcodes_admin' }"
-          class="rounded-lg border border-slate-300 px-4 py-2 text-base font-medium text-slate-700 hover:bg-slate-50"
-        >
-          Annulla
-        </RouterLink>
-      </div>
-    </form>
+        <div class="field-group">
+          <label for="qrcode-code" class="field-label">Codice</label>
+          <input
+            id="qrcode-code"
+            v-model="code"
+            type="text"
+            autocomplete="off"
+            class="field-input"
+            :disabled="isSaving || isLoadingDoc"
+            placeholder="Es. ABC123"
+          />
+        </div>
+
+        <p v-if="loadError" class="form-error">{{ loadError }}</p>
+
+        <div class="form-actions">
+          <button
+            type="submit"
+            class="form-submit"
+            :disabled="isSaving || isLoadingDoc"
+          >
+            {{ isSaving ? 'Salvataggio…' : 'Salva' }}
+          </button>
+          <RouterLink :to="{ name: 'qrcodes_admin' }" class="form-cancel">
+            Ciao
+          </RouterLink>
+        </div>
+
+      </form>
+    </section>
+
   </div>
 </template>

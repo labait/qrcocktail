@@ -9,7 +9,7 @@ export function useAdminGuard() {
   const router = useRouter()
 
   watch(
-    () => [global.accountReady, global.user, global.roles],
+    () => [global.accountReady, global.user, JSON.stringify(global.roles)],
     () => {
       if (!global.accountReady) return
       if (!global.user) {
