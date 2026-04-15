@@ -95,14 +95,14 @@ const fillPercent = computed(() => Math.min((points.value / 3) * 100, 100))
                 </clipPath>
               </defs>
 
-              <!-- Riempimento (liquido arancione animato) -->
+              <!-- Riempimento a 3 livelli separati (sfumature di arancione) -->
               <g clip-path="url(#glass-clip)">
-                <rect
-                  x="0" y="0" width="200" height="200"
-                  fill="#ff7230"
-                  :transform="`translate(0, ${130 - (points / 3) * 120})`"
-                  style="transition: transform 0.8s cubic-bezier(0.4,0,0.2,1)"
-                />
+                <!-- Livello 1 -->
+                <rect x="0" :y="points >= 1 ? 90 : 178" width="200" :height="points >= 1 ? 88 : 0" fill="#ffaa55" style="transition: all 0.6s ease" />
+                <!-- Livello 2 -->
+                <rect x="0" :y="points >= 2 ? 50 : 90" width="200" :height="points >= 2 ? 40 : 0" fill="#ff8d3f" style="transition: all 0.6s ease 0.1s" />
+                <!-- Livello 3 -->
+                <rect x="0" :y="points >= 3 ? 10 : 50" width="200" :height="points >= 3 ? 40 : 0" fill="#ff7230" style="transition: all 0.6s ease 0.2s" />
               </g>
 
               <!-- Suddivisioni del bicchiere (sempre visibili) -->
