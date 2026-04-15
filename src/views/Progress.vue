@@ -100,10 +100,14 @@ const fillPercent = computed(() => Math.min((points.value / 3) * 100, 100))
                 <rect
                   x="0" y="0" width="200" height="200"
                   fill="#ff7230"
-                  :transform="`translate(0, ${200 - fillPercent * 2})`"
+                  :transform="`translate(0, ${130 - (points / 3) * 120})`"
                   style="transition: transform 0.8s cubic-bezier(0.4,0,0.2,1)"
                 />
               </g>
+
+              <!-- Suddivisioni del bicchiere (sempre visibili) -->
+              <line x1="66.7" y1="90" x2="133.3" y2="90" stroke="rgba(255,255,255,0.4)" stroke-width="3" stroke-dasharray="5,4" />
+              <line x1="48.3" y1="50" x2="151.7" y2="50" stroke="rgba(255,255,255,0.4)" stroke-width="3" stroke-dasharray="5,4" />
 
               <!-- Contorno bicchiere (stroke arancione, sempre visibile) -->
               <!-- Calice -->
