@@ -1,6 +1,6 @@
 <script setup>
 import { useRoute } from 'vue-router'
-import QrcodeForm from '../components/qrcode_form.vue'
+import QrcodeForm from '../components/QrcodeForm.vue'
 import { useAdminGuard } from '../composables/useAdminGuard.js'
 
 useAdminGuard()

@@ -4,9 +4,10 @@ import { RouterLink } from 'vue-router'
 import { signOut as firebaseSignOut } from 'firebase/auth'
 import { auth } from '../firebase'
 import Quiz from './Quiz.vue'
-import Scan from '../components/scan.vue'
+import Scan from '../components/Scan.vue'
 
 const global = inject('global')
+const isLoggedIn = computed(() => !!global?.user)
 const isAdmin = computed(() => Array.isArray(global?.roles) && global.roles.includes('admin'))
 
 const points = ref(0)
@@ -32,6 +33,7 @@ const fillPercent = computed(() => Math.min((points.value / 3) * 100, 100))
 
 <template>
   <div class="home-root">
+    
     <!-- ── QUIZ (quando punti >= 3) ── -->
     <div v-if="points >= 3" class="w-full">
       <Quiz />
@@ -150,4 +152,5 @@ const fillPercent = computed(() => Math.min((points.value / 3) * 100, 100))
       </div>
     </template>
   </div>
+
 </template>

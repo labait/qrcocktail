@@ -2,9 +2,10 @@
 import { reactive, ref, onMounted, provide } from 'vue'
 import { collection, getDocs } from 'firebase/firestore'
 import { db } from './firebase'
+import Debug from './components/Debug.vue'
 
 import { RouterView } from 'vue-router'
-import Loading from './components/loading.vue'
+import Loading from './components/Loading.vue'
 
 const global = reactive({
   debug: true,
@@ -39,16 +40,16 @@ onMounted(() => {
         try {
           await ensureAccountExists(u.uid)
           const snap = await getDoc(doc(db, 'accounts', u.uid))
-          const raw = snap.exists() ? snap.data().roles : []
-          global.roles = Array.isArray(raw) ? raw : []
+          const raw = snap.exists() ? snap.data() : {}
+          global.account = raw
         } catch (err) {
           console.error(err)
-          global.roles = []
+          global
         } finally {
           global.accountReady = true
         }
       } else {
-        global.roles = []
+        global.account = {}
         global.accountReady = true
       }
     })()
@@ -81,6 +82,7 @@ onMounted(async () => {
   <main class="app-shell">
     <Loading v-if="global.loading" />
     <RouterView />
+    <Debug v-if="global.debug" />
   </main>
 </template>
 
