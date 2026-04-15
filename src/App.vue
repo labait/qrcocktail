@@ -79,8 +79,9 @@ onMounted(async () => {
 </script>
 
 <template>
+  <Loading v-if="global.loading" />
   <main class="app-shell">
-    <Loading v-if="global.loading" />
+    
     <RouterView />
     <Debug v-if="global.debug" />
   </main>
