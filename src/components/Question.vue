@@ -7,7 +7,13 @@ const props = defineProps({
     required: false,
     default: null
   },
+  modelValue: {
+    type: String,
+    default: null
+  }
 })
+
+const emit = defineEmits(['update:modelValue'])
 </script>
 
 <template>
@@ -25,6 +31,8 @@ const props = defineProps({
           :value="answer.text"
           :name="question.text"
           class="answer-radio"
+          :checked="modelValue === answer.text"
+          @change="emit('update:modelValue', answer.text)"
         />
         <span class="answer-text">{{ answer.text }}</span>
       </label>

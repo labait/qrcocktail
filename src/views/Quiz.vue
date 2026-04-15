@@ -30,6 +30,16 @@ const loadQuestions = async () => {
 onMounted(async () => {
   await loadQuestions()
 })
+
+const nextQuestion = () => {
+  if (questionIndex.value < questions.value.length - 1) {
+    questionIndex.value++
+    selectedAnswer.value = null
+  } else {
+    // Gestione fine quiz
+    console.log("Quiz completato!")
+  }
+}
 </script>
 
 <template>
@@ -60,7 +70,17 @@ onMounted(async () => {
           />
         </div>
 
-        <Question :question="questions[questionIndex]" />
+        <Question :question="questions[questionIndex]" v-model="selectedAnswer" />
+
+        <button
+          class="scan-btn"
+          style="margin-top: 16px; opacity: 1; transition: opacity 0.2s;"
+          :style="{ opacity: selectedAnswer ? '1' : '0.5', cursor: selectedAnswer ? 'pointer' : 'not-allowed' }"
+          :disabled="!selectedAnswer"
+          @click="nextQuestion"
+        >
+          Prosegui
+        </button>
       </template>
 
       <p v-else class="quiz-loading">Caricamento quiz…</p>
