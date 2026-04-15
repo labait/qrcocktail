@@ -611,7 +611,7 @@ body {
 }
 
 .quiz-header {
-  background: #7c6fe0;
+  background: #ff7230;
   padding: 40px 28px 44px;
   display: flex;
   flex-direction: column;
@@ -653,7 +653,6 @@ body {
 }
 
 .quiz-dots {
-  display: flex;
   gap: 6px;
 }
 

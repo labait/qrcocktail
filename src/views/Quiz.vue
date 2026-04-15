@@ -52,15 +52,7 @@ const nextQuestion = () => {
       <p class="quiz-sub">Rispondi alle domande per vincere il tuo cocktail omaggio.</p>
     </section>
 
-    <!-- Corpo domanda -->
-    <section class="quiz-body">
-      <p v-if="loadError" class="quiz-error">{{ loadError }}</p>
-
-      <template v-else-if="questions.length && questions[questionIndex]">
-        <!-- Contatore -->
-        <p class="quiz-counter">Domanda {{ questionIndex + 1 }} di {{ questions.length }}</p>
-
-        <!-- Dots progress -->
+    <!-- Dots progress -->
         <div class="quiz-dots">
           <span
             v-for="(q, i) in questions"
@@ -70,13 +62,18 @@ const nextQuestion = () => {
           />
         </div>
 
+    <!-- Corpo domanda -->
+    <section class="quiz-body">
+      <p v-if="loadError" class="quiz-error">{{ loadError }}</p>
+
+      <template v-else-if="questions.length && questions[questionIndex]">
+
         <Question :question="questions[questionIndex]" v-model="selectedAnswer" />
 
         <button
+          v-if="selectedAnswer"
           class="scan-btn"
-          style="margin-top: 16px; opacity: 1; transition: opacity 0.2s;"
-          :style="{ opacity: selectedAnswer ? '1' : '0.5', cursor: selectedAnswer ? 'pointer' : 'not-allowed' }"
-          :disabled="!selectedAnswer"
+          style="margin-top: 16px;"
           @click="nextQuestion"
         >
           Prosegui
