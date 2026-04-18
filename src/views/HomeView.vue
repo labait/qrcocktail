@@ -6,15 +6,17 @@ const router = useRouter()
 const global = inject('global')
 
 const phase = computed(() => global.account?.phase ?? 'instructions')
-watch(phase, (newPhase) => {
+const redirectTophase = (newPhase) => {
   if (newPhase === 'qrcodes') {
     router.push({ name: 'qrcodes_view' })
     console.log('redirecting to qrcodes view')
   }
-})
+}
+watch(phase, redirectTophase)
 
 onMounted(() => {
   global.bgColor = '#ccc'
+  redirectTophase(phase.value)
 })
 </script>
 
