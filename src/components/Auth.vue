@@ -12,9 +12,9 @@ import { auth, db, googleProvider, ensureAccountExists } from '../firebase'
 const global = inject('global')
 const router = useRouter()
 
-watch(() => global.user, (newVal) => {
-  if(!newVal) router.push({ name: 'home' })
-}, { immediate: true })
+// watch(() => global.user, (newVal) => {
+//   if(!newVal) router.push({ name: 'home' })
+// }, { immediate: true })
 
 onMounted(() => {
   onAuthStateChanged(auth, (u) => {
@@ -27,6 +27,7 @@ onMounted(() => {
           const snap = await getDoc(doc(db, 'accounts', u.uid))
           const raw = snap.exists() ? snap.data() : null
           global.account = raw ?? null
+          global.redirectToPhase(global.account?.phase ?? 'instructions')
         } catch (err) {
           console.error(err)
           global.account = null
@@ -34,6 +35,7 @@ onMounted(() => {
 
         }
       } else {
+        router.push({ name: 'instructions' })
       }
     })()
   })
@@ -51,7 +53,7 @@ async function logout() {
 </script>
 
 <template>
-  <div class="flex justify-center gap-4 w-full flex-none">
+  <div class="flex justify-center w-full flex-none mb-8">
     <template v-if="!global.user">
       <button
         type="button"

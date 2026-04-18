@@ -1,6 +1,9 @@
 <script setup>
 import { reactive, ref, onMounted, provide, computed } from 'vue'
 import { RouterView } from 'vue-router'
+import { useRouter } from 'vue-router'
+const router = useRouter()
+
 import Loading from './components/Loading.vue'
 
 import { collection, getDocs } from 'firebase/firestore'
@@ -9,7 +12,6 @@ import { db } from './firebase'
 import Debug from './components/Debug.vue'
 import Header from './components/Header.vue'
 import Auth from './components/Auth.vue'
-import Instructions from './components/Instructions.vue'
 
 const global = reactive({
   debug: (() =>{
@@ -27,6 +29,12 @@ const global = reactive({
   account: null,
   qrcodes: [],
   user: null,
+  redirectToPhase: (phase) => {
+    console.log('redirecting to phase', phase)
+    if (phase === 'qrcodes') {
+      router.push({ name: 'qrcodes_view' })
+    }
+  },
 })
 
 
@@ -71,7 +79,6 @@ onMounted(async () => {
   <main class="mx-auto min-h-screen" :style="{ backgroundColor: global.bgColor }"  >
     <div class="max-w-screen-sm mx-auto min-h-screen flex flex-col gap-3">
       <Header />
-      <Instructions v-if="!global.account" />
       <Auth />
       <RouterView />
     </div>
