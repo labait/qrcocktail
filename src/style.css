@@ -9,11 +9,14 @@ body {
   @apply text-slate-900 bg-white;
 }
 
+@layer components {
+  .btn {
+    @apply cursor-pointer w-full max-w-xs mt-4 rounded-full bg-brand px-6 py-3.5 text-sm font-bold tracking-wider text-white uppercase shadow-lg transition hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2;
+  }
+}
 
-@media screen and (min-width: 8000px) {
-  
 
-
+@media screen and (min-width: 8000px) { /* disaled all css... :-( */
 /* ═══════════════════════════════════════════════════
    App Shell  (App.vue)
 ═══════════════════════════════════════════════════ */

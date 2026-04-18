@@ -49,9 +49,9 @@ onMounted(() => {
       </svg>
     </div>
 
-    <!-- Pulsante scansiona -->
-    <div class="dash-actions">
-      <button class="dash-scan-btn cursor-pointer" @click="startScanner">
+
+    <div class="flex items-center justify-center mb-4">
+      <button class="btn btn-primary" @click="startScanner">
         Scansiona il QRcode
       </button>
     </div>

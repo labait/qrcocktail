@@ -66,10 +66,12 @@ onMounted(async () => {
 
 <template>
   <Loading v-if="global.loading" />
-  <main class="border-2 border-red-500 max-w-screen-sm mx-auto" :style="{ backgroundColor: global.bgColor }"  >
-    <Header />
-    <Auth />
-    <RouterView />
+  <main class="border-2 border-red-500 mx-auto h-full" :style="{ backgroundColor: global.bgColor }"  >
+    <div class="max-w-screen-sm mx-auto">
+      <Header />
+      <Auth />
+      <RouterView />
+    </div>
     <Debug v-if="global.debug" />
   </main>
 </template>
