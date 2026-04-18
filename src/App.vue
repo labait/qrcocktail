@@ -11,6 +11,7 @@ import { db } from './firebase'
 
 import Debug from './components/Debug.vue'
 import Header from './components/Header.vue'
+import HelpIcon from './components/HelpIcon.vue'
 import Auth from './components/Auth.vue'
 
 const global = reactive({
@@ -83,6 +84,7 @@ onMounted(async () => {
       <RouterView />
     </div>
     <Debug v-if="global.debug" />
+    <HelpIcon v-if="$route.name !== 'home'" />
   </main>
 </template>
 
