@@ -35,6 +35,7 @@ export async function ensureAccountExists(uid) {
     await setDoc(ref, {
       uid,
       roles: [],
+      phase: 'qrcodes',
       quiz_completed: false,
       price_redeemed: false,
       qrcodes: [],

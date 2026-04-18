@@ -12,10 +12,6 @@ async function connectGoogle() {
   <div class="home-root">
     <!-- Hero arancione -->
     <section class="hero-section">
-      <div class="hero-logo">
-        <img src="../assets/Laba-logo.svg" class="logo-laba" alt="LABA Logo" />
-      </div>
-
       <div class="hero-text">
         <h1 class="hero-title">Take a Cocktail</h1>
         <p class="hero-sub">Partecipa al QUIZ e vinci un coupon omaggio!</p>

@@ -9,6 +9,11 @@ body {
   @apply text-slate-900 bg-white;
 }
 
+
+@media screen and (min-width: 8000px) {
+  
+
+
 /* ═══════════════════════════════════════════════════
    App Shell  (App.vue)
 ═══════════════════════════════════════════════════ */
@@ -1016,4 +1021,5 @@ body {
 .form-cancel:hover {
   border-color: #cbd5e1;
   color: #1e293b;
+}
 }

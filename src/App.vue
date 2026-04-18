@@ -1,26 +1,32 @@
 <script setup>
-import { reactive, ref, onMounted, provide } from 'vue'
-import { collection, getDocs } from 'firebase/firestore'
-import { db } from './firebase'
-import Debug from './components/Debug.vue'
-
+import { reactive, ref, onMounted, provide, computed } from 'vue'
 import { RouterView } from 'vue-router'
 import Loading from './components/Loading.vue'
 
+import { collection, getDocs } from 'firebase/firestore'
+import { db } from './firebase'
+
+import Debug from './components/Debug.vue'
+import Header from './components/Header.vue'
+import Auth from './components/Auth.vue'
+
 const global = reactive({
-  debug: true,
+  debug: (() =>{
+    //return false // TODO: force debug value
+    return [1, 'true'].includes(import.meta.env.VITE_DEBUG) || new URL(window.location.href).searchParams.has('debug')
+  })(),
+  isAdmin: () => global.account && Array.isArray(global.account.roles) && global.account.roles.includes('admin'),
   loading: false,
+  bgColor: '#ccc',
   base_url: import.meta.env.VITE_BASE_URL,
-  user: null,
-  /** Ruoli da `accounts/{uid}.roles` in Firestore */
-  roles: [],
-  /** True dopo il primo aggiornamento utente/ruoli da `onAuthStateChanged` */
-  accountReady: false,
   settings: {
     qrcode_size: 400,
   },
+  account: null,
   qrcodes: [],
+  user: null,
 })
+
 
 
 provide('global', global)
@@ -32,28 +38,6 @@ import { doc, getDoc } from 'firebase/firestore'
 import { auth, ensureAccountExists } from './firebase'
 
 onMounted(() => {
-  onAuthStateChanged(auth, (u) => {
-    global.user = u
-    ;(async () => {
-      if (u) {
-        global.accountReady = false
-        try {
-          await ensureAccountExists(u.uid)
-          const snap = await getDoc(doc(db, 'accounts', u.uid))
-          const raw = snap.exists() ? snap.data() : {}
-          global.account = raw
-        } catch (err) {
-          console.error(err)
-          global
-        } finally {
-          global.accountReady = true
-        }
-      } else {
-        global.account = {}
-        global.accountReady = true
-      }
-    })()
-  })
 })
 
 async function loadQrCodes() {
@@ -80,8 +64,9 @@ onMounted(async () => {
 
 <template>
   <Loading v-if="global.loading" />
-  <main class="app-shell">
-    
+  <main class="border-2 border-red-500 max-w-screen-sm mx-auto" :style="{ backgroundColor: global.bgColor }"  >
+    <Header />
+    <Auth />
     <RouterView />
     <Debug v-if="global.debug" />
   </main>

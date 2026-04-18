@@ -47,7 +47,6 @@ const nextQuestion = () => {
 
     <!-- Header viola con logo -->
     <section class="quiz-header">
-      <img src="../assets/Laba-logo.svg" class="logo-laba" alt="LABA Logo" />
       <h1 class="quiz-title">Misura la tua abilità</h1>
       <p class="quiz-sub">Rispondi alle domande per vincere il tuo cocktail omaggio.</p>
     </section>

@@ -2,7 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from './views/HomeView.vue'
 import QrcodeRedeem from './views/QrcodeRedeem.vue'
 
-import QrcodesView from './views/QrcodesView.vue'
+import QrcodeView from './views/QrcodeView.vue'
+
 import AdminQrcodesList from './views/AdminQrcodesListView.vue'
 import AdminQrcodeNewView from './views/AdminQrcodesNewView.vue'
 import AdminQrcodeEditView from './views/AdminQrcodesEditView.vue'
@@ -22,11 +23,10 @@ export class Routing {
           name: 'qrcode_redeem',
           component: QrcodeRedeem,
         },
-
         {
           path: '/qrcodes/:code',
-          name: 'qrcode_by_code',
-            component: QrcodesView,
+          name: 'qrcode',
+            component: QrcodeView,
         },
 
         // Admin routes

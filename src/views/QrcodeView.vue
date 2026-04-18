@@ -1,6 +1,9 @@
 <script setup>
 import { inject, computed } from 'vue'
 import { useRoute } from 'vue-router'
+
+import utils from '../composables/utils'
+
 import Qrcode from '../components/qrcode.vue'
 
 const route = useRoute()
@@ -21,13 +24,14 @@ const qrcode = computed(() => {
   return global.qrcodes.find((item) => String(item.code) === String(c)) ?? null
 })
 
-const qrPath = computed(() => (code.value ? `/qcodes/${code.value}` : ''))
+const qrcodePath = computed(() => (code.value ? utils.getAbsoluteUrl(`/qcodes/${code.value}`) : ''))
 </script>
 
 <template>
   <div class="flex flex-col items-center gap-4 px-4 py-8">
     <template v-if="code && qrcode">
-      <Qrcode :path="qrPath" />
+      <Qrcode :path="qrcodePath" />
+      {{ qrcodePath }}
     </template>
     <p v-else-if="code && !qrcode" class="text-center text-lg text-red-600">
       Codice non trovato
