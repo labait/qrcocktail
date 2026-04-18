@@ -6,7 +6,14 @@
 }
 
 body {
-  @apply text-slate-900 bg-white;
+  @apply bg-white;
+  font-size: 16px;
+  line-height: 1.32;
+  text-rendering: geometricPrecision;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 @layer components {
@@ -19,6 +26,15 @@ body {
   }
   .btn-secondary {
     @apply bg-gray-600 text-white ;
+  }
+
+  .title-l {
+    @apply font-bold text-white mb-2 indent-[-0.05em];
+    font-size: clamp(1.5rem, 1rem + 3vw, 2.5rem);
+  }
+
+  .text-m {
+    @apply text-[1.25rem];
   }
 }
 

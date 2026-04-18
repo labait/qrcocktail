@@ -7,6 +7,6 @@ const global = inject('global')
 
 <template>
   <RouterLink :to="{ name: 'home' }" class="flex items-center justify-center p-4">
-    <img src="../assets/Laba-logo.svg" class="logo-laba max-w-24" alt="LABA Logo" />
+    <img src="../assets/Laba-logo.svg" class="logo-laba w-full max-w-24" alt="LABA Logo" />
   </RouterLink>
 </template>

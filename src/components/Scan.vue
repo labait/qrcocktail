@@ -111,10 +111,10 @@ defineExpose({ start, stop })
 </script>
 
 <template>
-  <div class="w-full">
+  <div class="w-full p-6">
     <video
       ref="videoRef"
-      class="h-full w-full object-cover mb-8"
+      class="h-full w-full aspect-square object-cover mb-4 rounded-[4px] ring-2 ring-white/40 shadow-sm"
       autoplay
       playsinline
       muted
