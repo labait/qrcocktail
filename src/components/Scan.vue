@@ -111,7 +111,7 @@ defineExpose({ start, stop })
 </script>
 
 <template>
-  <div class="w-full p-6">
+  <div class="w-full absolute inset-0">
     <video
       ref="videoRef"
       class="h-full w-full aspect-square object-cover mb-4 rounded-[4px] ring-2 ring-white/40 shadow-sm"
@@ -119,7 +119,7 @@ defineExpose({ start, stop })
       playsinline
       muted
     />
-    <div class="flex justify-center mb-8"> 
+    <div class="flex justify-center mb-8 z-20 absolute bottom-0 left-0 right-0"> 
       <a href="#" class="btn btn-secondary " @click.prevent="emit('exit')">Esci</a>
     </div>
   </div>
