@@ -9,6 +9,7 @@ import { db } from './firebase'
 import Debug from './components/Debug.vue'
 import Header from './components/Header.vue'
 import Auth from './components/Auth.vue'
+import Instructions from './components/Instructions.vue'
 
 const global = reactive({
   debug: (() =>{
@@ -20,6 +21,7 @@ const global = reactive({
   bgColor: '#ccc',
   base_url: import.meta.env.VITE_BASE_URL,
   settings: {
+    qrcodes_required: 3,
     qrcode_size: 400,
   },
   account: null,
@@ -69,6 +71,7 @@ onMounted(async () => {
   <main class="mx-auto min-h-screen" :style="{ backgroundColor: global.bgColor }"  >
     <div class="max-w-screen-sm mx-auto min-h-screen flex flex-col gap-3">
       <Header />
+      <Instructions v-if="!global.account" />
       <Auth />
       <RouterView />
     </div>

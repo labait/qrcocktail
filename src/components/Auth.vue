@@ -89,9 +89,7 @@ async function logout() {
           @click.prevent="logout"
         >
           Logout
-        </a>
-
-        
+        </a>  
       </div>
     </template>
   </div>
