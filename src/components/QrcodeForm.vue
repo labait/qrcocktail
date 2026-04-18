@@ -87,62 +87,59 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="form-root">
-
-    <!-- Header viola con logo -->
-    <section class="form-header">
-      <h1 class="form-title">
+  <div class="mx-auto w-full max-w-2xl px-4 py-6 sm:px-6">
+    <section class="mb-4">
+      <h1 class="text-2xl font-semibold text-slate-900">
         {{ mode === 'create' ? 'Nuovo QR Code' : 'Modifica QR Code' }}
       </h1>
     </section>
 
-    <!-- Form body -->
-    <section class="form-body">
-      <form class="form-fields" @submit.prevent="submit">
-
-        <div class="field-group">
-          <label for="qrcode-name" class="field-label">Nome</label>
+    <section class="bg-white p-4 shadow-sm">
+      <form class="grid gap-4" @submit.prevent="submit">
+        <div class="grid gap-2">
+          <label for="qrcode-name" class="text-base font-medium text-slate-700">Nome</label>
           <input
             id="qrcode-name"
             v-model="name"
             type="text"
             autocomplete="off"
-            class="field-input"
+            class="w-full border border-slate-300 px-3 py-2 text-base text-slate-900 outline-none transition focus:border-indigo-500"
             :disabled="isSaving || isLoadingDoc"
             placeholder="Es. Bancone Nord"
           />
         </div>
 
-        <div class="field-group">
-          <label for="qrcode-code" class="field-label">Codice</label>
+        <div class="grid gap-2">
+          <label for="qrcode-code" class="text-base font-medium text-slate-700">Codice</label>
           <input
             id="qrcode-code"
             v-model="code"
             type="text"
             autocomplete="off"
-            class="field-input"
+            class="w-full border border-slate-300 px-3 py-2 text-base text-slate-900 outline-none transition focus:border-indigo-500"
             :disabled="isSaving || isLoadingDoc"
             placeholder="Es. ABC123"
           />
         </div>
 
-        <p v-if="loadError" class="form-error">{{ loadError }}</p>
+        <p v-if="loadError" class="text-base text-red-600">{{ loadError }}</p>
 
-        <div class="form-actions">
+        <div class="flex items-center gap-3 pt-2">
           <button
             type="submit"
-            class="form-submit"
+            class="btn btn-primary"
             :disabled="isSaving || isLoadingDoc"
           >
             {{ isSaving ? 'Salvataggio…' : 'Salva' }}
           </button>
-          <RouterLink :to="{ name: 'admin_qrcodes_list' }" class="form-cancel">
-            Ciao
+          <RouterLink
+            :to="{ name: 'admin_qrcodes_list' }"
+            class="text-base text-slate-600 underline-offset-2 hover:underline"
+          >
+            Annulla
           </RouterLink>
         </div>
-
       </form>
     </section>
-
   </div>
 </template>

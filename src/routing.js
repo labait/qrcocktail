@@ -2,7 +2,6 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 
 import HomeView from './views/HomeView.vue'
-import InstructionsView from './views/InstructionsView.vue'
 import QrcodesView from './views/QrcodesView.vue'
 import QrcodeRedeem from './views/QrcodeRedeem.vue'
 
@@ -24,13 +23,8 @@ export class Routing {
           component: HomeView,
         },
         {
-          path: '/instructions',
-          name: 'instructions',
-          component: InstructionsView,
-        },
-        {
           path: '/qrcodes',
-          name: 'qrcodes_view',
+          name: 'qrcodes',
           component: QrcodesView,
         },
         {

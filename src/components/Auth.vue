@@ -71,7 +71,6 @@ async function logout() {
             :src="global.user.photoURL"
             :alt="global.user.displayName || 'Avatar'"
             class="h-10 w-10 rounded-full object-cover ring-2 shadow-sm"
-    
             referrerpolicy="no-referrer"
           />
           <div
@@ -83,9 +82,10 @@ async function logout() {
           </div>
           <div class="capitalize">{{ global.user.displayName || global.user.email }}</div>
         </div>
+        <RouterLink :to="{ name: 'admin_qrcodes_list' }" v-if="global.account?.roles?.includes('admin')" class="text-white underline-offset-2 hover:underline">Admin</RouterLink>
         <a
           href="#"
-          class="text-white"
+          class="text-white underline-offset-2 hover:underline"
           @click.prevent="logout"
         >
           Logout

@@ -1,11 +1,15 @@
 <script setup>
 import { ref, inject, computed, onMounted } from 'vue'
+import { CameraIcon } from '@heroicons/vue/24/solid'
 
 import Scan from '../components/Scan.vue'
 
 const global = inject('global')
 const scanning = ref(false)
-const codesScanned = computed(() => global.account?.qrcodes?.length ?? 0)
+const codesScanned = computed(() => {
+  //return 2; // testing
+  return global.account?.qrcodes?.length ?? 0
+})
 const codesToScan = computed(() => global.settings.qrcodes_required - codesScanned.value)
 
 onMounted(() => {
@@ -14,7 +18,13 @@ onMounted(() => {
 
 const handleDetected = (code) => {
   console.log('code detected', code)
-  scanning.value = false
+  global.dialog = {
+    text: 'Codice scansionato, grazie!',
+    confirmText: 'Prosegui',
+    onConfirm: () => {
+      scanning.value = false
+    },
+  }
 }
 
 </script>
@@ -32,9 +42,14 @@ const handleDetected = (code) => {
     </header>
 
     <div class="flex items-center justify-center">
-      <button class="btn btn-primary" @click="()=> {
+      <button
+        class="btn btn-primary !flex items-center justify-center gap-2"
+        type="button"
+        @click="()=> {
         scanning = true
-      }">
+      }"
+      >
+        <CameraIcon class="size-6 shrink-0" aria-hidden="true" />
         Scansiona QRcode
       </button>
     </div>
@@ -60,8 +75,8 @@ const handleDetected = (code) => {
           </g>
 
           <!-- Suddivisioni del bicchiere (sempre visibili) -->
-          <line x1="66.7" y1="90" x2="133.3" y2="90" stroke="rgba(255,255,255,0.4)" stroke-width="3" stroke-dasharray="5,4" />
-          <line x1="48.3" y1="50" x2="151.7" y2="50" stroke="rgba(255,255,255,0.4)" stroke-width="3" stroke-dasharray="5,4" />
+          <line x1="0" y1="90" x2="200" y2="90" stroke="rgba(255,255,255,0.4)" stroke-width="3" stroke-dasharray="5,4" />
+          <line x1="0" y1="50" x2="200" y2="50" stroke="rgba(255,255,255,0.4)" stroke-width="3" stroke-dasharray="5,4" />
 
           <!-- Contorno bicchiere (stroke arancione, sempre visibile) -->
           <polygon

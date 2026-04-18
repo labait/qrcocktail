@@ -4,8 +4,8 @@ import { RouterLink } from 'vue-router'
 import { deleteDoc, doc } from 'firebase/firestore'
 import { db } from '../firebase'
 import Qrcode from '../components/Qrcode.vue'
-import { useAdminGuard } from '../composables/useAdminGuard.js'
 
+import { useAdminGuard } from '../composables/useAdminGuard.js'
 useAdminGuard()
 
 const global = inject('global')
@@ -29,73 +29,65 @@ async function removeRow(id) {
 </script>
 
 <template>
-  <div class="admin-root">
+  <div class="mx-auto ">
+    <div class="mb-4 flex justify-center">
+      <RouterLink
+        :to="{ name: 'admin_qrcodes_new' }"
+        class="btn btn-primary"
+      >
+        + Nuovo
+      </RouterLink>
+    </div>
 
-    <!-- Header viola admin -->
-    <section class="admin-hero">
-      <div class="admin-hero-row">
-        <h1 class="admin-hero-title">Console QR</h1>
-        <RouterLink :to="{ name: 'admin_qrcodes_new' }" class="admin-new-btn">
-          + Nuovo
-        </RouterLink>
+    <section class="">
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div
+          v-for="row in global.qrcodes"
+          :key="row.id"
+          class="flex flex-col gap-2 items-center bg-white p-4 rounded-lg border border-slate-200"
+        >
+          <RouterLink :to="{ name: 'admin_qrcodes_edit', params: { id: row.id } }">
+          <Qrcode v-if="row.code" :url="`/qcodes/${row.code}`" />
+          </RouterLink>
+
+          <div>
+            {{ row.name ?? '—' }}
+          </div>
+
+          <div>
+            <RouterLink
+              v-if="row.code"
+              :to="{ name: 'qrcode', params: { code: String(row.code) } }"
+              class="underline-offset-2 hover:underline text-black"
+            >
+              {{ row.code }}
+            </RouterLink>
+            <span v-else class="">—</span>
+          </div>
+          <div class="md:text-right">
+            <RouterLink
+              v-if="row.id"
+              :to="{ name: 'admin_qrcodes_edit', params: { id: row.id } }"
+              class="mr-3 text-baseunderline-offset-2 hover:underline text-black"
+            >
+              Modifica
+            </RouterLink>
+            <a
+              v-if="row.id"
+              href="#"
+              class="text-base text-red-600 underline-offset-2 hover:underline"
+              @click.prevent="removeRow(row.id)"
+            >
+              Elimina
+            </a>
+          </div>
+        </div>
+
+        <div v-if="!global.qrcodes.length" class="py-8 text-center text-base">
+          Nessun QR code. Aggiungine uno con «+ Nuovo».
+        </div>
       </div>
     </section>
-
-    <!-- Lista QR -->
-    <section class="admin-body">
-      <div class="qr-table-wrapper">
-        <table class="qr-table">
-          <thead>
-            <tr>
-              <th>Grafica</th>
-              <th>Nome</th>
-              <th>ID</th>
-              <th class="text-right">Azioni</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="row in global.qrcodes" :key="row.id" class="qr-row">
-              <td class="qr-cell">
-                <Qrcode v-if="row.code" :path="`/qcodes/${row.code}`" :size="52" />
-              </td>
-              <td class="qr-cell qr-name">{{ row.name ?? '—' }}</td>
-              <td class="qr-cell">
-                <RouterLink
-                  v-if="row.code"
-                  :to="{ name: 'qrcode', params: { code: String(row.code) } }"
-                  class="qr-link"
-                >
-                  {{ row.code }}
-                </RouterLink>
-                <span v-else class="qr-empty">—</span>
-              </td>
-              <td class="qr-cell text-right">
-                <RouterLink
-                  v-if="row.id"
-                  :to="{ name: 'qrcodes_edit', params: { id: row.id } }"
-                  class="qr-action-edit"
-                >
-                  Modifica
-                </RouterLink>
-                <button
-                  v-if="row.id"
-                  type="button"
-                  class="qr-action-delete"
-                  @click="removeRow(row.id)"
-                >
-                  Elimina
-                </button>
-              </td>
-            </tr>
-            <tr v-if="!global.qrcodes.length">
-              <td colspan="4" class="qr-empty-row">
-                Nessun QR code. Aggiungine uno con «+ Nuovo».
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
   </div>
 </template>

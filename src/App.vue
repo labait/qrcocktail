@@ -11,6 +11,8 @@ import { db } from './firebase'
 
 import Debug from './components/Debug.vue'
 import Header from './components/Header.vue'
+import HelpIcon from './components/HelpIcon.vue'
+import Dialog from './components/Dialog.vue'
 import Auth from './components/Auth.vue'
 
 const global = reactive({
@@ -29,6 +31,7 @@ const global = reactive({
   account: null,
   qrcodes: [],
   user: null,
+  dialog: {},
   redirectToPhase: (phase) => {
     console.log('redirecting to phase', phase)
     if (phase === 'qrcodes') {
@@ -71,6 +74,7 @@ async function loadQrCodes() {
 onMounted(async () => {
   await loadQrCodes()
   console.log(global.qrcodes)
+
 })
 </script>
 
@@ -83,6 +87,8 @@ onMounted(async () => {
       <RouterView />
     </div>
     <Debug v-if="global.debug" />
+    <HelpIcon v-if="$route.name !== 'home'" />
+    <Dialog v-if="global.dialog.text != null" />
   </main>
 </template>
 
