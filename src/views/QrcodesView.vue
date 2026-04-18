@@ -107,6 +107,9 @@ const handleDetected = async (url) => {
                 qrcodes: [],
               })
             },
+            onCancel: () => {
+              global.dialog = {}
+            },
           }
         }"
       >
