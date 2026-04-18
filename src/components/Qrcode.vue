@@ -5,7 +5,7 @@ import QRCode from 'qrcode'
 
 
 const props = defineProps({
-  path: {
+  url: {
     type: String,
     required: true,
   },
@@ -27,13 +27,14 @@ const qrSize = computed(() => {
 const qrDataUrl = ref('')
 
 watch(
-  [path, qrSize],
+  [props.url, qrSize],
   async ([url, size]) => {
     if (!url) {
       qrDataUrl.value = ''
       return
     }
     try {
+      console.log('generating QR code for', url, 'with size', size)
       qrDataUrl.value = await QRCode.toDataURL(url, {
         width: size,
         margin: 2,
