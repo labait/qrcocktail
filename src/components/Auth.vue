@@ -52,7 +52,7 @@ async function logout() {
         class="btn btn-primary"
         @click="connectGoogle"
       >
-        Connect with Google
+        Accedi con Google
       </button>
     </template>
     <template v-else>
