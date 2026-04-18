@@ -9,14 +9,14 @@ export function useAdminGuard() {
   const router = useRouter()
 
   watch(
-    () => [global.accountReady, global.user, JSON.stringify(global.roles)],
+    () => [global.accountReady, global.user, JSON.stringify(global.account?.roles)],
     () => {
       if (!global.accountReady) return
       if (!global.user) {
         router.replace({ name: 'home' })
         return
       }
-      const roles = global.roles
+      const roles = global.account?.roles
       if (!Array.isArray(roles) || !roles.includes('admin')) {
         router.replace({ name: 'home' })
       }

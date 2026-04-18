@@ -667,6 +667,20 @@ body {
 .quiz-dot.active { background: #7c6fe0; }
 .quiz-dot.done   { background: #ff7230; }
 
+.quiz-errors-indicator {
+  display: flex;
+  justify-content: center;
+  padding: 8px 24px;
+}
+
+.quiz-errors-label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #94a3b8;
+}
+
 .quiz-error {
   font-size: 15px;
   font-weight: 600;

@@ -1,14 +1,17 @@
 <script setup>
 import { ref, onMounted, inject } from 'vue'
 import Question from '../components/Question.vue'
-import { RouterLink } from 'vue-router'
+import { db } from '../firebase'
+import { doc, updateDoc } from 'firebase/firestore'
 
 const global = inject('global')
 const questions = ref([])
 const questionIndex = ref(0)
 const loadError = ref('')
-const answered = ref(false)
 const selectedAnswer = ref(null)
+
+const errors = ref(0)
+const MAX_ERRORS = 1
 
 const loadQuestions = async () => {
   global.loading = true
@@ -31,13 +34,44 @@ onMounted(async () => {
   await loadQuestions()
 })
 
-const nextQuestion = () => {
+async function setPhase(newPhase) {
+  try {
+    if (global.user?.uid) {
+      const updates = { phase: newPhase }
+      if (newPhase === 'redeem') {
+        updates.quiz_completed = true
+      }
+      await updateDoc(doc(db, 'accounts', global.user.uid), updates)
+      global.account.phase = newPhase
+    }
+  } catch (e) {
+    console.error('Errore aggiornamento fase:', e)
+  }
+}
+
+const nextQuestion = async () => {
+  if (!selectedAnswer.value) return
+
+  // Valuta la risposta corrente
+  const currentQuestion = questions.value[questionIndex.value]
+  const answerObj = currentQuestion.answers.find(a => a.text === selectedAnswer.value)
+  if (!answerObj || !answerObj.correct) {
+    errors.value++
+  }
+
+  // Troppi errori → lost
+  if (errors.value > MAX_ERRORS) {
+    await setPhase('lost')
+    return
+  }
+
+  // Avanza o finisci
   if (questionIndex.value < questions.value.length - 1) {
     questionIndex.value++
     selectedAnswer.value = null
   } else {
-    // Gestione fine quiz
-    console.log("Quiz completato!")
+    // Quiz superato!
+    await setPhase('redeem')
   }
 }
 </script>
@@ -61,6 +95,11 @@ const nextQuestion = () => {
             :class="{ active: i === questionIndex, done: i < questionIndex }"
           />
         </div>
+
+    <!-- Errori indicator -->
+    <div v-if="questions.length" class="quiz-errors-indicator">
+      <span class="quiz-errors-label">Errori: {{ errors }} / {{ MAX_ERRORS }}</span>
+    </div>
 
     <!-- Corpo domanda -->
     <section class="quiz-body">

@@ -1,7 +1,7 @@
 const promptTemplate = `
 Devo fare un quiz ad un utente, 
 il quiz riguarda il cocktail {{cocktail}}. 
-Restituiscimi tre domande ognuna con tre opzioni, 
+Restituiscimi cinque domande ognuna con tre opzioni, 
 solo una delle quali valide in modo che possa proporre questo quiz ad una platea di gente comune. 
 Restituiscimi i dati in questo formato.
 

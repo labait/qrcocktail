@@ -12,9 +12,9 @@ const global = reactive({
   loading: false,
   base_url: import.meta.env.VITE_BASE_URL,
   user: null,
-  /** Ruoli da `accounts/{uid}.roles` in Firestore */
-  roles: [],
-  /** True dopo il primo aggiornamento utente/ruoli da `onAuthStateChanged` */
+  /** Dati account da Firestore (`accounts/{uid}`) — contiene phase, qrcodes, roles */
+  account: {},
+  /** True dopo il primo aggiornamento utente/account da `onAuthStateChanged` */
   accountReady: false,
   settings: {
     qrcode_size: 400,
