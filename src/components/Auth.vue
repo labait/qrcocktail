@@ -27,7 +27,7 @@ onMounted(() => {
           const snap = await getDoc(doc(db, 'accounts', u.uid))
           const raw = snap.exists() ? snap.data() : null
           global.account = raw ?? null
-          global.redirectToPhase(global.account?.phase ?? 'instructions')
+          //global.redirectToPhase(global.account?.phase ?? 'instructions')
         } catch (err) {
           console.error(err)
           global.account = null

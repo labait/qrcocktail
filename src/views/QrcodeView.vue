@@ -30,7 +30,7 @@ const url = computed(() => (code.value ? utils.getAbsoluteUrl(`/qcodes/${code.va
 <template>
   <div class="flex flex-col items-center gap-4 px-4 py-8">
     <template v-if="code && qrcode">
-      <Qrcode :url="url" />
+      <Qrcode :url="url"/>
       {{ url }}
     </template>
     <p v-else-if="code && !qrcode" class="text-center text-lg text-red-600">

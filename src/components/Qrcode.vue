@@ -1,15 +1,12 @@
 <script setup>
-import { computed, inject, ref, watch } from 'vue'
+import { computed, inject, ref, watch, onMounted } from 'vue'
 import QRCode from 'qrcode'
-
-
 
 const props = defineProps({
   url: {
     type: String,
     required: true,
   },
-  /** Larghezza/altezza QR in px; se omesso usa `global.settings.qrcode_size` o 200 */
   size: {
     type: Number,
     default: null,
@@ -17,35 +14,14 @@ const props = defineProps({
 })
 
 const global = inject('global')
-
-const qrSize = computed(() => {
-  if (props.size != null && props.size > 0) return Math.round(props.size)
-  return Number(global?.settings?.qrcode_size) || 200
-})
-
-
 const qrDataUrl = ref('')
 
-watch(
-  [props.url, qrSize],
-  async ([url, size]) => {
-    if (!url) {
-      qrDataUrl.value = ''
-      return
-    }
-    try {
-      console.log('generating QR code for', url, 'with size', size)
-      qrDataUrl.value = await QRCode.toDataURL(url, {
-        width: size,
-        margin: 2,
-      })
-    } catch (err) {
-      console.error(err)
-      qrDataUrl.value = ''
-    }
-  },
-  { immediate: true },
-)
+onMounted(async () => {
+  qrDataUrl.value = await QRCode.toDataURL(props.url, {
+    width: (props.size ?? global.settings.qrcode_size),
+      margin: 2,
+    })
+})
 </script>
 
 <template>
@@ -54,9 +30,9 @@ watch(
       v-if="qrDataUrl"
       :src="qrDataUrl"
       :alt="url"
-      :width="qrSize"
-      :height="qrSize"
-      :style="{ width: `${qrSize}px`, height: `${qrSize}px` }"
+      :width="size"
+      :height="size"
+      :style="{ width: `${size}px`, height: `${size}px` }"
     />
   </div>
 </template>

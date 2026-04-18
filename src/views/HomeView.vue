@@ -5,6 +5,10 @@ const router = useRouter()
 
 const global = inject('global')
 
+onMounted(() => {
+  global.bgColor = '#ccc'
+  global.redirectToPhase('instructions')
+})
 </script>
 
 <template>
