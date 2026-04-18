@@ -66,8 +66,8 @@ onMounted(async () => {
 
 <template>
   <Loading v-if="global.loading" />
-  <main class="border-2 border-red-500 mx-auto h-full" :style="{ backgroundColor: global.bgColor }"  >
-    <div class="max-w-screen-sm mx-auto">
+  <main class="mx-auto min-h-screen" :style="{ backgroundColor: global.bgColor }"  >
+    <div class="max-w-screen-sm mx-auto min-h-screen flex flex-col gap-3">
       <Header />
       <Auth />
       <RouterView />

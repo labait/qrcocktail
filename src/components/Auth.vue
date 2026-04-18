@@ -45,7 +45,7 @@ async function logout() {
 </script>
 
 <template>
-  <div class="flex flex-col items-center gap-4 w-full mb-8">
+  <div class="flex justify-center gap-4 w-full flex-none">
     <template v-if="!global.user">
       <button
         type="button"
@@ -56,20 +56,20 @@ async function logout() {
       </button>
     </template>
     <template v-else>
-      <div class="flex flex-col md:flex-row items-center gap-4">
-        <div class="avatar flex items-center gap-4">
+      <div class="flex items-center justify-between w-full gap-4 px-6 py-2">
+        <div class="avatar flex items-center gap-3 text-white">
           <img
             v-if="global.user.photoURL"
             :src="global.user.photoURL"
             :alt="global.user.displayName || 'Avatar'"
-            class="h-12 w-12 rounded-full object-cover ring-2 ring-white shadow-sm"
+            class="h-10 w-10 rounded-[4px] object-cover ring-2 ring-white/40 shadow-sm"
             width="48"
             height="48"
             referrerpolicy="no-referrer"
           />
           <div
             v-else
-            class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-slate-200 text-sm font-bold text-slate-700 ring-2 ring-white shadow-sm"
+            class="flex h-12 w-12 shrink-0 items-center justify-center rounded-[6px] bg-slate-200 text-sm font-bold text-slate-700 ring-2 ring-white shadow-sm"
             aria-hidden="true"
           >
             {{ (global.user.displayName || global.user.email || '?').charAt(0).toUpperCase() }}
@@ -85,11 +85,13 @@ async function logout() {
         </RouterLink>
         <a
           href="#"
-          class=""
+          class="text-white"
           @click.prevent="logout"
         >
           Logout
         </a>
+
+        
       </div>
     </template>
   </div>
