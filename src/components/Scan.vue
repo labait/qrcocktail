@@ -1,5 +1,5 @@
 <script setup>
-import { onBeforeUnmount, onMounted, ref } from 'vue'
+import { onBeforeUnmount, onMounted, ref, computed } from 'vue'
 
 const emit = defineEmits(['detected', 'error', 'started', 'stopped', 'exit'])
 
@@ -108,6 +108,13 @@ onBeforeUnmount(() => {
 })
 
 defineExpose({ start, stop })
+
+const videoTransform = computed(() => {
+  // Flip horizontally for user ('user') camera
+  return props.facingMode === 'user'
+    ? 'none'
+    : 'scaleX(-1)'
+})
 </script>
 
 <template>
@@ -115,6 +122,7 @@ defineExpose({ start, stop })
     <video
       ref="videoRef"
       class="h-full w-full aspect-square object-cover mb-4 rounded-[4px] ring-2 ring-white/40 shadow-sm"
+      :style="{ transform: videoTransform }"
       autoplay
       playsinline
       muted
