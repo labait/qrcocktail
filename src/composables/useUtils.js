@@ -10,12 +10,15 @@ export function useUtils() {
     return `${base_url}${path}`
   }
 
+  const isAdmin = () => global.account && Array.isArray(global.account.roles) && global.account.roles.includes('admin')
+
   const redirectToPhase = (phase) => {
     if (!phase) phase = global.account?.phase ?? 'instructions'
     router.push({ name: phase })
   }
 
   return {
+    isAdmin,
     getAbsoluteUrl,
     redirectToPhase,
   }
