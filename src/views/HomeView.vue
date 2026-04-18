@@ -21,5 +21,5 @@ onMounted(() => {
 </script>
 
 <template>
-  {{ phase }}
+  
 </template>
