@@ -2,13 +2,22 @@
 
 ## Flusso Utente (Phase-based)
 
-| # | Phase | Stato |
-|---|-------|-------|
-| 1 | **qrcode** — Scansione QR code (3 richiesti, validati vs Firestore, no duplicati) | ✅ |
-| 2 | **quiz** — 5 domande, max 1 errore consentito | ✅ |
-| 3 | **redeem** — QR code personale per il manager, erogazione cocktail | ✅ |
-| 4 | **thanks** — Schermata di ringraziamento post-erogazione | ✅ |
-| 5 | **lost** — Schermata di sconfitta (errori quiz superati) | ✅ |
+| # | Phase | Descrizione | Stato |
+|---|-------|-------------|-------|
+| 1 | **qrcode** | Scansione QR code (3 richiesti, validati vs Firestore, no duplicati con fresh-read DB) | ✅ |
+| 2 | **quiz** | 5 domande random da pool locale di 30, max 1 errore | ✅ |
+| 3 | **redeem** | Coupon QR univoco (UUID) generato automaticamente per l'utente | ✅ |
+| 4 | **thanks** | Schermata ringraziamento post-erogazione da parte del manager | ✅ |
+| 5 | **lost** | Schermata sconfitta (errori quiz superati) | ✅ |
+
+---
+
+## Manager / Admin
+
+- [x] Scanner coupon dedicato nel pannello admin
+- [x] Pagina `/users/:uid/redeem` protetta da admin guard
+- [x] Validazione coupon_code prima dell'erogazione
+- [x] Transizione `phase: 'thanks'` alla conferma
 
 ---
 
@@ -17,16 +26,22 @@
 - [x] Vue 3 + Vite + Vue Router
 - [x] Firebase Auth (Google Sign-In)
 - [x] Firebase Firestore (`accounts`, `qrcodes`)
-- [x] Netlify Functions (generazione quiz via OpenAI)
+- [x] Pool domande locale (`quiz_pool.json`, 30 domande)
 - [x] Tailwind CSS v4
 
 ---
 
-## Admin / Manager
+## Schema Firestore `accounts/{uid}`
 
-- [x] CRUD QR codes (lista, crea, modifica, elimina)
-- [x] Admin Guard (protezione rotte)
-- [x] Pagina redeem protetta per manager
+```json
+{
+  "uid": "string",
+  "roles": [],
+  "phase": "qrcode | quiz | redeem | thanks | lost",
+  "qrcodes": ["code1", "code2", ...],
+  "coupon_code": "uuid | null"
+}
+```
 
 ---
 
@@ -40,4 +55,4 @@
 ---
 
 Ultimo aggiornamento: **18 Aprile 2026**
-Stato progetto: **~90% completato** — flusso utente completo end-to-end
+Stato progetto: **~95% completato** — flusso utente end-to-end con coupon univoco

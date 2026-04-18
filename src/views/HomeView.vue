@@ -1,6 +1,6 @@
 <script setup>
 import { inject, computed, ref } from 'vue'
-import { RouterLink } from 'vue-router'
+import { RouterLink, useRouter } from 'vue-router'
 import { signOut as firebaseSignOut } from 'firebase/auth'
 import { auth, db } from '../firebase'
 import { doc, getDoc, updateDoc, arrayUnion } from 'firebase/firestore'
@@ -9,6 +9,7 @@ import Scan from '../components/Scan.vue'
 import Qrcode from '../components/qrcode.vue'
 
 const global = inject('global')
+const router = useRouter()
 const isLoggedIn = computed(() => !!global?.user)
 const isAdmin = computed(() => {
   const roles = global?.account?.roles
@@ -17,14 +18,21 @@ const isAdmin = computed(() => {
 
 const phase = computed(() => global?.account?.phase || 'qrcode')
 const scannedCodes = computed(() => global?.account?.qrcodes || [])
+const couponCode = computed(() => global?.account?.coupon_code || null)
 const REQUIRED_SCANS = 3
 
 const isScanning = ref(false)
+const isScanningCoupon = ref(false)
 const scanError = ref('')
 
 function startScanner() {
   scanError.value = ''
   isScanning.value = true
+}
+
+function startCouponScanner() {
+  scanError.value = ''
+  isScanningCoupon.value = true
 }
 
 async function onQrDetected(rawValue) {
@@ -42,8 +50,15 @@ async function onQrDetected(rawValue) {
       // non è un URL, usa il valore raw come codice
     }
 
-    // Controlla duplicati
-    if (scannedCodes.value.includes(code)) {
+    // Fresh-read da Firestore per controllo duplicati affidabile
+    const uid = global.user.uid
+    const accountRef = doc(db, 'accounts', uid)
+    const freshSnap = await getDoc(accountRef)
+    const freshData = freshSnap.exists() ? freshSnap.data() : {}
+    const freshQrcodes = freshData.qrcodes || []
+
+    // Controlla duplicati sul dato fresco dal DB
+    if (freshQrcodes.includes(code)) {
       scanError.value = 'Hai già scansionato questo QR code!'
       return
     }
@@ -56,10 +71,7 @@ async function onQrDetected(rawValue) {
     }
 
     // Salva il codice nell'array dell'utente
-    const uid = global.user.uid
-    const accountRef = doc(db, 'accounts', uid)
-
-    const newCount = scannedCodes.value.length + 1
+    const newCount = freshQrcodes.length + 1
     const updates = { qrcodes: arrayUnion(code) }
 
     // Se raggiunge la soglia, transizione a phase quiz
@@ -70,13 +82,33 @@ async function onQrDetected(rawValue) {
     await updateDoc(accountRef, updates)
 
     // Aggiorna lo stato locale
-    global.account.qrcodes = [...scannedCodes.value, code]
+    global.account.qrcodes = [...freshQrcodes, code]
     if (newCount >= REQUIRED_SCANS) {
       global.account.phase = 'quiz'
     }
   } catch (err) {
     console.error('Errore durante la scansione:', err)
     scanError.value = 'Errore durante il salvataggio. Riprova.'
+  }
+}
+
+/** Handler scanner coupon (per admin/manager) */
+function onCouponDetected(rawValue) {
+  isScanningCoupon.value = false
+  scanError.value = ''
+
+  try {
+    // Estrai la path dall'URL scansionato e naviga
+    const url = new URL(rawValue)
+    const path = url.pathname
+    // Il QR coupon punta a /users/{uid}/redeem
+    if (path.includes('/users/') && path.includes('/redeem')) {
+      router.push(path)
+    } else {
+      scanError.value = 'QR code non riconosciuto come coupon.'
+    }
+  } catch {
+    scanError.value = 'QR code non valido.'
   }
 }
 
@@ -101,7 +133,7 @@ const remaining = computed(() => Math.max(REQUIRED_SCANS - scannedCodes.value.le
     <div v-else-if="phase === 'redeem'" class="dash-root">
       <img src="../assets/Laba-logo.svg" class="logo-laba dash-logo" alt="LABA Logo" />
       <h1 class="dash-instr-primary">Complimenti!</h1>
-      <p class="dash-instr-secondary">Hai superato il quiz. Mostra questo QR Code al barman per ritirare il tuo cocktail omaggio.</p>
+      <p class="dash-instr-secondary">Hai superato il quiz.<br>Mostra questo QR Code al barman per ritirare il tuo cocktail omaggio.</p>
       <div class="bg-white p-6 rounded-2xl shadow-lg mt-4">
         <Qrcode v-if="global.user?.uid" :path="'users/' + global.user.uid + '/redeem'" />
       </div>
@@ -128,7 +160,7 @@ const remaining = computed(() => Math.max(REQUIRED_SCANS - scannedCodes.value.le
     <template v-else>
       <div class="dash-root">
 
-        <!-- Scanner attivo (fullscreen overlay) -->
+        <!-- Scanner QR attivo (fullscreen overlay) -->
         <div v-if="isScanning" class="scanner-overlay">
           <img src="../assets/Laba-logo.svg" class="logo-laba scanner-logo" alt="LABA Logo" />
           <h2 class="scanner-title">Scannerizza un QRcode</h2>
@@ -137,6 +169,17 @@ const remaining = computed(() => Math.max(REQUIRED_SCANS - scannedCodes.value.le
             <Scan @detected="onQrDetected" />
           </div>
           <button class="cancel-btn" @click="isScanning = false">Annulla</button>
+        </div>
+
+        <!-- Scanner Coupon attivo (per admin) -->
+        <div v-else-if="isScanningCoupon" class="scanner-overlay">
+          <img src="../assets/Laba-logo.svg" class="logo-laba scanner-logo" alt="LABA Logo" />
+          <h2 class="scanner-title">Scansiona Coupon Utente</h2>
+
+          <div class="scanner-frame">
+            <Scan @detected="onCouponDetected" />
+          </div>
+          <button class="cancel-btn" @click="isScanningCoupon = false">Annulla</button>
         </div>
 
         <!-- Schermata principale viola -->
@@ -162,6 +205,12 @@ const remaining = computed(() => Math.max(REQUIRED_SCANS - scannedCodes.value.le
                 </svg>
                 <span>Crea Nuovo</span>
               </RouterLink>
+              <button class="admin-card-dark" @click="startCouponScanner">
+                <svg class="admin-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/>
+                </svg>
+                <span>Scansiona Coupon</span>
+              </button>
             </div>
           </div>
 

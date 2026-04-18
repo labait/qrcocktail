@@ -3,6 +3,7 @@ import { ref, onMounted, inject } from 'vue'
 import Question from '../components/Question.vue'
 import { db } from '../firebase'
 import { doc, updateDoc } from 'firebase/firestore'
+import quizPool from '../data/quiz_pool.json'
 
 const global = inject('global')
 const questions = ref([])
@@ -12,26 +13,34 @@ const selectedAnswer = ref(null)
 
 const errors = ref(0)
 const MAX_ERRORS = 1
+const QUIZ_SIZE = 5
 
-const loadQuestions = async () => {
-  global.loading = true
-  loadError.value = ''
+/** Fisher-Yates shuffle */
+function shuffle(arr) {
+  const a = [...arr]
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[a[i], a[j]] = [a[j], a[i]]
+  }
+  return a
+}
+
+function loadQuestions() {
   try {
-    const cocktail = 'white russian'
-    const response = await fetch(`.netlify/functions/quizBuild?cocktail=${cocktail}${global.debug ? '&debug' : ''}`)
-    if (!response.ok) throw new Error(`HTTP ${response.status}`)
-    const data = await response.json()
-    questions.value = JSON.parse(data.raw.output[0].content[0].text.trim().replaceAll('```json', '').replaceAll('```', '')).questions
+    const pool = quizPool.questions
+    if (!pool || pool.length < QUIZ_SIZE) {
+      loadError.value = 'Pool domande insufficiente.'
+      return
+    }
+    questions.value = shuffle(pool).slice(0, QUIZ_SIZE)
   } catch (err) {
     console.error('Quiz load failed:', err)
     loadError.value = 'Impossibile caricare il quiz.'
-  } finally {
-    global.loading = false
   }
 }
 
-onMounted(async () => {
-  await loadQuestions()
+onMounted(() => {
+  loadQuestions()
 })
 
 async function setPhase(newPhase) {
@@ -39,7 +48,10 @@ async function setPhase(newPhase) {
     if (global.user?.uid) {
       const updates = { phase: newPhase }
       if (newPhase === 'redeem') {
-        updates.quiz_completed = true
+        // Genera un coupon univoco per l'utente
+        const couponCode = crypto.randomUUID()
+        updates.coupon_code = couponCode
+        global.account.coupon_code = couponCode
       }
       await updateDoc(doc(db, 'accounts', global.user.uid), updates)
       global.account.phase = newPhase

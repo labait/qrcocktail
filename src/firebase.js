@@ -37,6 +37,7 @@ export async function ensureAccountExists(uid) {
       roles: [],
       phase: 'qrcode',
       qrcodes: [],
+      coupon_code: null,
     })
   }
 }

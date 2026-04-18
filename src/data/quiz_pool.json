@@ -1,0 +1,244 @@
+{
+  "questions": [
+    {
+      "text": "Qual è l'ingrediente alcolico principale del White Russian?",
+      "answers": [
+        { "correct": true, "text": "Vodka" },
+        { "correct": false, "text": "Gin" },
+        { "correct": false, "text": "Rum" }
+      ]
+    },
+    {
+      "text": "Quale liquore aggiunge dolcezza e aroma di caffè al White Russian?",
+      "answers": [
+        { "correct": true, "text": "Kahlúa (liquore al caffè)" },
+        { "correct": false, "text": "Liquore alla menta" },
+        { "correct": false, "text": "Amaretto" }
+      ]
+    },
+    {
+      "text": "Cos'è quell'ingrediente bianco che si mette nel White Russian?",
+      "answers": [
+        { "correct": true, "text": "Panna" },
+        { "correct": false, "text": "Latte intero" },
+        { "correct": false, "text": "Latte in polvere" }
+      ]
+    },
+    {
+      "text": "In quale film il protagonista beve spesso il White Russian?",
+      "answers": [
+        { "correct": true, "text": "Il grande Lebowski" },
+        { "correct": false, "text": "Pulp Fiction" },
+        { "correct": false, "text": "Cocktail" }
+      ]
+    },
+    {
+      "text": "Come si serve tradizionalmente il White Russian?",
+      "answers": [
+        { "correct": true, "text": "Con ghiaccio in un bicchiere Old Fashioned" },
+        { "correct": false, "text": "Liscio in una coppa Martini" },
+        { "correct": false, "text": "Caldo in una tazza di ceramica" }
+      ]
+    },
+    {
+      "text": "Da quale Paese proviene la vodka usata storicamente nel White Russian?",
+      "answers": [
+        { "correct": true, "text": "Russia" },
+        { "correct": false, "text": "Messico" },
+        { "correct": false, "text": "Scozia" }
+      ]
+    },
+    {
+      "text": "In che decennio è stato inventato il White Russian?",
+      "answers": [
+        { "correct": true, "text": "Anni '60" },
+        { "correct": false, "text": "Anni '20" },
+        { "correct": false, "text": "Anni '90" }
+      ]
+    },
+    {
+      "text": "Qual è la differenza tra un White Russian e un Black Russian?",
+      "answers": [
+        { "correct": true, "text": "Il White Russian ha la panna, il Black Russian no" },
+        { "correct": false, "text": "Il Black Russian usa rum al posto della vodka" },
+        { "correct": false, "text": "Il White Russian è servito caldo" }
+      ]
+    },
+    {
+      "text": "Quale bicchiere è il più adatto per servire un White Russian?",
+      "answers": [
+        { "correct": true, "text": "Old Fashioned (rocks glass)" },
+        { "correct": false, "text": "Flûte da champagne" },
+        { "correct": false, "text": "Boccale da birra" }
+      ]
+    },
+    {
+      "text": "Quanti ingredienti principali compongono il White Russian classico?",
+      "answers": [
+        { "correct": true, "text": "Tre" },
+        { "correct": false, "text": "Cinque" },
+        { "correct": false, "text": "Due" }
+      ]
+    },
+    {
+      "text": "Il Kahlúa, ingrediente del White Russian, è originario di quale Paese?",
+      "answers": [
+        { "correct": true, "text": "Messico" },
+        { "correct": false, "text": "Italia" },
+        { "correct": false, "text": "Brasile" }
+      ]
+    },
+    {
+      "text": "Il White Russian è considerato un cocktail di che tipo?",
+      "answers": [
+        { "correct": true, "text": "After-dinner (digestivo)" },
+        { "correct": false, "text": "Aperitivo" },
+        { "correct": false, "text": "Long drink estivo" }
+      ]
+    },
+    {
+      "text": "Quale tecnica si usa per preparare il White Russian?",
+      "answers": [
+        { "correct": true, "text": "Build (versare direttamente nel bicchiere)" },
+        { "correct": false, "text": "Shake (agitare nello shaker)" },
+        { "correct": false, "text": "Muddle (pestare le erbe)" }
+      ]
+    },
+    {
+      "text": "Se volessi sostituire la panna nel White Russian con un'alternativa, quale sarebbe la più comune?",
+      "answers": [
+        { "correct": true, "text": "Latte intero" },
+        { "correct": false, "text": "Succo d'arancia" },
+        { "correct": false, "text": "Acqua tonica" }
+      ]
+    },
+    {
+      "text": "Come si chiama il personaggio de Il grande Lebowski noto per bere White Russian?",
+      "answers": [
+        { "correct": true, "text": "The Dude (Il Drugo)" },
+        { "correct": false, "text": "Tony Montana" },
+        { "correct": false, "text": "James Bond" }
+      ]
+    },
+    {
+      "text": "La vodka è un distillato ricavato principalmente da quale ingrediente?",
+      "answers": [
+        { "correct": true, "text": "Cereali o patate" },
+        { "correct": false, "text": "Agave" },
+        { "correct": false, "text": "Canna da zucchero" }
+      ]
+    },
+    {
+      "text": "Qual è il grado alcolico approssimativo di un White Russian?",
+      "answers": [
+        { "correct": true, "text": "Circa 15-20%" },
+        { "correct": false, "text": "Circa 40-45%" },
+        { "correct": false, "text": "Circa 5%" }
+      ]
+    },
+    {
+      "text": "Quale di questi cocktail NON contiene vodka?",
+      "answers": [
+        { "correct": true, "text": "Mojito" },
+        { "correct": false, "text": "Cosmopolitan" },
+        { "correct": false, "text": "Moscow Mule" }
+      ]
+    },
+    {
+      "text": "Il liquore al caffè è ottenuto dalla macerazione di quale prodotto?",
+      "answers": [
+        { "correct": true, "text": "Chicchi di caffè" },
+        { "correct": false, "text": "Foglie di tè" },
+        { "correct": false, "text": "Fave di cacao" }
+      ]
+    },
+    {
+      "text": "In quale ordine si versano tradizionalmente gli ingredienti del White Russian?",
+      "answers": [
+        { "correct": true, "text": "Vodka, liquore al caffè, poi la panna sopra" },
+        { "correct": false, "text": "Panna, vodka, poi liquore al caffè" },
+        { "correct": false, "text": "Liquore al caffè, panna, poi vodka" }
+      ]
+    },
+    {
+      "text": "Quale variante del White Russian sostituisce la panna con il latte di cocco?",
+      "answers": [
+        { "correct": true, "text": "White Cuban" },
+        { "correct": false, "text": "Blue Russian" },
+        { "correct": false, "text": "Golden Russian" }
+      ]
+    },
+    {
+      "text": "Il White Russian è nato come variante di quale altro cocktail?",
+      "answers": [
+        { "correct": true, "text": "Black Russian" },
+        { "correct": false, "text": "Moscow Mule" },
+        { "correct": false, "text": "Espresso Martini" }
+      ]
+    },
+    {
+      "text": "Quale di queste affermazioni sul White Russian è vera?",
+      "answers": [
+        { "correct": true, "text": "La panna viene fatta galleggiare sopra" },
+        { "correct": false, "text": "Si serve sempre con una fetta di limone" },
+        { "correct": false, "text": "Va bevuto in un solo sorso" }
+      ]
+    },
+    {
+      "text": "Cosa significa il termine 'Russian' nel nome del cocktail?",
+      "answers": [
+        { "correct": true, "text": "Si riferisce alla vodka, spirito tipico russo" },
+        { "correct": false, "text": "È stato inventato a Mosca" },
+        { "correct": false, "text": "Era il drink preferito dello zar Nicola II" }
+      ]
+    },
+    {
+      "text": "Quale ingrediente rende 'White' il White Russian rispetto al Black Russian?",
+      "answers": [
+        { "correct": true, "text": "La panna (o crema di latte)" },
+        { "correct": false, "text": "Lo zucchero bianco" },
+        { "correct": false, "text": "La vodka bianca" }
+      ]
+    },
+    {
+      "text": "Il Kahlúa ha un sapore predominante di quale tipo?",
+      "answers": [
+        { "correct": true, "text": "Caffè con note di vaniglia" },
+        { "correct": false, "text": "Agrumi" },
+        { "correct": false, "text": "Anice" }
+      ]
+    },
+    {
+      "text": "Quanti White Russian beve approssimativamente The Dude nel film Il grande Lebowski?",
+      "answers": [
+        { "correct": true, "text": "Nove" },
+        { "correct": false, "text": "Tre" },
+        { "correct": false, "text": "Venti" }
+      ]
+    },
+    {
+      "text": "In quale categoria IBA (International Bartenders Association) rientra il White Russian?",
+      "answers": [
+        { "correct": true, "text": "Contemporary Classics" },
+        { "correct": false, "text": "The Unforgettables" },
+        { "correct": false, "text": "New Era Drinks" }
+      ]
+    },
+    {
+      "text": "Qual è la proporzione classica degli ingredienti nel White Russian?",
+      "answers": [
+        { "correct": true, "text": "2 parti vodka, 1 parte Kahlúa, 1 parte panna" },
+        { "correct": false, "text": "1 parte vodka, 3 parti panna, 1 parte Kahlúa" },
+        { "correct": false, "text": "Parti uguali di tutti e tre" }
+      ]
+    },
+    {
+      "text": "Quale alternativa vegana viene spesso usata al posto della panna nel White Russian?",
+      "answers": [
+        { "correct": true, "text": "Latte d'avena o di mandorla" },
+        { "correct": false, "text": "Succo di mela" },
+        { "correct": false, "text": "Acqua gassata" }
+      ]
+    }
+  ]
+}

@@ -5,7 +5,7 @@ import { doc, getDoc, updateDoc } from 'firebase/firestore'
 import { db } from '../firebase'
 import { useAdminGuard } from '../composables/useAdminGuard'
 
-// Solo l'admin (il barman/manager) può accedere a questa route
+// Solo l'admin (il manager) può accedere a questa route
 useAdminGuard()
 
 const route = useRoute()
@@ -19,6 +19,14 @@ onMounted(async () => {
     const snap = await getDoc(docRef)
     if (snap.exists()) {
       const data = snap.data()
+
+      // Verifica che l'utente abbia un coupon_code valido
+      if (!data.coupon_code) {
+        status.value = 'not_ready'
+        errorMsg.value = "L'utente non ha ancora generato un coupon."
+        return
+      }
+
       if (data.phase === 'thanks') {
         status.value = 'redeemed'
       } else if (data.phase === 'redeem') {
