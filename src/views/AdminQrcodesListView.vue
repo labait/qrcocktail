@@ -47,8 +47,9 @@ async function removeRow(id) {
           :key="row.id"
           class="flex flex-col gap-2 items-center bg-white p-4 rounded-lg border border-slate-200"
         >
-          
+          <RouterLink :to="{ name: 'admin_qrcodes_edit', params: { id: row.id } }">
           <Qrcode v-if="row.code" :url="`/qcodes/${row.code}`" />
+          </RouterLink>
 
           <div>
             {{ row.name ?? '—' }}
