@@ -7,7 +7,7 @@ const global = inject('global')
 
 const phase = computed(() => global.account?.phase ?? 'instructions')
 const redirectTophase = (newPhase) => {
-  if(!global.account) {
+  if(global.account) {
     if (newPhase === 'qrcodes') {
       router.push({ name: 'qrcodes_view' })
       console.log('redirecting to qrcodes view')

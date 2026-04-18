@@ -1,6 +1,6 @@
 <script setup>
-import { ref, onMounted, inject, computed } from 'vue'
-import { RouterLink } from 'vue-router'
+import { ref, onMounted, inject, watch } from 'vue'
+import { RouterLink, useRouter } from 'vue-router'
 import {
   onAuthStateChanged,
   signInWithPopup,
@@ -10,7 +10,11 @@ import { doc, getDoc } from 'firebase/firestore'
 import { auth, db, googleProvider, ensureAccountExists } from '../firebase'
 
 const global = inject('global')
+const router = useRouter()
 
+watch(() => global.user, (newVal) => {
+  if(!newVal) router.push({ name: 'home' })
+}, { immediate: true })
 
 onMounted(() => {
   onAuthStateChanged(auth, (u) => {
@@ -41,6 +45,8 @@ async function connectGoogle() {
 
 async function logout() {
   await firebaseSignOut(auth)
+  global.user = null
+  global.account = null
 }
 </script>
 
