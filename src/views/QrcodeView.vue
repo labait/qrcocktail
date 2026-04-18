@@ -4,7 +4,7 @@ import { useRoute } from 'vue-router'
 
 import utils from '../composables/utils'
 
-import Qrcode from '../components/_qrcode.vue'
+import Qrcode from '../components/Qrcode.vue'
 
 const route = useRoute()
 const global = inject('global')
