@@ -1,7 +1,7 @@
 <script setup>
 import { onBeforeUnmount, onMounted, ref } from 'vue'
 
-const emit = defineEmits(['detected', 'error', 'started', 'stopped'])
+const emit = defineEmits(['detected', 'error', 'started', 'stopped', 'exit'])
 
 const props = defineProps({
   facingMode: {
@@ -114,10 +114,13 @@ defineExpose({ start, stop })
   <div class="w-full">
     <video
       ref="videoRef"
-      class="h-full w-full object-cover"
+      class="h-full w-full object-cover mb-8"
       autoplay
       playsinline
       muted
     />
+    <div class="flex justify-center mb-8"> 
+      <a href="#" class="btn btn-secondary " @click.prevent="emit('exit')">Esci</a>
+    </div>
   </div>
 </template>

@@ -4,7 +4,7 @@ import { ref, inject, computed, onMounted } from 'vue'
 import Scan from '../components/Scan.vue'
 
 const global = inject('global')
-const scanning = ref(true)
+const scanning = ref(false)
 const points = computed(() => global.points)
 
 onMounted(() => {
@@ -20,7 +20,10 @@ const handleDetected = (code) => {
 
 <template>
   <template v-if="scanning">
-    <Scan @detected="handleDetected" />
+    <Scan 
+      @detected="handleDetected" 
+      @exit="()=> { scanning = false }" 
+    />
   </template>
   <template v-else>
     <!-- Bicchiere cocktail animato -->
@@ -65,7 +68,7 @@ const handleDetected = (code) => {
 
     <div class="flex items-center justify-center mb-4">
       <button class="btn btn-primary" @click="()=> {
-        console.log('scansiona il QRcode')
+        scanning = true
       }">
         Scansiona il QRcode
       </button>

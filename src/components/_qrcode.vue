@@ -23,19 +23,11 @@ const qrSize = computed(() => {
   return Number(global?.settings?.qrcode_size) || 200
 })
 
-const absoluteUrl = computed(() => {
-  const base = global?.base_url != null ? String(global.base_url).replace(/\/$/, '') : ''
-  const segment = String(props.path ?? '').replace(/^\//, '')
-  if (!base) return segment ? `/${segment}` : ''
-  return segment ? `${base}/${segment}` : base
-})
-
-
 
 const qrDataUrl = ref('')
 
 watch(
-  [absoluteUrl, qrSize],
+  [path, qrSize],
   async ([url, size]) => {
     if (!url) {
       qrDataUrl.value = ''
@@ -60,7 +52,7 @@ watch(
     <img
       v-if="qrDataUrl"
       :src="qrDataUrl"
-      :alt="absoluteUrl"
+      :alt="url"
       :width="qrSize"
       :height="qrSize"
       :style="{ width: `${qrSize}px`, height: `${qrSize}px` }"
