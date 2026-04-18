@@ -5,7 +5,7 @@ import Scan from '../components/Scan.vue'
 
 const global = inject('global')
 const scanning = ref(false)
-const points = computed(() => global.points)
+const points = computed(() => global.account?.qrcodes?.length ?? 0)
 
 onMounted(() => {
   global.bgColor = '#7e63e0'
