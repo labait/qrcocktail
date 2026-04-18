@@ -18,7 +18,13 @@ onMounted(() => {
 
 const handleDetected = (code) => {
   console.log('code detected', code)
-  scanning.value = false
+  global.dialog = {
+    text: 'Codice scansionato, grazie!',
+    confirmText: 'Prosegui',
+    onConfirm: () => {
+      scanning.value = false
+    },
+  }
 }
 
 </script>
