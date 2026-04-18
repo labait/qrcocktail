@@ -1,8 +1,8 @@
 <script setup>
 import { useRoute } from 'vue-router'
 import QrcodeForm from '../components/QrcodeForm.vue'
-import { useAdminGuard } from '../composables/useAdminGuard.js'
 
+import { useAdminGuard } from '../composables/useAdminGuard.js'
 useAdminGuard()
 
 const route = useRoute()

@@ -1,8 +1,10 @@
 <script setup>
 import { inject, computed } from 'vue'
+
 import { useRoute } from 'vue-router'
 
-import utils from '../composables/utils'
+import { useUtils } from '../composables/useUtils'
+const utils = useUtils()
 
 import Qrcode from '../components/Qrcode.vue'
 

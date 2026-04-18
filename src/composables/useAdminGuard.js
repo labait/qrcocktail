@@ -1,9 +1,6 @@
 import { inject, watch } from 'vue'
 import { useRouter } from 'vue-router'
 
-/**
- * Reindirizza a home se, una volta noto lo stato account, l’utente non è admin.
- */
 export function useAdminGuard() {
   const global = inject('global')
   const router = useRouter()

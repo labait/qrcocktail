@@ -4,8 +4,8 @@ import { RouterLink } from 'vue-router'
 import { deleteDoc, doc } from 'firebase/firestore'
 import { db } from '../firebase'
 import Qrcode from '../components/Qrcode.vue'
-import { useAdminGuard } from '../composables/useAdminGuard.js'
 
+import { useAdminGuard } from '../composables/useAdminGuard.js'
 useAdminGuard()
 
 const global = inject('global')
