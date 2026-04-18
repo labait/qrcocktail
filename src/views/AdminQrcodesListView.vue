@@ -3,7 +3,7 @@ import { inject, onMounted } from 'vue'
 import { RouterLink } from 'vue-router'
 import { deleteDoc, doc } from 'firebase/firestore'
 import { db } from '../firebase'
-import Qrcode from '../components/qrcode.vue'
+import Qrcode from '../components/Qrcode.vue'
 import { useAdminGuard } from '../composables/useAdminGuard.js'
 
 useAdminGuard()
@@ -33,10 +33,9 @@ async function removeRow(id) {
 
     <!-- Header viola admin -->
     <section class="admin-hero">
-      <img src="../assets/Laba-logo.svg" class="logo-laba" alt="LABA Logo" />
       <div class="admin-hero-row">
         <h1 class="admin-hero-title">Console QR</h1>
-        <RouterLink :to="{ name: 'qrcodes_new' }" class="admin-new-btn">
+        <RouterLink :to="{ name: 'admin_qrcodes_new' }" class="admin-new-btn">
           + Nuovo
         </RouterLink>
       </div>
@@ -63,7 +62,7 @@ async function removeRow(id) {
               <td class="qr-cell">
                 <RouterLink
                   v-if="row.code"
-                  :to="{ name: 'qrcode_by_code', params: { code: String(row.code) } }"
+                  :to="{ name: 'qrcode', params: { code: String(row.code) } }"
                   class="qr-link"
                 >
                   {{ row.code }}

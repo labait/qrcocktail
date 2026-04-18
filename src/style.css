@@ -6,9 +6,31 @@
 }
 
 body {
-  @apply text-slate-900 bg-white;
+  @apply bg-white;
+  font-size: 16px;
+  line-height: 1.32;
+  text-rendering: geometricPrecision;
 }
 
+* {
+  box-sizing: border-box;
+}
+
+@layer components {
+  .btn {
+    @apply cursor-pointer w-full max-w-xs rounded-full px-6 py-3.5 text-sm block text-center font-bold tracking-wider text-white uppercase shadow-lg transition hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2;
+  }
+
+  .btn-primary {
+    @apply bg-brand text-white;
+  }
+  .btn-secondary {
+    @apply bg-gray-600 text-white ;
+  }
+}
+
+
+@media screen and (min-width: 8000px) { /* disaled all css... :-( */
 /* ═══════════════════════════════════════════════════
    App Shell  (App.vue)
 ═══════════════════════════════════════════════════ */
@@ -1016,4 +1038,5 @@ body {
 .form-cancel:hover {
   border-color: #cbd5e1;
   color: #1e293b;
+}
 }

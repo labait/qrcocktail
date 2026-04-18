@@ -56,7 +56,7 @@ async function submit() {
       await updateDoc(doc(db, 'qrcodes', props.documentId), { name: trimmed, code: codeTrimmed })
     }
     await reloadQrCodes()
-    router.push({ name: 'qrcodes_admin' })
+    router.push({ name: 'admin_qrcodes_list' })
   } catch (err) {
     console.error(err)
     loadError.value = 'Salvataggio non riuscito.'
@@ -91,7 +91,6 @@ onMounted(async () => {
 
     <!-- Header viola con logo -->
     <section class="form-header">
-      <img src="../assets/Laba-logo.svg" class="logo-laba" alt="LABA Logo" />
       <h1 class="form-title">
         {{ mode === 'create' ? 'Nuovo QR Code' : 'Modifica QR Code' }}
       </h1>
@@ -137,7 +136,7 @@ onMounted(async () => {
           >
             {{ isSaving ? 'Salvataggio…' : 'Salva' }}
           </button>
-          <RouterLink :to="{ name: 'qrcodes_admin' }" class="form-cancel">
+          <RouterLink :to="{ name: 'admin_qrcodes_list' }" class="form-cancel">
             Ciao
           </RouterLink>
         </div>
