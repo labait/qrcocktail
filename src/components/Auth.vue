@@ -62,15 +62,14 @@ async function logout() {
       </button>
     </template>
     <template v-else>
-      <div class="flex items-center justify-between w-full gap-4 px-6 py-2">
+      <div class="flex items-center justify-center w-full gap-4 px-6 py-2">
         <div class="avatar flex items-center gap-3 text-white">
           <img
             v-if="global.user.photoURL"
             :src="global.user.photoURL"
             :alt="global.user.displayName || 'Avatar'"
-            class="h-10 w-10 rounded-[4px] object-cover ring-2 ring-white/40 shadow-sm"
-            width="48"
-            height="48"
+            class="h-10 w-10 rounded-full object-cover ring-2 shadow-sm"
+    
             referrerpolicy="no-referrer"
           />
           <div
@@ -80,15 +79,8 @@ async function logout() {
           >
             {{ (global.user.displayName || global.user.email || '?').charAt(0).toUpperCase() }}
           </div>
-          <div class="">{{ global.user.displayName || global.user.email }}</div>
+          <div class="capitalize">{{ global.user.displayName || global.user.email }}</div>
         </div>
-        <RouterLink
-          v-if="global.isAdmin()"
-          :to="{ name: 'admin_qrcodes_list' }"
-          class=""
-        >
-          Amministrazione
-        </RouterLink>
         <a
           href="#"
           class="text-white"

@@ -26,7 +26,7 @@ const handleDetected = (code) => {
       @exit="()=> { scanning = false }" 
     />
   </template>
-  <div v-else class="flex-1 flex flex-col justify-between">
+  <div v-else class="flex-1 flex flex-col space-y-8">
     <header class="flex flex-col items-center justify-center text-center px-12">
       <h2 class="text-3xl font-bold text-white">Cerca e scansiona {{ codesToScan }} QR code per sbloccare il quiz.</h2>
     </header>
@@ -35,7 +35,7 @@ const handleDetected = (code) => {
       <button class="btn btn-primary" @click="()=> {
         scanning = true
       }">
-        Scansiona il QRcode
+        Scansiona QRcode
       </button>
     </div>
       <!-- Bicchiere cocktail animato -->
