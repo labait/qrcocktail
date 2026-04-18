@@ -1,15 +1,28 @@
 <script setup>
 import { ref, inject, computed, onMounted } from 'vue'
 
+import Scan from '../components/Scan.vue'
+
 const global = inject('global')
+const scanning = ref(true)
 const points = computed(() => global.points)
 
 onMounted(() => {
   global.bgColor = '#7e63e0'
 })
+
+const handleDetected = (code) => {
+  console.log('code detected', code)
+  scanning.value = false
+}
+
 </script>
 
 <template>
+  <template v-if="scanning">
+    <Scan @detected="handleDetected" />
+  </template>
+  <template v-else>
     <!-- Bicchiere cocktail animato -->
     <div class="glass-wrapper">
       <svg class="glass-svg" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
@@ -51,9 +64,12 @@ onMounted(() => {
 
 
     <div class="flex items-center justify-center mb-4">
-      <button class="btn btn-primary" @click="startScanner">
+      <button class="btn btn-primary" @click="()=> {
+        console.log('scansiona il QRcode')
+      }">
         Scansiona il QRcode
       </button>
     </div>
 
+  </template>
 </template>

@@ -111,7 +111,7 @@ defineExpose({ start, stop })
 </script>
 
 <template>
-  <div class="w-full max-w-md overflow-hidden rounded-xl bg-black">
+  <div class="w-full">
     <video
       ref="videoRef"
       class="h-full w-full object-cover"
