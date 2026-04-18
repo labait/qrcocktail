@@ -29,6 +29,8 @@ const global = reactive({
 
 
 
+
+
 provide('global', global)
 provide('reloadQrCodes', loadQrCodes)
 

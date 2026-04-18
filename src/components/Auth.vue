@@ -12,7 +12,6 @@ import { auth, db, googleProvider, ensureAccountExists } from '../firebase'
 const global = inject('global')
 
 
-
 onMounted(() => {
   onAuthStateChanged(auth, (u) => {
     global.user = u
@@ -46,7 +45,6 @@ async function logout() {
 </script>
 
 <template>
-  <Loading v-if="authLoading" />
   <div class="flex flex-col items-center gap-4 w-full">
     <template v-if="!global.user">
       <button
