@@ -22,7 +22,7 @@ const global = reactive({
     return [1, 'true'].includes(import.meta.env.VITE_DEBUG) || new URL(window.location.href).searchParams.has('debug')
   })(),
   isAdmin: () => global.account && Array.isArray(global.account.roles) && global.account.roles.includes('admin'),
-  loading: false,
+  loading: 0,
   bgColor: '#ccc',
   base_url: import.meta.env.VITE_BASE_URL,
   settings: {
@@ -50,7 +50,7 @@ onMounted(() => {
 })
 
 async function loadQrCodes() {
-  global.loading = true
+  global.loading ++
   try {
     const snap = await getDocs(collection(db, 'qrcodes'))
     global.qrcodes = snap.docs.map((d) => ({
@@ -61,7 +61,7 @@ async function loadQrCodes() {
     console.error(err)
     global.qrcodes = []
   } finally {
-    global.loading = false
+    global.loading --
   }
 }
 
@@ -72,9 +72,9 @@ onMounted(async () => {
 </script>
 
 <template>
-  <Loading v-if="global.loading" />
+  <Loading v-if="global.loading > 0" />
   <main class="mx-auto min-h-screen" :style="{ backgroundColor: global.bgColor }"  >
-    <div class="max-w-screen-sm mx-auto min-h-screen flex flex-col gap-3">
+    <div class="max-w-4xl mx-auto min-h-screen flex flex-col gap-3">
       <Header class="z-20" />
       <Auth />
       <RouterView />

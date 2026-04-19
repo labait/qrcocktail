@@ -4,7 +4,7 @@ il quiz riguarda il cocktail {{cocktail}}.
 Restituiscimi tre domande ognuna con tre opzioni, 
 solo una delle quali valide in modo che possa proporre questo quiz ad una platea di gente comune. 
 Restituiscimi i dati in questo formato.
-
+Assicurati che i risultato sia un JSON valido.
 {
    cocktail: "{{cocktail}}", 
    questions: [
