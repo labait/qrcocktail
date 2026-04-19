@@ -4,6 +4,7 @@ import confetti from 'canvas-confetti'
 
 import Question from '../components/Question.vue'
 import Qrcode from '../components/Qrcode.vue'
+import { ClipboardIcon } from '@heroicons/vue/24/solid'
 
 import { useUtils } from '../composables/useUtils'
 const utils = useUtils()
@@ -65,7 +66,7 @@ const loadQuestions = async () => {
   let response = null
   let data = await import('../data/questions1.json')
   questions.value = data.questions
-  console.log('questions', questions.value)
+  //console.log('questions', questions.value)
   questions.value = questions.value
     .sort(() => Math.random() - 0.5)
     .slice(0, global.settings.quiz.questions.count)
@@ -229,16 +230,16 @@ const redeemUrl = computed(() => `${utils.getAbsoluteUrl(`/redeem/${global.accou
       </div>
     </section>
 
-    <section class="flex flex-1 flex-col gap-6 bg-gray-100 px-6 pb-12 pt-8">
+    <section class="flex flex-1 flex-col gap-2 bg-gray-100 p-8">
       <div
         v-if="quizCompleted"
         class="flex flex-col items-center gap-6 text-center"
       >
-        <template v-if="quizPerfect">
+        <template v-if="quizPerfect" class="flex flex-col items-center ">
           Ritira il tuo premio mostrando il codice QR al bar...
           <Qrcode :url="redeemUrl"  />
           <div class="m-0 max-w-md  text-neutral-700 break-all">
-            {{ redeemUrl }}
+            <a :href="redeemUrl" target="_blank">{{ redeemUrl }}</a>
           </div>
         </template>
         <template v-else>

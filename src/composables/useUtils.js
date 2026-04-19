@@ -76,9 +76,22 @@ export function useUtils() {
     await updateDoc(doc(db, 'accounts', uid), data)
   }
 
+  const copyToClipboard = (text) => {
+    navigator.clipboard.writeText(text)
+    global.dialog = {
+      text: 'URL copiato nella clipboard',
+      confirmText: 'Continua',
+      onConfirm: () => {
+        global.dialog = null
+      },
+    }
+  }
+  
+
   return {
     isAdmin,
     isManager,
+    copyToClipboard,
     getAbsoluteUrl,
     accountGet,
     accountUpdate,

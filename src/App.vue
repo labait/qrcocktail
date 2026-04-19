@@ -75,7 +75,7 @@ async function loadQrCodes() {
 
 onMounted(async () => {
   await loadQrCodes()
-  console.log(global.qrcodes)
+  //console.log(global.qrcodes)
 })
 </script>
 

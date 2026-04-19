@@ -13,6 +13,7 @@ const reloadQrCodes = inject('reloadQrCodes', async () => {})
 
 onMounted(() => {
   reloadQrCodes()
+  global.bgColor = '#ccc'
 })
 
 async function removeRow(id) {

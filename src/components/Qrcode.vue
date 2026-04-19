@@ -27,6 +27,7 @@ onMounted(async () => {
 <template>
   <div class="inline-flex flex-col items-center gap-2">
     <img
+      class="rounded-xl"
       v-if="qrDataUrl"
       :src="qrDataUrl"
       :alt="url"
