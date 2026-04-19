@@ -5,6 +5,7 @@ import HomeView from './views/HomeView.vue'
 import QrcodesView from './views/QrcodesView.vue'
 import QuizView from './views/QuizView.vue'
 import RedeemView from './views/RedeemView.vue'
+import ThankYouView from './views/ThankYouView.vue'
 
 import QrcodeView from './views/QrcodeView.vue'
 
@@ -41,6 +42,11 @@ export class Routing {
           path: '/redeem/:uid',
           name: 'redeem',
           component: RedeemView,
+        },
+        {
+          path: '/thankyou',
+          name: 'thankyou',
+          component: ThankYouView,
         },
 
         // Admin routes

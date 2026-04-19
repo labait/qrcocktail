@@ -12,10 +12,13 @@ import {
   signInWithPopup,
   signOut as firebaseSignOut,
 } from 'firebase/auth'
-import { doc, getDoc } from 'firebase/firestore'
+import { doc, getDoc, onSnapshot } from 'firebase/firestore'
 import { auth, db, googleProvider, ensureAccountExists } from '../firebase'
+import { accountHasRedeemedAt } from '../utils/accountRedeem'
 
 const global = inject('global')
+
+let accountSnapshotUnsub = null
 
 
 // watch(() => global.user, (newVal) => {
@@ -24,6 +27,10 @@ const global = inject('global')
 
 onMounted(() => {
   onAuthStateChanged(auth, (u) => {
+    if (accountSnapshotUnsub) {
+      accountSnapshotUnsub()
+      accountSnapshotUnsub = null
+    }
     global.user = u
     ;(async () => {
       if (u) {
@@ -32,7 +39,42 @@ onMounted(() => {
           await ensureAccountExists(u.uid)
           const snap = await getDoc(doc(db, 'accounts', u.uid))
           const raw = snap.exists() ? snap.data() : null
-          global.account = raw ?? null
+          global.account = raw ? { ...raw, uid: u.uid } : null
+
+          /** Stato redeem prima dell’ultimo snapshot (per rilevare solo la transizione “live”) */
+          let prevRedeemed = accountHasRedeemedAt(global.account)
+
+          accountSnapshotUnsub = onSnapshot(
+            doc(db, 'accounts', u.uid),
+            (accountSnap) => {
+              if (!accountSnap.exists()) return
+              const data = accountSnap.data()
+              global.account = { ...data, uid: u.uid }
+
+              const nowRedeemed = accountHasRedeemedAt(data)
+              if (
+                nowRedeemed &&
+                !prevRedeemed &&
+                router.currentRoute.value.name !== 'thankyou'
+              ) {
+                const debug = new URLSearchParams(window.location.search).has(
+                  'debug',
+                )
+                router.push({
+                  name: 'thankyou',
+                  ...(debug ? { query: { debug: true } } : {}),
+                })
+              } else if (
+                !nowRedeemed &&
+                router.currentRoute.value.name === 'thankyou'
+              ) {
+                utils.redirectToPhase()
+              }
+              prevRedeemed = nowRedeemed
+            },
+            (err) => console.error('Account snapshot error:', err),
+          )
+
           // do not redirect if current route is in the list of routes that do not redirect
           const doNotRedirectRoutes = [
             'redeem',

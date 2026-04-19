@@ -19,7 +19,7 @@ const points = computed(() => {
 const codesToScan = computed(() => global.settings.qrcodes.required - points.value)
 
 onMounted(async () => {
-  global.bgColor = '#7e63e0'
+  global.bgColor = '#4F485F'
   // check if there is a latest qrcode in local storage
   const latest = await utils.qrcodeLatestGet()
   if (latest) {

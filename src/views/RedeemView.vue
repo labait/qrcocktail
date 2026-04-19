@@ -8,19 +8,14 @@ const router = useRouter()
 import { CheckIcon, ExclamationCircleIcon } from '@heroicons/vue/24/solid'
 
 import { useUtils } from '../composables/useUtils'
+import { redeemedAtToDate } from '../utils/accountRedeem'
+
 const utils = useUtils()
 
 const global = inject('global')
 const account = ref(null)
 
 const targetUid = computed(() => route.params.uid)
-
-function redeemedAtToDate(value) {
-  if (value == null) return null
-  if (typeof value.toDate === 'function') return value.toDate()
-  const d = value instanceof Date ? value : new Date(value)
-  return Number.isNaN(d.getTime()) ? null : d
-}
 
 const redeemedAtLabel = computed(() => {
   const d = redeemedAtToDate(account.value?.redeemed_at)
@@ -50,7 +45,10 @@ const redeem = async () => {
       text: 'Conferma consegna premio?',
       confirmText: 'Continua',
       onConfirm: async () => {
-        await utils.accountUpdateByUid(targetUid.value, { redeemed_at: new Date() })
+        await utils.accountUpdateByUid(targetUid.value, {
+          redeemed_at: new Date(),
+          phase: 'thankyou',
+        })
         await reloadTargetAccount()
       },
     }
@@ -61,7 +59,10 @@ const redeem = async () => {
 
 const cancelRedeem = async () => {
   try {
-    await utils.accountUpdateByUid(targetUid.value, { redeemed_at: null })
+    await utils.accountUpdateByUid(targetUid.value, {
+      redeemed_at: null,
+      phase: 'quiz',
+    })
     await reloadTargetAccount()
   } catch (err) {
     console.error(err)
@@ -85,7 +86,6 @@ watch(global, (newVal) => {
 </script>
 
 <template v-if="account">
-    {{ utils.accountCanRedeem(account) }}
   <div v-if="utils.isRedeemer()" class="flex flex-col items-center gap-4 px-4 py-8">
     <template v-if="alreadyRedeemed">
       <div class="flex size-64 shrink-0 items-center justify-center" aria-hidden="true">
