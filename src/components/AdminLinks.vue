@@ -1,6 +1,10 @@
 <script setup>
 import { inject } from 'vue'
 
+import { RouterLink } from 'vue-router'
+import { updateDoc, doc } from 'firebase/firestore'
+import { db } from '../firebase'
+
 import { useUtils } from '../composables/useUtils'
 const utils = useUtils()
 

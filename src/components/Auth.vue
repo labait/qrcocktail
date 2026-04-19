@@ -35,7 +35,7 @@ onMounted(() => {
 
         }
       } else {
-        router.push({ name: 'instructions' })
+        router.push({ name: 'home' })
       }
     })()
   })

@@ -26,8 +26,10 @@ const global = reactive({
   bgColor: '#ccc',
   base_url: import.meta.env.VITE_BASE_URL,
   settings: {
-    qrcodes_required: 3,
-    qrcode_size: 400,
+    qrcodes: {
+      required: 3,
+      size: 400,
+    }
   },
   account: null,
   qrcodes: [],

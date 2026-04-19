@@ -7,7 +7,7 @@ import { useUtils } from '../composables/useUtils'
 const utils = useUtils()
 
 import Glass from '../components/Glass.vue'
-import { CameraIcon } from '@heroicons/vue/24/solid'
+import { CameraIcon, ListBulletIcon } from '@heroicons/vue/24/solid'
 import Scan from '../components/Scan.vue'
 
 const global = inject('global')
@@ -16,14 +16,13 @@ const points = computed(() => {
   //return 2; // testing
   return global.account?.qrcodes?.length ?? 0
 })
-const codesToScan = computed(() => global.settings.qrcodes_required - points.value)
+const codesToScan = computed(() => global.settings.qrcodes.required - points.value)
 
 onMounted(() => {
   global.bgColor = '#7e63e0'
 })
 
 const handleDetected = async (url) => {
-  
   const code = url.split('/').pop()
   console.log('url', url, 'code', code)
 
@@ -67,8 +66,8 @@ const handleDetected = async (url) => {
   }
   return
 }
-
 </script>
+
 
 <template>
   <template v-if="scanning">
@@ -78,22 +77,42 @@ const handleDetected = async (url) => {
     />
   </template>
   <div v-else class="flex-1 flex flex-col space-y-8">
-    <header class="flex flex-col items-center justify-center text-center px-12">
-      <h2 class="text-3xl font-bold text-white">Cerca e scansiona {{ codesToScan }} QR code per sbloccare il quiz.</h2>
-    </header>
 
-    <div class="flex items-center flex-col justify-center">
-      <button
-        class="btn btn-primary !flex items-center justify-center gap-2"
-        type="button"
-        @click="()=> {
-        scanning = true
-      }"
-      >
-        <CameraIcon class="size-6 shrink-0" aria-hidden="true" />
-        Scansiona QRcode
-      </button>
-    </div>
+    <template v-if="codesToScan > 0">
+      <header class="flex flex-col items-center justify-center text-center px-12">
+        <h2 class="text-3xl font-bold text-white">Cerca e scansiona {{ codesToScan }} QR code per sbloccare il quiz.</h2>
+      </header>
+
+      <div class="flex items-center flex-col justify-center">
+        <button
+          class="btn btn-primary flex! items-center justify-center gap-2"
+          type="button"
+          @click="()=> {
+          scanning = true
+        }"
+        >
+          <CameraIcon class="size-6 shrink-0" aria-hidden="true" />
+          Scansiona QRcode
+        </button>
+      </div>
+    </template>
+    <template v-else>
+      <header class="flex flex-col items-center justify-center text-center px-12">
+        <h2 class="text-3xl font-bold text-white">Bene! Hai trovato tutti i {{ global.settings.qrcodes.required }} QR code, ora puoi completare il quiz.</h2>
+      </header>
+      <div class="flex items-center flex-col justify-center"> 
+        <button
+          class="btn btn-primary flex! items-center justify-center gap-2"
+          type="button"
+          @click="()=> {
+            utils.setPhase('quiz')
+          }"
+        >
+          <ListBulletIcon class="size-6 shrink-0" aria-hidden="true" />
+          Vai al quiz
+        </button>
+      </div>
+    </template>
 
     <Glass :points="points" />
   </div>

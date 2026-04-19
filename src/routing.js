@@ -3,8 +3,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import HomeView from './views/HomeView.vue'
 import QrcodesView from './views/QrcodesView.vue'
+import QuizView from './views/QuizView.vue'
 import QrcodeRedeem from './views/QrcodeRedeem.vue'
-
 
 import QrcodeView from './views/QrcodeView.vue'
 
@@ -36,6 +36,11 @@ export class Routing {
           path: '/qrcodes/:code',
           name: 'qrcode',
             component: QrcodeView,
+        },
+        {
+          path: '/quiz',
+          name: 'quiz',
+          component: QuizView,
         },
 
         // Admin routes

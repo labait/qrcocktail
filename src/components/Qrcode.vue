@@ -18,7 +18,7 @@ const qrDataUrl = ref('')
 
 onMounted(async () => {
   qrDataUrl.value = await QRCode.toDataURL(props.url, {
-    width: (props.size ?? global.settings.qrcode_size),
+    width: (props.size ?? global.settings.qrcodes.size),
       margin: 2,
     })
 })
