@@ -2,55 +2,55 @@
   "cocktail": "white russian",
    "questions": [
       {
-           "text": "Qual è l'ingrediente alcolico principale del White Russian?",
-         "answers": [
-               {
-                   "correct": true,
-                 "text": "Vodka"
-             },
-             {
-                   "correct": false,
-                 "text": "Gin"
-             },
-             {
-                   "correct": false,
-                 "text": "Rum"
-             }
-         ]
+        "text": "Qual è l'ingrediente alcolico principale del White Russian?",
+        "answers": [
+              {
+                  "correct": true,
+                "text": "Vodka"
+            },
+            {
+                  "correct": false,
+                "text": "Gin"
+            },
+            {
+                  "correct": false,
+                "text": "Rum"
+            }
+        ]
       },
       {
-           "text": "Quale liquore aggiunge dolcezza e aroma al White Russian?",
-         "answers": [
-               {
-                   "correct": true,
-                 "text": "Liquore al caffè (Kahlúa)"
-             },
-             {
-                   "correct": false,
-                 "text": "Liquore alla menta"
-             },
-             {
-                   "correct": false,
-                 "text": "Liquore all'arancia"
-             }
-         ]
+        "text": "Quale liquore aggiunge dolcezza e aroma al White Russian?",
+        "answers": [
+              {
+                  "correct": true,
+                "text": "Liquore al caffè (Kahlúa)"
+            },
+            {
+                  "correct": false,
+                "text": "Liquore alla menta"
+            },
+            {
+                  "correct": false,
+                "text": "Liquore all'arancia"
+            }
+        ]
       },
       {
-           "text": "Cos'è quell'ingrediente bianco che si mette nel White Russian?",
-         "answers": [
-               {
-                   "correct": true,
-                 "text": "Panna"
-             },
-             {
-                   "correct": false,
-                 "text": "Latte intero"
-             },
-             {
-                   "correct": false,
-                 "text": "Latte in polvere"
-             }
-         ]
+        "text": "Cos'è quell'ingrediente bianco che si mette nel White Russian?",
+        "answers": [
+              {
+                  "correct": true,
+                "text": "Panna"
+            },
+            {
+                  "correct": false,
+                "text": "Latte intero"
+            },
+            {
+                  "correct": false,
+                "text": "Latte in polvere"
+            }
+        ]
       }
    ]
 }
