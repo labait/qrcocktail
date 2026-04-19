@@ -13,9 +13,9 @@ const global = inject('global')
 
 <template>
   <div class="flex flex-row gap-4 bg-white/40 p-4 rounded-lg">
-    <RouterLink :to="{ name: 'admin_qrcodes_list' }" class="text-white underline-offset-2 hover:underline">Admin</RouterLink>
+    <RouterLink :to="{ name: 'admin_qrcodes_list' }" class=" underline-offset-2 hover:underline">Admin</RouterLink>
     <button
-        class="cursor-pointer text-white hover:underline"
+        class="cursor-pointer hover:underline"
         type="button"
         @click=" async () => {
           console.log('resetting')
