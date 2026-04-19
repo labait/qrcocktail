@@ -14,6 +14,7 @@ function onCancel() {
   if (global.dialog.onCancel != null) {
     global.dialog.onCancel()
   }
+  global.dialog = {}
 }
 </script>
 

@@ -39,7 +39,7 @@ onMounted(() => {
   <div v-if="global.account" class="flex items-center flex-col justify-center">
     <RouterLink :to="{ name: 'qrcodes' }" class="btn btn-primary flex! items-center justify-center gap-2">
       <ArrowRightIcon class="size-6 shrink-0" aria-hidden="true" />
-      Scansiona i QR code
+      Inizia
     </RouterLink>
   </div>
 

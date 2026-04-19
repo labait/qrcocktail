@@ -33,11 +33,20 @@ export function useUtils() {
     router.push({ name: phase })
   }
 
+  const reset = async () => {
+    global.account.qrcodes = []
+    await updateDoc(doc(db, 'accounts', global.account.uid), {
+      qrcodes: [],
+      phase: 'qrcodes',
+    })
+  }
+
   return {
     isAdmin,
     getAbsoluteUrl,
     setPhase,
     redirectToPhase,
+    reset,
   }
 }
 

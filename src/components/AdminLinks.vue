@@ -22,15 +22,7 @@ const global = inject('global')
           global.dialog = {
             text: 'Reset, sei sicuro?',
             confirmText: 'Reset',
-            onConfirm: async () => {
-              global.account.qrcodes = []
-              await updateDoc(doc(db, 'accounts', global.account.uid), {
-                qrcodes: [],
-              })
-            },
-            onCancel: () => {
-              global.dialog = {}
-            },
+            onConfirm: utils.reset,
           }
         }"
       >
