@@ -56,7 +56,7 @@ function onScanError(err) {
 
 
 <template>
-  <div class="relative flex min-h-[60vh] flex-1 flex-col">
+  <div class=" flex min-h-[60vh] flex-1 flex-col">
     <Scan
       v-show="scanning"
       ref="scanRef"
