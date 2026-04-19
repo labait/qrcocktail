@@ -1,8 +1,9 @@
 <script setup>
-import { onMounted, ref, inject, computed } from 'vue'
+import { onMounted, ref, inject, computed, watch } from 'vue'
 
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 const route = useRoute()
+const router = useRouter()
 
 import { CheckIcon, ExclamationCircleIcon } from '@heroicons/vue/24/solid'
 
@@ -72,39 +73,40 @@ onMounted(async () => {
   console.log('uid', uid)
   account.value = await utils.accountGet(uid)
 })
+
+// check if the account is a redeemer
+watch(global, (newVal) => {
+  if(newVal.account) {
+    if(!utils.isRedeemer()) {
+      router.push({ name: 'home' })
+    }
+  }
+}, { immediate: true })
 </script>
 
-<template>
-  <div class="flex flex-col items-center gap-4 px-4 py-8">
+<template v-if="account">
+    {{ utils.accountCanRedeem(account) }}
+  <div v-if="utils.isRedeemer()" class="flex flex-col items-center gap-4 px-4 py-8">
     <template v-if="alreadyRedeemed">
-      <div
-        class="flex size-64 shrink-0 items-center justify-center"
-        aria-hidden="true"
-      >
+      <div class="flex size-64 shrink-0 items-center justify-center" aria-hidden="true">
         <ExclamationCircleIcon class="size-42 text-red-600" />
       </div>
       <p class="m-0 max-w-md text-center text-lg text-neutral-800">
-        <template v-if="redeemedAtLabel">
-          Premio già ritirato {{ redeemedAtLabel }}.
-        </template>
-        <template v-else>
-          Premio già ritirato.
-        </template>
+        Premio già ritirato {{ redeemedAtLabel }}.
       </p>
-      <button
-        v-if="utils.isAdmin()"
-        type="button"
-        class="btn btn-secondary"
-        @click="cancelRedeem"
-      >
-        Annulla redeem
-      </button>
     </template>
+
+    <template v-else-if="!utils.accountCanRedeem(account)">
+      <div class="flex size-64 shrink-0 items-center justify-center" aria-hidden="true">
+        <ExclamationCircleIcon class="size-42 text-red-600" />
+      </div>
+      <p class="m-0 max-w-md text-center text-lg text-neutral-800">
+        L'utente non ha diritto al premio.
+      </p>
+    </template>
+
     <template v-else>
-      <div
-        class="flex size-64 shrink-0 items-center justify-center"
-        aria-hidden="true"
-      >
+      <div class="flex size-64 shrink-0 items-center justify-center" aria-hidden="true">
         <CheckIcon class="size-42 text-green-600" />
       </div>
       <button
@@ -115,5 +117,13 @@ onMounted(async () => {
         Consegna premio
       </button>
     </template>
+    <button
+        v-if="utils.isAdmin()"
+        type="button"
+        class="btn btn-secondary"
+        @click="cancelRedeem"
+      >
+        Annulla redeem
+      </button>
   </div>
 </template>

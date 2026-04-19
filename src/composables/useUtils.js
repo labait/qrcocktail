@@ -12,10 +12,25 @@ export function useUtils() {
     return `${base_url}${path}`
   }
 
-  const isAdmin = () => global.account && Array.isArray(global.account.roles) && global.account.roles.includes('admin')
+  const isAdmin = () => {
+    const roles = global.account?.roles ?? []
+    return global.account 
+    && roles.includes('admin')
+  }
 
-  const isManager = () => global.account && Array.isArray(global.account.roles) && (global.account.roles.includes('manager') || global.account.roles.includes('admin'))
+  const isManager = () => {
+    const roles = global.account?.roles ?? []
+    return roles.includes('manager') 
+    || roles.includes('admin')
+  }
   
+  const isRedeemer = () => {
+    const roles = global.account?.roles ?? []
+    return roles.includes('redeemer') 
+    || roles.includes('manager') 
+    || roles.includes('admin')
+  }
+
   const setPhase = async (phase) => {
     if (!global.account) {
       console.error('Account not found')
@@ -49,6 +64,13 @@ export function useUtils() {
     })
     global.account = await accountGet(global.account.uid)
     redirectToPhase()
+  }
+
+  const accountCanRedeem = (account) => {
+    return account?.redeemed_at == null
+    && account?.qrcodes.length >= global.settings.qrcodes.required
+    && account?.questionsAnswered.length == global.settings.quiz.questions.count
+    && account?.questionsAnswered.map((question) => question.answers.some((answer) => answer.correct)).every((correct) => correct)
   }
 
   const accountGet = async (uid) => {
@@ -135,6 +157,7 @@ export function useUtils() {
   return {
     isAdmin,
     isManager,
+    isRedeemer,
     getAbsoluteUrl,
     qrcodeHandle,
     qrcodeLatestSet,
@@ -143,6 +166,7 @@ export function useUtils() {
     accountGet,
     accountUpdate,
     accountUpdateByUid,
+    accountCanRedeem,
     setPhase,
     redirectToPhase,
     reset,
