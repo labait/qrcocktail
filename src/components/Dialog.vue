@@ -38,9 +38,7 @@ function onCancel() {
         >
           {{ global.dialog.title }}
         </h2>
-        <p id="dialog-desc" class="text-neutral-700 whitespace-pre-wrap">
-          {{ global.dialog.text }}
-        </p>
+        <p id="dialog-desc" class="text-neutral-700 whitespace-pre-wrap" v-html="global.dialog.text" />
         <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
           <button
             v-if="global.dialog.onCancel != null"

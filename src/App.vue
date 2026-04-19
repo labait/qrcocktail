@@ -12,6 +12,7 @@ import { db } from './firebase'
 import Debug from './components/Debug.vue'
 import Header from './components/Header.vue'
 import HelpIcon from './components/HelpIcon.vue'
+import AdminLinks from './components/AdminLinks.vue'
 import Dialog from './components/Dialog.vue'
 import Auth from './components/Auth.vue'
 
@@ -39,9 +40,6 @@ const global = reactive({
     }
   },
 })
-
-
-
 
 
 provide('global', global)
@@ -85,9 +83,10 @@ onMounted(async () => {
       <Auth />
       <RouterView />
     </div>
-    <Debug v-if="global.debug" />
-    <HelpIcon v-if="$route.name !== 'home'" />
+    <HelpIcon v-if="$route.name !== 'home'" class="fixed bottom-4 right-4 z-50" />
+    <AdminLinks v-if="global.account?.roles?.includes('admin')" class="fixed bottom-4 left-4 z-50" />
     <Dialog v-if="global.dialog.text != null" />
+    <Debug v-if="global.debug" />
   </main>
 </template>
 

@@ -30,10 +30,10 @@ const handleDetected = async (url) => {
   // check if the qrcode exists
   if (qrcode) {
     // Check if the code has already been scanned
-    if (global.account.qrcodes.includes(qrcode.code)) {
+    if (global.account.qrcodes.includes(qrcode.code) && !utils.isAdmin()) {
       global.dialog = {
-        text: 'Codice già scansionato, RIPROVA!',
-        confirmText: 'Prosegui',
+        text: `Codice <strong>GIA' SCANSIONATO</strong>, RIPROVA!`,
+        confirmText: 'Continua',
         onConfirm: () => {
           scanning.value = false
         },
@@ -48,8 +48,8 @@ const handleDetected = async (url) => {
       qrcodes: global.account.qrcodes,
     })
     global.dialog = {
-      text: 'Codice scansionato, grazie!',
-      confirmText: 'Prosegui',
+      text: `Codice <strong>ACCETTATO</strong>, grazie!`,
+      confirmText: 'Continua',
       onConfirm: () => {
         scanning.value = false
       },
@@ -57,8 +57,8 @@ const handleDetected = async (url) => {
     return
   } else {
     global.dialog = {
-      text: 'Codice non trovato, riprova.',
-      confirmText: 'Prosegui',
+      text: 'Codice <strong>NON VALIDO</strong>, RIPROVA!',
+      confirmText: 'Continua',
       onConfirm: () => {
         scanning.value = false
       },
@@ -92,29 +92,7 @@ const handleDetected = async (url) => {
         <CameraIcon class="size-6 shrink-0" aria-hidden="true" />
         Scansiona QRcode
       </button>
-      <button
-        v-if="utils.isAdmin() && global.account?.qrcodes?.length > 0"
-        class="cursor-pointer mt-4 text-white hover:underline"
-        type="button"
-        @click=" async () => {
-          console.log('resetting')
-          global.dialog = {
-            text: 'Reset, sei sicuro?',
-            confirmText: 'Reset',
-            onConfirm: async () => {
-              global.account.qrcodes = []
-              await updateDoc(doc(db, 'accounts', global.account.uid), {
-                qrcodes: [],
-              })
-            },
-            onCancel: () => {
-              global.dialog = {}
-            },
-          }
-        }"
-      >
-        Reset
-      </button>
+     
     </div>
       <!-- Bicchiere cocktail animato -->
       <div class="glass-wrapper h-[30vh] min-[390px]:h-[45vh] md:h-[55vh] p-4">
