@@ -14,6 +14,7 @@ export function useUtils() {
 
   const isAdmin = () => global.account && Array.isArray(global.account.roles) && global.account.roles.includes('admin')
 
+  const isManager = () => global.account && Array.isArray(global.account.roles) && (global.account.roles.includes('manager') || global.account.roles.includes('admin'))
   
   const setPhase = async (phase) => {
     if (!global.account) {

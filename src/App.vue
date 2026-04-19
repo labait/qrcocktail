@@ -31,7 +31,12 @@ const global = reactive({
       size: 400,
     },
     quiz: {
-      questionsCount: 3,
+      questions: {
+        count: 3,
+      },
+    },
+    redeem: {
+      max: 100,
     },
   },
   account: null,

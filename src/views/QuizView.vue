@@ -1,7 +1,43 @@
 <script setup>
 import { ref, onMounted, inject, computed, watch } from 'vue'
+import confetti from 'canvas-confetti'
+
 import Question from '../components/Question.vue'
+import Qrcode from '../components/Qrcode.vue'
+
 import { useUtils } from '../composables/useUtils'
+const utils = useUtils()
+
+function launchConfetti() {
+  const colors = ['#FF722F', '#7c6fe0', '#ffffff', '#fbbf24']
+  const base = {
+    spread: 52,
+    startVelocity: 42,
+    scalar: 2.1,
+    ticks: 320,
+    gravity: 0.9,
+    colors,
+  }
+  const bursts = 4
+  const intervalMs = 200
+  let n = 0
+  const id = setInterval(() => {
+    confetti({
+      ...base,
+      particleCount: 10,
+      angle: 60,
+      origin: { x: 0, y: 0.65 },
+    })
+    confetti({
+      ...base,
+      particleCount: 10,
+      angle: 120,
+      origin: { x: 1, y: 0.65 },
+    })
+    n++
+    if (n >= bursts) clearInterval(id)
+  }, intervalMs)
+}
 
 const global = inject('global')
 const { updateAccount, isAdmin } = useUtils()
@@ -11,7 +47,7 @@ const questionIndex = ref(0)
 const questionsAnswered = ref([])
 const answerSelected = ref(null)
 
-const questionsTotal = computed(() => global.settings.quiz.questionsCount)
+const questionsTotal = computed(() => global.settings.quiz.questions.count)
 const questionsCorrect = computed(() =>
   questionsAnswered.value.reduce(
     (n, r) => n + (r.answers?.[0]?.correct === true ? 1 : 0),
@@ -32,7 +68,7 @@ const loadQuestions = async () => {
   console.log('questions', questions.value)
   questions.value = questions.value
     .sort(() => Math.random() - 0.5)
-    .slice(0, global.settings.quiz.questionsCount)
+    .slice(0, global.settings.quiz.questions.count)
   questions.value.forEach((question) => {
     question.answers = question.answers.sort(() => Math.random() - 0.5)
   })
@@ -64,14 +100,13 @@ const loadQuestions = async () => {
 
 function restoreQuiz() {
   const saved = global.account?.questionsAnswered
-  const n = global.settings.quiz.questionsCount
+  const n = global.settings.quiz.questions.count
   if (!Array.isArray(saved) || saved.length !== n) return false
   if (quizCompleted.value && questionsAnswered.value.length === n) return true
 
   questionsAnswered.value = saved
   questions.value = saved.map((r) => r.question)
   questionIndex.value = n - 1
-  quizCompleted.value = true
   return true
 }
 
@@ -80,6 +115,14 @@ watch(
   () => {
     restoreQuiz()
   },
+)
+
+watch(
+  quizPerfect,
+  (perfect) => {
+    if (perfect) launchConfetti()
+  },
+  { flush: 'post' },
 )
 
 onMounted(async () => {
@@ -107,7 +150,6 @@ const nextQuestion = async () => {
         console.error('Salvataggio quiz su account fallito:', err)
       }
     }
-    quizCompleted.value = true
     console.log('Punteggio:', calculateScore())
   }
 }
@@ -123,7 +165,6 @@ const calculateScore = () => {
 }
 
 async function restartQuiz() {
-  quizCompleted.value = false
   questionsAnswered.value = []
   questionIndex.value = 0
   answerSelected.value = null
@@ -137,7 +178,7 @@ async function restartQuiz() {
   await loadQuestions()
 }
 
-function progressDotClass(i) {
+const progressDotClass = (i) => {
   const common =
     'size-8 shrink-0 rounded-full box-border transition-[background-color,border-width] duration-300'
   const record = questionsAnswered.value[i]
@@ -154,6 +195,9 @@ function progressDotClass(i) {
   }
   return [common, 'border-2 border-white bg-transparent']
 }
+
+const redeemUrl = computed(() => `${utils.getAbsoluteUrl(`/redeem/${global.account.uid}`)}`)
+
 </script>
 
 <template>
@@ -191,14 +235,11 @@ function progressDotClass(i) {
         class="flex flex-col items-center gap-6 text-center"
       >
         <template v-if="quizPerfect">
-          <p class="m-0 max-w-md text-lg font-semibold text-neutral-800">
-            Complimenti, hai risposto a {{ questionsCorrect }} su {{ questionsTotal }} domande.
-          </p>
-          <button type="button" class="btn btn-primary w-full" @click="() => {
-            console.log('Ritira il tuo premio')
-          }">
-            Ritira il tuo premio
-          </button>
+          Ritira il tuo premio mostrando il codice QR al bar...
+          <Qrcode :url="redeemUrl"  />
+          <div class="m-0 max-w-md  text-neutral-700 break-all">
+            {{ redeemUrl }}
+          </div>
         </template>
         <template v-else>
           <p class="m-0 max-w-md text-lg text-neutral-700">
@@ -211,7 +252,7 @@ function progressDotClass(i) {
           class="btn btn-secondary w-full"
           @click="restartQuiz"
         >
-          Ricomincia
+          Ricomincia Quiz
         </button>
       </div>
 

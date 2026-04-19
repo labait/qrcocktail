@@ -4,7 +4,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from './views/HomeView.vue'
 import QrcodesView from './views/QrcodesView.vue'
 import QuizView from './views/QuizView.vue'
-import QrcodeRedeem from './views/QrcodeRedeem.vue'
+import RedeemView from './views/RedeemView.vue'
 
 import QrcodeView from './views/QrcodeView.vue'
 
@@ -38,9 +38,9 @@ export class Routing {
           component: QuizView,
         },
         {
-          path: '/users/:uid/redeem',
+          path: '/redeem/:uid',
           name: 'redeem',
-          component: QrcodeRedeem,
+          component: RedeemView,
         },
 
         // Admin routes

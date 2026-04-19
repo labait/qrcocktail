@@ -33,7 +33,11 @@ onMounted(() => {
           const snap = await getDoc(doc(db, 'accounts', u.uid))
           const raw = snap.exists() ? snap.data() : null
           global.account = raw ?? null
-          utils.redirectToPhase()
+          // do not redirect if current route is in the list of routes that do not redirect
+          const doNotRedirectRoutes = ['redeem']
+          if (!doNotRedirectRoutes.includes(router.currentRoute.value.name)) {
+            utils.redirectToPhase()
+          }
         } catch (err) {
           console.error(err)
           global.account = null
