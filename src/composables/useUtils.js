@@ -33,11 +33,9 @@ export function useUtils() {
     if (!phase) phase = global.account?.phase ?? 'home'
     // keep debug param
     const debug = new URLSearchParams(window.location.search).has('debug')
-    if (debug) {
-      router.push({ name: phase, query: { debug: debug } })
-    } else {
-      router.push({ name: phase })
-    } 
+    const query = {}
+    if(debug) query.debug = debug
+    router.push({ name: phase, query: query })
   }
 
   const reset = async () => {
