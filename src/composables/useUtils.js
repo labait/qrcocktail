@@ -43,8 +43,10 @@ export function useUtils() {
     global.account.qrcodes = []
     await updateDoc(doc(db, 'accounts', global.account.uid), {
       qrcodes: [],
+      questionsAnswered: [],
       phase: 'qrcodes',
     })
+    redirectToPhase()
   }
 
   const updateAccount = async (data) => {
