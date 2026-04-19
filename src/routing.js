@@ -28,11 +28,6 @@ export class Routing {
           component: QrcodesView,
         },
         {
-          path: '/users/:uid/redeem',
-          name: 'redeem',
-          component: QrcodeRedeem,
-        },
-        {
           path: '/qrcodes/:code',
           name: 'qrcode',
             component: QrcodeView,
@@ -41,6 +36,11 @@ export class Routing {
           path: '/quiz',
           name: 'quiz',
           component: QuizView,
+        },
+        {
+          path: '/users/:uid/redeem',
+          name: 'redeem',
+          component: QrcodeRedeem,
         },
 
         // Admin routes

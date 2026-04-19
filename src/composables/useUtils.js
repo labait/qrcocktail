@@ -24,12 +24,12 @@ export function useUtils() {
     await updateDoc(doc(db, 'accounts', global.account.uid), {
       phase: phase,
     })
-    global.redirectToPhase(phase)
+    redirectToPhase(phase)
   }
 
 
   const redirectToPhase = (phase) => {
-    if (!phase) phase = global.account?.phase ?? 'instructions'
+    if (!phase) phase = global.account?.phase ?? 'home'
     router.push({ name: phase })
   }
 

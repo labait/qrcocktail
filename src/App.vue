@@ -35,12 +35,6 @@ const global = reactive({
   qrcodes: [],
   user: null,
   dialog: {},
-  redirectToPhase: (phase) => {
-    console.log('redirecting to phase', phase)
-    if (phase === 'qrcodes') {
-      router.push({ name: 'qrcodes_view' })
-    }
-  },
 })
 
 

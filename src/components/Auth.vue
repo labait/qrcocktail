@@ -1,6 +1,12 @@
 <script setup>
 import { ref, onMounted, inject, watch } from 'vue'
+
+import { useUtils } from '../composables/useUtils'
+const utils = useUtils()
+
 import { RouterLink, useRouter } from 'vue-router'
+const router = useRouter()
+
 import {
   onAuthStateChanged,
   signInWithPopup,
@@ -10,7 +16,7 @@ import { doc, getDoc } from 'firebase/firestore'
 import { auth, db, googleProvider, ensureAccountExists } from '../firebase'
 
 const global = inject('global')
-const router = useRouter()
+
 
 // watch(() => global.user, (newVal) => {
 //   if(!newVal) router.push({ name: 'home' })
@@ -27,7 +33,7 @@ onMounted(() => {
           const snap = await getDoc(doc(db, 'accounts', u.uid))
           const raw = snap.exists() ? snap.data() : null
           global.account = raw ?? null
-          //global.redirectToPhase(global.account?.phase ?? 'instructions')
+          utils.redirectToPhase()
         } catch (err) {
           console.error(err)
           global.account = null

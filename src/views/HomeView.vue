@@ -2,10 +2,14 @@
 import { inject, onMounted } from 'vue'
 import { ArrowRightIcon } from '@heroicons/vue/24/solid'
 
+import { useUtils } from '../composables/useUtils'
+const utils = useUtils()
+
 const global = inject('global')
 
 onMounted(() => {
   global.bgColor = '#ccc'
+  //if (global.account) utils.redirectToPhase() // redirect to the phase of the account
 })
 </script>
 
