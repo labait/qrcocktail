@@ -1,6 +1,6 @@
 import { inject } from 'vue'
 import { useRouter } from 'vue-router'
-import { updateDoc, doc } from 'firebase/firestore'
+import { updateDoc, doc, getDoc } from 'firebase/firestore'
 import { db } from '../firebase'
 
 export function useUtils() {
@@ -45,12 +45,22 @@ export function useUtils() {
     await updateDoc(doc(db, 'accounts', global.account.uid), {
       qrcodes: [],
       questionsAnswered: [],
+      redeemed_at: null,
       phase: 'qrcodes',
     })
     redirectToPhase()
   }
 
-  const updateAccount = async (data) => {
+  const accountGet = async (uid) => {
+    const snap = await getDoc(doc(db, 'accounts', uid))
+    if (!snap.exists()) {
+      console.error('Account not found')
+      return null
+    }
+    return snap.data()
+  }
+
+  const accountUpdate = async (data) => {
     await updateDoc(doc(db, 'accounts', global.account.uid), data)
     global.account = {
       ...global.account,
@@ -58,10 +68,21 @@ export function useUtils() {
     }
   }
 
+  const accountUpdateByUid = async (uid, data) => {
+    if (!uid) {
+      console.error('accountUpdateByUid: uid mancante')
+      return
+    }
+    await updateDoc(doc(db, 'accounts', uid), data)
+  }
+
   return {
     isAdmin,
+    isManager,
     getAbsoluteUrl,
-    updateAccount,
+    accountGet,
+    accountUpdate,
+    accountUpdateByUid,
     setPhase,
     redirectToPhase,
     reset,

@@ -40,7 +40,7 @@ function launchConfetti() {
 }
 
 const global = inject('global')
-const { updateAccount, isAdmin } = useUtils()
+const { accountUpdate, isAdmin } = useUtils()
 
 const questions = ref([])
 const questionIndex = ref(0)
@@ -145,7 +145,7 @@ const nextQuestion = async () => {
     if (global.account?.uid) {
       try {
         const payload = JSON.parse(JSON.stringify(questionsAnswered.value))
-        await updateAccount({ questionsAnswered: payload })
+        await accountUpdate({ questionsAnswered: payload })
       } catch (err) {
         console.error('Salvataggio quiz su account fallito:', err)
       }
@@ -170,7 +170,7 @@ async function restartQuiz() {
   answerSelected.value = null
   if (global.account?.uid) {
     try {
-      await updateAccount({ questionsAnswered: [] })
+      await accountUpdate({ questionsAnswered: [] })
     } catch (err) {
       console.error('Reset quiz su account fallito:', err)
     }
