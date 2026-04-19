@@ -1,8 +1,15 @@
 Devo fare un quiz ad un utente, le domande devono riguardare
 
-l'accademia laba https://laba.edu/ l'evento https://synapses.laba.edu/cronache-disorganiche/ tematiche attuali legate all'intelligenza artificiale, tool, approcci, difficoltà, opportunità
+l'accademia laba https://laba.edu/ 
+l'evento https://synapses.laba.edu/cronache-disorganiche/ 
+tematiche attuali legate all'intelligenza artificiale, tool, approcci, difficoltà, opportunità
 
-altri argomenti possono essere graphic design, web e arte in generale, insomma tematiche che possono essere legate agli argomenti affrontati in un'accademia di belle arti moderna e di interesse per gente che la frequenta, così come legate all'evento "cronache disorganiche" citato;   Restituiscimi 120 domande ognuna con tre opzioni, solo una delle quali valide. le risposte possono essere simpatiche, ma non banali, non devono essere troppo semplici o citare livelli scolastici troppo diversi.
+altri argomenti possono essere graphic design, web e arte in generale, 
+insomma tematiche che possono essere legate agli argomenti affrontati in un'accademia di belle arti moderna e di interesse per gente che la frequenta, 
+così come legate all'evento "cronache disorganiche" citato;   
+
+Restituiscimi 120 domande ognuna con tre opzioni, solo una delle quali valide. 
+Le risposte possono essere simpatiche, ma non banali, non devono essere troppo semplici o citare livelli scolastici troppo diversi.
 
 Fammi scaricare file json completo. Restituiscimi i dati in questo formato e assicurati che i risultato sia un JSON valido. {
 
