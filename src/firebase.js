@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app'
 import { getAuth, GoogleAuthProvider } from 'firebase/auth'
-import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore'
+import { getFirestore, doc, getDoc, setDoc, updateDoc } from 'firebase/firestore'
 
 /**
  * Configurazione console Firebase (Impostazioni progetto → Le tue app → Config).
@@ -41,6 +41,37 @@ export async function ensureAccountExists(uid) {
       qrcodes: [],
     })
   }
+}
+
+/**
+ * Aggiorna accounts/{uid} con email e nome da Google (dopo signInWithPopup).
+ * Usa firstname/lastname se Google espone given_name e family_name, altrimenti name.
+ */
+export async function syncAccountFromGoogleProfile(uid, user, additionalUserInfo) {
+  await ensureAccountExists(uid)
+  const profile = additionalUserInfo?.profile ?? {}
+  const payload = {}
+
+  const email = user.email ?? profile.email
+  if (email) payload.email = email
+
+  const given =
+    typeof profile.given_name === 'string' ? profile.given_name.trim() : ''
+  const family =
+    typeof profile.family_name === 'string' ? profile.family_name.trim() : ''
+  if (given && family) {
+    payload.firstname = given
+    payload.lastname = family
+  } else {
+    const fullName = [profile.name, user.displayName].find(
+      (s) => typeof s === 'string' && s.trim(),
+    )
+    if (fullName) payload.name = fullName.trim()
+  }
+
+  if (Object.keys(payload).length === 0) return
+
+  await updateDoc(doc(db, 'accounts', uid), payload)
 }
 
 export { app }

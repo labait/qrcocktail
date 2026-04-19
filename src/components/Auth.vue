@@ -13,7 +13,7 @@ import {
   signOut as firebaseSignOut,
 } from 'firebase/auth'
 import { doc, getDoc, onSnapshot } from 'firebase/firestore'
-import { auth, db, googleProvider, ensureAccountExists } from '../firebase'
+import { auth, db, googleProvider, ensureAccountExists, syncAccountFromGoogleProfile } from '../firebase'
 import { accountHasRedeemedAt } from '../utils/accountRedeem'
 
 const global = inject('global')
@@ -98,7 +98,12 @@ onMounted(() => {
 })
 
 async function connectGoogle() {
-  await signInWithPopup(auth, googleProvider)
+  const result = await signInWithPopup(auth, googleProvider)
+  await syncAccountFromGoogleProfile(
+    result.user.uid,
+    result.user,
+    result.additionalUserInfo,
+  )
 }
 
 async function logout() {
