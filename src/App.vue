@@ -27,6 +27,9 @@ const global = reactive({
   base_url: import.meta.env.VITE_BASE_URL,
   settings: {
     qrcodes: {
+      keys: {
+        latest: 'qrcocktail-qrcode-latest-scanned',
+      },
       required: 3,
       size: 400,
     },

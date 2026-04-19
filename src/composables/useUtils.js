@@ -1,6 +1,6 @@
 import { inject } from 'vue'
 import { useRouter } from 'vue-router'
-import { updateDoc, doc, getDoc } from 'firebase/firestore'
+import { updateDoc, doc, getDoc, collection, getDocs } from 'firebase/firestore'
 import { db } from '../firebase'
 
 export function useUtils() {
@@ -86,19 +86,67 @@ export function useUtils() {
       },
     }
   }
+
+  const qrcodeLatestSet = async (code) => {
+    localStorage.setItem(global.settings.qrcodes.keys.latest, code)
+  }
   
+  const qrcodeLatestGet = async () => {
+    return localStorage.getItem(global.settings.qrcodes.keys.latest)
+  }
+
+  const qrcodeLatestDelete = async () => {
+    localStorage.removeItem(global.settings.qrcodes.keys.latest)
+  }
+
+  const qrcodeHandle = async (code) => {
+    const qrcode = global.qrcodes.find((item) => String(item.code) === String(code))
+    // check if the qrcode exists
+    if (qrcode) {
+      // Check if the code has already been scanned
+      if (global.account.qrcodes.includes(qrcode.code) && !isAdmin()) {
+        global.dialog = {
+          text: `Codice <strong>GIA' SCANSIONATO</strong>, RIPROVA!`,
+          confirmText: 'Continua',
+        }
+        return
+      }
+      
+      // Add the code to the account
+      global.account.qrcodes.push(qrcode.code)
+      // Save the account
+      await updateDoc(doc(db, 'accounts', global.account.uid), {
+        qrcodes: global.account.qrcodes,
+      })
+      global.dialog = {
+        text: `Codice <strong>ACCETTATO</strong>, grazie!`,
+        confirmText: 'Continua',
+      }
+      return
+    } else {
+      global.dialog = {
+        text: 'Codice <strong>NON VALIDO</strong>, RIPROVA!',
+        confirmText: 'Continua',
+      }
+    }
+    return
+  }
 
   return {
     isAdmin,
     isManager,
-    copyToClipboard,
     getAbsoluteUrl,
+    qrcodeHandle,
+    qrcodeLatestSet,
+    qrcodeLatestGet,
+    qrcodeLatestDelete,
     accountGet,
     accountUpdate,
     accountUpdateByUid,
     setPhase,
     redirectToPhase,
     reset,
+    copyToClipboard,
   }
 }
 

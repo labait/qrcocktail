@@ -1,7 +1,8 @@
 <script setup>
-import { inject, computed } from 'vue'
+import { inject, computed, onMounted } from 'vue'
 
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
+const router = useRouter()
 
 import { useUtils } from '../composables/useUtils'
 const utils = useUtils()
@@ -27,10 +28,16 @@ const qrcode = computed(() => {
 })
 
 const url = computed(() => (code.value ? utils.getAbsoluteUrl(`/qcodes/${code.value}`) : ''))
+
+onMounted(async () => {
+  utils.qrcodeLatestSet(code.value)
+  //if(!utils.isAdmin()) router.push({ name: 'qrcodes' })
+})
+
 </script>
 
 <template>
-  <div class="flex flex-col items-center gap-4 px-4 py-8">
+  <div class="flex flex-col items-center gap-4 px-4">
     <template v-if="code && qrcode">
       <Qrcode :url="url"/>
       {{ url }}
@@ -39,5 +46,14 @@ const url = computed(() => (code.value ? utils.getAbsoluteUrl(`/qcodes/${code.va
       Codice non trovato
     </p>
     <p v-else class="text-slate-600">Nessun codice specificato.</p>
+  </div>
+  <div v-if="utils.isAdmin()" class="flex justify-center">
+    <button
+      type="button"
+      class="btn btn-secondary"
+      @click="router.push({ name: 'qrcodes' })"
+    >
+      Elabora codice
+    </button>
   </div>
 </template>

@@ -79,7 +79,7 @@ onMounted(async () => {
     }
   } catch (err) {
     console.error(err)
-    loadError.value = 'Impossibile caricare il QR code.'
+    loadError.value = 'Impossibile caricare il QR-code.'
   } finally {
     isLoadingDoc.value = false
   }
@@ -90,7 +90,7 @@ onMounted(async () => {
   <div class="mx-auto w-full max-w-2xl px-4 py-6 sm:px-6">
     <section class="mb-4">
       <h1 class="text-2xl font-semibold text-slate-900">
-        {{ mode === 'create' ? 'Nuovo QR Code' : 'Modifica QR Code' }}
+        {{ mode === 'create' ? 'Nuovo QR-Code' : 'Modifica QR-Code' }}
       </h1>
     </section>
 

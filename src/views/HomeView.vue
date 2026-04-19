@@ -25,7 +25,7 @@ onMounted(() => {
       <div class="font-bold rounded-full text-xl bg-white text-black w-12 h-12 flex items-center justify-center">
         2
       </div>
-      Scansiona almeno {{ global.settings.qrcodes.required }} QR code che trovi in giro
+      Scansiona almeno {{ global.settings.qrcodes.required }} QR-code che trovi in giro
     </li>
     <li class="text-lg flex flex-col items-center gap-2">
       <div class="font-bold rounded-full text-xl bg-white text-black w-12 h-12 flex items-center justify-center">

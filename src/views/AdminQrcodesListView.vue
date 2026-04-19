@@ -18,7 +18,7 @@ onMounted(() => {
 
 async function removeRow(id) {
   if (!id) return
-  if (!window.confirm('Eliminare questo QR code? Operazione non è reversibile.')) return
+  if (!window.confirm('Eliminare questo QR-code? Operazione non è reversibile.')) return
   try {
     await deleteDoc(doc(db, 'qrcodes', id))
     await reloadQrCodes()
@@ -86,7 +86,7 @@ async function removeRow(id) {
         </div>
 
         <div v-if="!global.qrcodes.length" class="py-8 text-center text-base">
-          Nessun QR code. Aggiungine uno con «+ Nuovo».
+          Nessun QR-code. Aggiungine uno con «+ Nuovo».
         </div>
       </div>
     </section>

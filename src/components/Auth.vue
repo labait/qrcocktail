@@ -34,7 +34,11 @@ onMounted(() => {
           const raw = snap.exists() ? snap.data() : null
           global.account = raw ?? null
           // do not redirect if current route is in the list of routes that do not redirect
-          const doNotRedirectRoutes = ['redeem']
+          const doNotRedirectRoutes = [
+            'redeem',
+            'qrcode',
+            'admin_qrcodes_list',
+          ]
           if (!doNotRedirectRoutes.includes(router.currentRoute.value.name)) {
             utils.redirectToPhase()
           }
