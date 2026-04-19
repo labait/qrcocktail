@@ -35,6 +35,7 @@ export function useUtils() {
     const debug = new URLSearchParams(window.location.search).has('debug')
     const query = {}
     if(debug) query.debug = debug
+    console.log('redirectToPhase', phase, query)
     router.push({ name: phase, query: query })
   }
 
@@ -46,6 +47,7 @@ export function useUtils() {
       redeemed_at: null,
       phase: 'qrcodes',
     })
+    global.account = await accountGet(global.account.uid)
     redirectToPhase()
   }
 
