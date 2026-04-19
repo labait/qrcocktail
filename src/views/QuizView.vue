@@ -236,7 +236,9 @@ const redeemUrl = computed(() => `${utils.getAbsoluteUrl(`/redeem/${global.accou
         class="flex flex-col items-center gap-6 text-center"
       >
         <template v-if="quizPerfect" class="flex flex-col items-center ">
-          Ritira il tuo premio mostrando il codice QR al bar...
+          <p class="m-0 max-w-md text-xl"> 
+            Ritira il premio mostrando il codice QR-code al bar...
+          </p>
           <Qrcode :url="redeemUrl"  />
           <div class="m-0 max-w-md  text-neutral-700 break-all">
             <a :href="redeemUrl" target="_blank">{{ redeemUrl }}</a>
