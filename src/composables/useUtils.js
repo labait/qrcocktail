@@ -30,7 +30,13 @@ export function useUtils() {
 
   const redirectToPhase = (phase) => {
     if (!phase) phase = global.account?.phase ?? 'home'
-    router.push({ name: phase })
+    // keep debug param
+    const debug = new URLSearchParams(window.location.search).has('debug')
+    if (debug) {
+      router.push({ name: phase, query: { debug: debug } })
+    } else {
+      router.push({ name: phase })
+    } 
   }
 
   const reset = async () => {
@@ -41,9 +47,18 @@ export function useUtils() {
     })
   }
 
+  const updateAccount = async (data) => {
+    await updateDoc(doc(db, 'accounts', global.account.uid), data)
+    global.account = {
+      ...global.account,
+      ...data,
+    }
+  }
+
   return {
     isAdmin,
     getAbsoluteUrl,
+    updateAccount,
     setPhase,
     redirectToPhase,
     reset,

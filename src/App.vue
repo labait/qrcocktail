@@ -29,7 +29,10 @@ const global = reactive({
     qrcodes: {
       required: 3,
       size: 400,
-    }
+    },
+    quiz: {
+      questionsCount: 3,
+    },
   },
   account: null,
   qrcodes: [],

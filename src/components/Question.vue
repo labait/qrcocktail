@@ -6,12 +6,22 @@ defineProps({
     default: null,
   },
   modelValue: {
-    type: String,
     default: null,
+    validator: (v) =>
+      v === null ||
+      v === undefined ||
+      (typeof v === 'object' &&
+        v !== null &&
+        typeof v.text === 'string' &&
+        typeof v.correct === 'boolean'),
   },
 })
 
 const emit = defineEmits(['update:modelValue'])
+
+function isSelected(modelValue, answer) {
+  return modelValue != null && modelValue.text === answer.text
+}
 </script>
 
 <template>
@@ -31,10 +41,10 @@ const emit = defineEmits(['update:modelValue'])
           :value="answer.text"
           :name="question.text"
           class="size-[18px] shrink-0 accent-[#7c6fe0]"
-          :checked="modelValue === answer.text"
-          @change="emit('update:modelValue', answer.text)"
+          :checked="isSelected(modelValue, answer)"
+          @change="emit('update:modelValue', answer)"
         />
-        <span class="text-[15px] font-medium leading-[1.4] text-slate-700">
+        <span class="text-md font-medium leading-[1.4] " :class="{ 'underline': answer.correct }">
           {{ answer.text }}
         </span>
       </label>

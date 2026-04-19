@@ -6,14 +6,28 @@ const global = inject('global')
 const questions = ref([])
 const questionIndex = ref(0)
 const loadError = ref('')
-const answered = ref(false)
-const selectedAnswer = ref(null)
+const questionsAnswered = ref([])
+const answerSelected = ref(null)
 
 const loadQuestions = async () => {
   global.loading ++
   loadError.value = ''
   let response = null
-  let data = null
+  let data = await import('../data/questions1.json')
+  questions.value = data.questions
+  console.log("questions", questions.value)
+  // get global.settings.quiz.questionsCount questions randomly
+  questions.value = questions.value
+  .sort(() => Math.random() - 0.5)
+  .slice(0, global.settings.quiz.questionsCount)
+  // for each question, shuffle the answers
+  questions.value.forEach(question => {
+    question.answers = question.answers.sort(() => Math.random() - 0.5)
+  })
+  console.log("questions", questions.value)
+  global.loading --
+  return 
+  // load from ai model
   try {
     const cocktail = 'white russian'
     response = await fetch(`.netlify/functions/quizBuild?cocktail=${cocktail}${global.debug ? '&debug' : ''}`)
@@ -41,12 +55,47 @@ onMounted(async () => {
 })
 
 const nextQuestion = () => {
+  const question = questions.value[questionIndex.value]
+  questionsAnswered.value.push({
+    question: question,
+    answers: [answerSelected.value],
+  })
+  console.log("questionsAnswered", questionsAnswered.value)
   if (questionIndex.value < questions.value.length - 1) {
     questionIndex.value++
-    selectedAnswer.value = null
+    answerSelected.value = null
   } else {
     console.log("Quiz completato!")
+    console.log("Punteggio:", calculateScore())
   }
+}
+
+const calculateScore = () => {
+  let score = 0
+  questionsAnswered.value.forEach(question => {
+    if (question.answers.some(answer => answer.correct)) {
+      score++
+    }
+  })
+  return score
+}
+
+function progressDotClass(i) {
+  const common =
+    'size-8 shrink-0 rounded-full box-border transition-[background-color,border-width] duration-300'
+  const record = questionsAnswered.value[i]
+  if (record != null) {
+    const correct = record.answers?.[0]?.correct === true
+    return [
+      common,
+      'border-2 border-white',
+      correct ? 'bg-[#7c6fe0]' : 'bg-white',
+    ]
+  }
+  if (i === questionIndex.value) {
+    return [common, 'border-[6px] border-white bg-transparent']
+  }
+  return [common, 'border-2 border-white bg-transparent']
 }
 </script>
 
@@ -59,18 +108,16 @@ const nextQuestion = () => {
       <h1 class="m-0 text-3xl font-bold leading-tight text-center px-4">
         Rispondi alle domande per vincere il tuo cocktail omaggio
       </h1>
-      <div class="flex flex-wrap items-center justify-center gap-1.5">
+      <div
+        class="flex flex-wrap items-center justify-center gap-1.5"
+        role="list"
+        aria-label="Avanzamento domande"
+      >
         <span
           v-for="(q, i) in questions"
           :key="i"
-          class="h-1 w-7 shrink-0 rounded-sm transition-colors duration-300"
-          :class="
-            i === questionIndex
-              ? 'bg-[#7c6fe0]'
-              : i < questionIndex
-                ? 'bg-white'
-                : 'bg-[#ddd]'
-          "
+          :class="progressDotClass(i)"
+          role="presentation"
         />
       </div>
     </section>
@@ -83,9 +130,9 @@ const nextQuestion = () => {
       </p>
 
       <template v-if="questions.length && questions[questionIndex]">
-        <Question :question="questions[questionIndex]" v-model="selectedAnswer" />
+        <Question :question="questions[questionIndex]" v-model="answerSelected" />
         <button
-          v-if="selectedAnswer"
+          v-if="answerSelected"
           type="button"
           class="btn btn-primary w-full"
           @click="nextQuestion"

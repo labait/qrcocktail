@@ -1,0 +1,1052 @@
+{
+  "questions": [
+    {
+      "text": "LABA sta per:",
+      "answers": [
+        { "correct": true, "text": "Libera Accademia di Belle Arti" },
+        { "correct": false, "text": "Laboratorio Artistico di Brescia Avanzato" },
+        { "correct": false, "text": "Liceo Artistico Biennale e Accademico" }
+      ]
+    },
+    {
+      "text": "In quale città ha sede principale l'Accademia LABA?",
+      "answers": [
+        { "correct": true, "text": "Brescia" },
+        { "correct": false, "text": "Milano" },
+        { "correct": false, "text": "Bergamo" }
+      ]
+    },
+    {
+      "text": "Il modello formativo di LABA segue la formula:",
+      "answers": [
+        { "correct": true, "text": "3+2, triennio + biennio specialistico" },
+        { "correct": false, "text": "4+1, quadriennio + master annuale" },
+        { "correct": false, "text": "5 anni continui senza suddivisione" }
+      ]
+    },
+    {
+      "text": "Il diploma triennale di LABA è equipollente a:",
+      "answers": [
+        { "correct": true, "text": "Laurea Triennale" },
+        { "correct": false, "text": "Diploma di maturità artistica" },
+        { "correct": false, "text": "Certificato professionale di primo grado" }
+      ]
+    },
+    {
+      "text": "Il diploma biennale di LABA è equipollente a:",
+      "answers": [
+        { "correct": true, "text": "Laurea Magistrale" },
+        { "correct": false, "text": "Dottorato di ricerca" },
+        { "correct": false, "text": "Master universitario di primo livello" }
+      ]
+    },
+    {
+      "text": "Quale di questi è un corso triennale offerto da LABA?",
+      "answers": [
+        { "correct": true, "text": "Graphic Design & Multimedia" },
+        { "correct": false, "text": "Intelligenza Artificiale Applicata" },
+        { "correct": false, "text": "Marketing Creativo" }
+      ]
+    },
+    {
+      "text": "Quale biennio specialistico di LABA si focalizza sulla comunicazione digitale?",
+      "answers": [
+        { "correct": true, "text": "Digital Design & Communication" },
+        { "correct": false, "text": "Social Media & Branding" },
+        { "correct": false, "text": "Web Journalism & Visual Storytelling" }
+      ]
+    },
+    {
+      "text": "Il festival 'Synapses' di LABA prende ispirazione dal concetto di:",
+      "answers": [
+        { "correct": true, "text": "Connessioni neurali tra persone, discipline e territori" },
+        { "correct": false, "text": "Sincronizzazione dei ritmi circadiani degli studenti" },
+        { "correct": false, "text": "Sinergia tra moda e tecnologia wearable" }
+      ]
+    },
+    {
+      "text": "Cosa significa 'Cronache Disorganiche' nel contesto dell'evento Synapses?",
+      "answers": [
+        { "correct": true, "text": "Una riflessione sull'ibridazione tra organico e artificiale, tra corpo e dati" },
+        { "correct": false, "text": "Un archivio storico di eventi disorganizzati dall'accademia" },
+        { "correct": false, "text": "Un manuale di chimica per artisti" }
+      ]
+    },
+    {
+      "text": "Synapses è pensato come momento-culmine di:",
+      "answers": [
+        { "correct": true, "text": "L'anno accademico di LABA" },
+        { "correct": false, "text": "Il semestre di scambi Erasmus" },
+        { "correct": false, "text": "Il primo giorno di open day" }
+      ]
+    },
+    {
+      "text": "La comunicazione del Festival Synapses è stata curata da:",
+      "answers": [
+        { "correct": true, "text": "Il biennio di Digital Design & Communication" },
+        { "correct": false, "text": "Un'agenzia esterna milanese" },
+        { "correct": false, "text": "Gli studenti del corso di Fotografia" }
+      ]
+    },
+    {
+      "text": "Il Festival Synapses si svolge in:",
+      "answers": [
+        { "correct": true, "text": "Più sedi di LABA e spazi urbani della città" },
+        { "correct": false, "text": "Un'unica location nei pressi del lago di Garda" },
+        { "correct": false, "text": "Esclusivamente online in live streaming" }
+      ]
+    },
+    {
+      "text": "Quale rivista è prodotta da LABA?",
+      "answers": [
+        { "correct": true, "text": "Moltobene" },
+        { "correct": false, "text": "Domus" },
+        { "correct": false, "text": "Abitare" }
+      ]
+    },
+    {
+      "text": "LABA ha una rubrica chiamata 'Gemello Digitale'. Di cosa si occupa?",
+      "answers": [
+        { "correct": true, "text": "Temi legati al digitale e all'innovazione nell'arte e nel design" },
+        { "correct": false, "text": "Confronto tra studenti gemelli iscritti all'accademia" },
+        { "correct": false, "text": "Programmazione di corsi gemellati con università straniere" }
+      ]
+    },
+    {
+      "text": "LABA è stata protagonista alla AI Week 2026, definita:",
+      "answers": [
+        { "correct": true, "text": "Il più grande evento europeo dedicato all'intelligenza artificiale" },
+        { "correct": false, "text": "Un hackathon privato per startup italiane" },
+        { "correct": false, "text": "Un convegno riservato ai docenti di informatica" }
+      ]
+    },
+    {
+      "text": "Cosa rappresenta il concetto di 'Think_ Make* Future' di LABA?",
+      "answers": [
+        { "correct": true, "text": "La visione che unisce pensiero creativo, produzione e proiezione nel futuro" },
+        { "correct": false, "text": "Il nome di una collezione di abbigliamento in edizione limitata" },
+        { "correct": false, "text": "Un corso intensivo estivo di design industriale" }
+      ]
+    },
+    {
+      "text": "Quale programma europeo permette agli studenti di LABA di studiare all'estero?",
+      "answers": [
+        { "correct": true, "text": "Erasmus+" },
+        { "correct": false, "text": "Horizon Europe" },
+        { "correct": false, "text": "Creative Europe" }
+      ]
+    },
+    {
+      "text": "Il sistema AFAM in Italia è:",
+      "answers": [
+        { "correct": true, "text": "Alta Formazione Artistica, Musicale e Coreutica" },
+        { "correct": false, "text": "Associazione Formatori Artistici e Multimediali" },
+        { "correct": false, "text": "Archivio Fotografico Artistico Ministeriale" }
+      ]
+    },
+    {
+      "text": "LabaLAB è:",
+      "answers": [
+        { "correct": true, "text": "Un laboratorio/spazio sperimentale dell'accademia" },
+        { "correct": false, "text": "Un'app per prenotare i colloqui con i docenti" },
+        { "correct": false, "text": "Il nome della mensa universitaria di LABA" }
+      ]
+    },
+    {
+      "text": "Il corso di Scenografia a LABA si divide in due indirizzi. Quale tra questi è corretto?",
+      "answers": [
+        { "correct": true, "text": "Arti Drammatiche e Cinema Audiovisivo e Multimedia" },
+        { "correct": false, "text": "Scenografia Teatrale e Scenografia Digitale" },
+        { "correct": false, "text": "Regia e Produzione Cinematografica" }
+      ]
+    },
+    {
+      "text": "Cosa si intende con 'prompt engineering'?",
+      "answers": [
+        { "correct": true, "text": "L'arte di formulare istruzioni efficaci per ottenere risposte ottimali da un modello AI" },
+        { "correct": false, "text": "La progettazione di interfacce grafiche per chatbot" },
+        { "correct": false, "text": "Un linguaggio di programmazione per sistemi embedded" }
+      ]
+    },
+    {
+      "text": "Cos'è un Large Language Model (LLM)?",
+      "answers": [
+        { "correct": true, "text": "Un modello di intelligenza artificiale addestrato su enormi quantità di testo per generare linguaggio" },
+        { "correct": false, "text": "Un formato di file per documenti ad alta risoluzione" },
+        { "correct": false, "text": "Un protocollo di comunicazione per reti neurali hardware" }
+      ]
+    },
+    {
+      "text": "Cosa significa 'allucinazione' nel contesto dell'AI generativa?",
+      "answers": [
+        { "correct": true, "text": "Quando il modello genera informazioni false con tono convincente" },
+        { "correct": false, "text": "Quando il modello si blocca su input troppo complessi" },
+        { "correct": false, "text": "Quando il modello produce output visivi psichedelici" }
+      ]
+    },
+    {
+      "text": "Quale azienda ha sviluppato ChatGPT?",
+      "answers": [
+        { "correct": true, "text": "OpenAI" },
+        { "correct": false, "text": "DeepMind" },
+        { "correct": false, "text": "Meta AI" }
+      ]
+    },
+    {
+      "text": "Midjourney, Stable Diffusion e DALL-E sono strumenti di AI per:",
+      "answers": [
+        { "correct": true, "text": "Generazione di immagini da testo" },
+        { "correct": false, "text": "Composizione musicale automatica" },
+        { "correct": false, "text": "Traduzione simultanea in tempo reale" }
+      ]
+    },
+    {
+      "text": "Cosa si intende per 'bias algoritmico'?",
+      "answers": [
+        { "correct": true, "text": "Pregiudizi presenti nei dati di addestramento che si riflettono nelle decisioni del modello" },
+        { "correct": false, "text": "Un errore di calcolo causato da troppi parametri" },
+        { "correct": false, "text": "Una preferenza del modello per certi linguaggi di programmazione" }
+      ]
+    },
+    {
+      "text": "Quale tra questi è un modello AI sviluppato da Google?",
+      "answers": [
+        { "correct": true, "text": "Gemini" },
+        { "correct": false, "text": "Claude" },
+        { "correct": false, "text": "Grok" }
+      ]
+    },
+    {
+      "text": "Nel contesto dell'AI generativa, cosa significa 'fine-tuning'?",
+      "answers": [
+        { "correct": true, "text": "Addestrare ulteriormente un modello preesistente su dati specifici" },
+        { "correct": false, "text": "Regolare il volume dell'audio generato da un modello musicale" },
+        { "correct": false, "text": "Ottimizzare il font di un'interfaccia chatbot" }
+      ]
+    },
+    {
+      "text": "Cosa fa un generative adversarial network (GAN)?",
+      "answers": [
+        { "correct": true, "text": "Usa due reti neurali in competizione per generare contenuti sempre più realistici" },
+        { "correct": false, "text": "Analizza immagini per identificare oggetti pericolosi" },
+        { "correct": false, "text": "Comprime file video senza perdita di qualità" }
+      ]
+    },
+    {
+      "text": "Quale termine descrive la capacità di un'AI di creare contenuti originali come testi, immagini o musica?",
+      "answers": [
+        { "correct": true, "text": "AI generativa" },
+        { "correct": false, "text": "AI predittiva" },
+        { "correct": false, "text": "AI analitica" }
+      ]
+    },
+    {
+      "text": "Cos'è il 'context window' di un LLM?",
+      "answers": [
+        { "correct": true, "text": "La quantità massima di testo che il modello può elaborare in un'unica conversazione" },
+        { "correct": false, "text": "La finestra di un browser dove appare la risposta dell'AI" },
+        { "correct": false, "text": "Il tempo massimo di risposta del server" }
+      ]
+    },
+    {
+      "text": "Qual è uno dei principali rischi etici dell'AI generativa nell'arte?",
+      "answers": [
+        { "correct": true, "text": "L'appropriazione di stili artistici senza consenso o compenso agli artisti originali" },
+        { "correct": false, "text": "La tendenza dei modelli a preferire arte astratta" },
+        { "correct": false, "text": "La generazione automatica di colori troppo saturi" }
+      ]
+    },
+    {
+      "text": "Cosa si intende per 'deepfake'?",
+      "answers": [
+        { "correct": true, "text": "Contenuti multimediali sintetici che imitano in modo convincente persone reali" },
+        { "correct": false, "text": "Un tipo di errore grafico nei render 3D" },
+        { "correct": false, "text": "Un formato di compressione per video ad alta qualità" }
+      ]
+    },
+    {
+      "text": "Quale strumento AI è spesso usato per generare musica o audio?",
+      "answers": [
+        { "correct": true, "text": "Suno" },
+        { "correct": false, "text": "Figma AI" },
+        { "correct": false, "text": "Runway" }
+      ]
+    },
+    {
+      "text": "Runway ML è principalmente uno strumento per:",
+      "answers": [
+        { "correct": true, "text": "Generazione e editing video con AI" },
+        { "correct": false, "text": "Progettazione di sfilate di moda" },
+        { "correct": false, "text": "Analisi di dati finanziari" }
+      ]
+    },
+    {
+      "text": "Cosa significa 'token' nel contesto degli LLM?",
+      "answers": [
+        { "correct": true, "text": "L'unità minima di testo che il modello elabora, circa una parola o parte di essa" },
+        { "correct": false, "text": "Un certificato digitale per l'accesso ai servizi AI" },
+        { "correct": false, "text": "Un tipo di NFT associato ai modelli linguistici" }
+      ]
+    },
+    {
+      "text": "Qual è la principale differenza tra AI 'narrow' e AI 'generale'?",
+      "answers": [
+        { "correct": true, "text": "La narrow AI eccelle in un singolo compito; l'AGI ipotetica potrebbe fare qualsiasi cosa un umano può fare" },
+        { "correct": false, "text": "La narrow AI funziona solo offline; l'AI generale richiede connessione internet" },
+        { "correct": false, "text": "La narrow AI è open source; l'AI generale è sempre proprietaria" }
+      ]
+    },
+    {
+      "text": "Cosa fa Adobe Firefly?",
+      "answers": [
+        { "correct": true, "text": "Genera immagini e contenuti visivi tramite AI integrata nell'ecosistema Adobe" },
+        { "correct": false, "text": "Gestisce i backup automatici dei file di Photoshop" },
+        { "correct": false, "text": "Converte file PDF in documenti Word" }
+      ]
+    },
+    {
+      "text": "Nel design grafico, cosa si intende con 'golden ratio' (sezione aurea)?",
+      "answers": [
+        { "correct": true, "text": "Un rapporto proporzionale (circa 1:1.618) usato per creare composizioni esteticamente armoniose" },
+        { "correct": false, "text": "Il colore pantone più utilizzato nel lusso" },
+        { "correct": false, "text": "Il peso massimo raccomandato per un logo in pixel" }
+      ]
+    },
+    {
+      "text": "Cosa si intende con 'tipografia variabile'?",
+      "answers": [
+        { "correct": true, "text": "Font che permettono di modificare peso, larghezza e altri parametri con continuità" },
+        { "correct": false, "text": "Testi che cambiano automaticamente lingua in base alla geolocalizzazione" },
+        { "correct": false, "text": "Un sistema di font casuali generati algoritmicamente" }
+      ]
+    },
+    {
+      "text": "Quale principio del design stabilisce che gli elementi vicini sono percepiti come correlati?",
+      "answers": [
+        { "correct": true, "text": "Principio di prossimità (Gestalt)" },
+        { "correct": false, "text": "Principio di contrasto" },
+        { "correct": false, "text": "Principio di allineamento" }
+      ]
+    },
+    {
+      "text": "Cosa distingue un formato vettoriale da uno raster?",
+      "answers": [
+        { "correct": true, "text": "I vettoriali usano equazioni matematiche e sono scalabili infinitamente; i raster sono basati su pixel" },
+        { "correct": false, "text": "I vettoriali sono sempre in bianco e nero; i raster supportano i colori" },
+        { "correct": false, "text": "I vettoriali occupano più spazio su disco; i raster sono più leggeri" }
+      ]
+    },
+    {
+      "text": "Quale software è considerato lo standard per il design di interfacce UI/UX?",
+      "answers": [
+        { "correct": true, "text": "Figma" },
+        { "correct": false, "text": "AutoCAD" },
+        { "correct": false, "text": "DaVinci Resolve" }
+      ]
+    },
+    {
+      "text": "Cosa si intende con 'kerning' in tipografia?",
+      "answers": [
+        { "correct": true, "text": "La regolazione dello spazio tra specifiche coppie di caratteri" },
+        { "correct": false, "text": "La distanza tra le righe di testo" },
+        { "correct": false, "text": "La dimensione del carattere in punti tipografici" }
+      ]
+    },
+    {
+      "text": "Il design system di un'azienda serve principalmente a:",
+      "answers": [
+        { "correct": true, "text": "Garantire coerenza visiva e di utilizzo tra tutti i prodotti digitali dell'azienda" },
+        { "correct": false, "text": "Stabilire le regole di abbigliamento per i dipendenti" },
+        { "correct": false, "text": "Definire il budget per i progetti di rebranding" }
+      ]
+    },
+    {
+      "text": "Cosa significa 'above the fold' nel web design?",
+      "answers": [
+        { "correct": true, "text": "La porzione di pagina visibile senza scorrere, che deve catturare subito l'attenzione" },
+        { "correct": false, "text": "Il footer nascosto nella parte bassa della pagina" },
+        { "correct": false, "text": "Il menu a scomparsa per dispositivi mobili" }
+      ]
+    },
+    {
+      "text": "Cosa si intende per 'responsive design'?",
+      "answers": [
+        { "correct": true, "text": "Un approccio progettuale che adatta il layout ai diversi schermi e dispositivi" },
+        { "correct": false, "text": "Un sito che risponde ai comandi vocali dell'utente" },
+        { "correct": false, "text": "Un design che cambia colori in base al meteo" }
+      ]
+    },
+    {
+      "text": "Il metodo 'mobile first' nel web design prevede di:",
+      "answers": [
+        { "correct": true, "text": "Progettare prima per schermi piccoli e poi espandere per schermi più grandi" },
+        { "correct": false, "text": "Pubblicare il sito prima sull'app store e poi sul web" },
+        { "correct": false, "text": "Usare le notifiche push come principale canale di comunicazione" }
+      ]
+    },
+    {
+      "text": "Cosa fa il CSS in un sito web?",
+      "answers": [
+        { "correct": true, "text": "Definisce l'aspetto visivo: colori, font, layout, animazioni" },
+        { "correct": false, "text": "Gestisce il database dei contenuti del sito" },
+        { "correct": false, "text": "Stabilisce le connessioni sicure tra server e browser" }
+      ]
+    },
+    {
+      "text": "Cosa si intende per 'UX design'?",
+      "answers": [
+        { "correct": true, "text": "La progettazione dell'esperienza utente, focalizzata su usabilità e soddisfazione" },
+        { "correct": false, "text": "La creazione di effetti visivi estremi per siti web di lusso" },
+        { "correct": false, "text": "L'ottimizzazione dei costi di hosting per startup" }
+      ]
+    },
+    {
+      "text": "Cosa si intende per 'prototipo' nel processo di design?",
+      "answers": [
+        { "correct": true, "text": "Una versione simulata e navigabile del prodotto, usata per testare prima dello sviluppo definitivo" },
+        { "correct": false, "text": "Il primo documento Word con le specifiche del progetto" },
+        { "correct": false, "text": "Il modello fisico stampato in 3D di un packaging" }
+      ]
+    },
+    {
+      "text": "Nel web design, cosa sono le 'micro-interazioni'?",
+      "answers": [
+        { "correct": true, "text": "Piccoli feedback visivi o animati che rispondono alle azioni dell'utente" },
+        { "correct": false, "text": "Pop-up pubblicitari di piccole dimensioni" },
+        { "correct": false, "text": "Bottoni interattivi solo visibili su schermi piccoli" }
+      ]
+    },
+    {
+      "text": "Quale formato immagine supporta la trasparenza ed è ideale per il web?",
+      "answers": [
+        { "correct": true, "text": "PNG" },
+        { "correct": false, "text": "JPEG" },
+        { "correct": false, "text": "BMP" }
+      ]
+    },
+    {
+      "text": "Cosa si intende con 'color grading' in fotografia e video?",
+      "answers": [
+        { "correct": true, "text": "Il processo creativo di alterare e migliorare i colori per ottenere un look specifico" },
+        { "correct": false, "text": "La valutazione della qualità dei colori da parte di una commissione" },
+        { "correct": false, "text": "La conversione automatica di immagini a colori in bianco e nero" }
+      ]
+    },
+    {
+      "text": "Cosa si intende per 'flat design'?",
+      "answers": [
+        { "correct": true, "text": "Uno stile visivo minimalista che evita ombre, gradienti ed effetti tridimensionali" },
+        { "correct": false, "text": "Un design pensato solo per schermi piatti (non curvi)" },
+        { "correct": false, "text": "La creazione di loghi senza curve o angoli arrotondati" }
+      ]
+    },
+    {
+      "text": "Qual è la differenza tra 'font' e 'typeface'?",
+      "answers": [
+        { "correct": true, "text": "Il typeface è la famiglia tipografica (es. Helvetica); il font è la versione specifica (es. Helvetica Bold 12pt)" },
+        { "correct": false, "text": "Il font è gratis; il typeface è sempre a pagamento" },
+        { "correct": false, "text": "Il typeface è per il web; il font è per la stampa" }
+      ]
+    },
+    {
+      "text": "Cosa significa 'DPI' nel contesto della stampa?",
+      "answers": [
+        { "correct": true, "text": "Dots Per Inch: il numero di punti di inchiostro per pollice, che determina la risoluzione di stampa" },
+        { "correct": false, "text": "Digital Print Interface: il protocollo di connessione tra computer e stampante" },
+        { "correct": false, "text": "Dynamic Pixel Interpolation: un algoritmo di upscaling" }
+      ]
+    },
+    {
+      "text": "Nel motion design, cos'è l'easing?",
+      "answers": [
+        { "correct": true, "text": "La curva di accelerazione/decelerazione di un'animazione che la rende più naturale" },
+        { "correct": false, "text": "Il grado di difficoltà di un tutorial di After Effects" },
+        { "correct": false, "text": "La semplicità di esportazione di un video animato" }
+      ]
+    },
+    {
+      "text": "Cos'è l'arte generativa?",
+      "answers": [
+        { "correct": true, "text": "Arte creata tramite sistemi autonomi (algoritmi, regole, codice) con un grado di casualità" },
+        { "correct": false, "text": "Arte prodotta da artisti delle generazioni X e Y" },
+        { "correct": false, "text": "Arte il cui obiettivo è generare profitto commerciale" }
+      ]
+    },
+    {
+      "text": "Chi è considerato il padre della Pop Art?",
+      "answers": [
+        { "correct": true, "text": "Andy Warhol" },
+        { "correct": false, "text": "Jackson Pollock" },
+        { "correct": false, "text": "Salvador Dalì" }
+      ]
+    },
+    {
+      "text": "Il movimento Bauhaus nasce in:",
+      "answers": [
+        { "correct": true, "text": "Germania, nel 1919" },
+        { "correct": false, "text": "Francia, nel 1905" },
+        { "correct": false, "text": "Italia, nel 1934" }
+      ]
+    },
+    {
+      "text": "Qual è il principio fondamentale del Bauhaus?",
+      "answers": [
+        { "correct": true, "text": "Unire arte, artigianato e tecnologia per creare un design funzionale e accessibile" },
+        { "correct": false, "text": "L'arte deve essere pura e separata dalla produzione industriale" },
+        { "correct": false, "text": "Privilegiare la decorazione ornamentale su ogni oggetto quotidiano" }
+      ]
+    },
+    {
+      "text": "Cosa si intende per 'installazione artistica'?",
+      "answers": [
+        { "correct": true, "text": "Un'opera d'arte che trasforma uno spazio fisico, spesso immersiva e site-specific" },
+        { "correct": false, "text": "Il processo di montaggio di un quadro sulla parete" },
+        { "correct": false, "text": "Il setup tecnico di un computer in un laboratorio" }
+      ]
+    },
+    {
+      "text": "L'arte concettuale mette al centro del lavoro artistico:",
+      "answers": [
+        { "correct": true, "text": "L'idea, che precede e spesso sostituisce l'oggetto fisico" },
+        { "correct": false, "text": "La perfezione tecnica dell'esecuzione materiale" },
+        { "correct": false, "text": "La dimensione commerciale dell'opera" }
+      ]
+    },
+    {
+      "text": "Cosa si intende per 'street art'?",
+      "answers": [
+        { "correct": true, "text": "Arte visiva realizzata in spazi pubblici urbani, spesso fuori da canali istituzionali" },
+        { "correct": false, "text": "Mostre d'arte temporanee allestite per strada" },
+        { "correct": false, "text": "Fotografia documentaristica della vita urbana" }
+      ]
+    },
+    {
+      "text": "Chi è Banksy?",
+      "answers": [
+        { "correct": true, "text": "Un artista di street art anonimo britannico noto per opere satiriche e politiche" },
+        { "correct": false, "text": "Il fondatore di un famoso museo d'arte contemporanea londinese" },
+        { "correct": false, "text": "Un collettivo di designer grafici tedeschi" }
+      ]
+    },
+    {
+      "text": "Cosa si intende per 'NFT' in ambito arte digitale?",
+      "answers": [
+        { "correct": true, "text": "Non-Fungible Token: un certificato digitale unico su blockchain che attesta la proprietà di un'opera" },
+        { "correct": false, "text": "New Format Technology: un nuovo standard per file immagine ad altissima risoluzione" },
+        { "correct": false, "text": "Neural Filter Tool: uno strumento di Photoshop basato su AI" }
+      ]
+    },
+    {
+      "text": "Cos'è il 'metaverso' nel contesto dell'arte e del design?",
+      "answers": [
+        { "correct": true, "text": "Spazi virtuali condivisi in 3D dove si possono creare, esporre e vendere opere digitali" },
+        { "correct": false, "text": "Il titolo di una serie Netflix sul mondo degli artisti digitali" },
+        { "correct": false, "text": "Un software gratuito per creare gallerie d'arte virtuali" }
+      ]
+    },
+    {
+      "text": "Nel design sostenibile, cosa significa 'upcycling'?",
+      "answers": [
+        { "correct": true, "text": "Trasformare materiali di scarto in prodotti di valore maggiore" },
+        { "correct": false, "text": "Aggiornare il software di progettazione alle versioni più recenti" },
+        { "correct": false, "text": "Aumentare il prezzo di listino di un prodotto di design" }
+      ]
+    },
+    {
+      "text": "Cosa si intende per 'accessibilità' nel web design?",
+      "answers": [
+        { "correct": true, "text": "Progettare siti usabili da persone con disabilità visive, motorie, cognitive o uditive" },
+        { "correct": false, "text": "Garantire che il sito si carichi velocemente su connessioni lente" },
+        { "correct": false, "text": "Rendere il sito accessibile senza login o password" }
+      ]
+    },
+    {
+      "text": "Cosa misura il 'contrast ratio' nell'accessibilità visiva?",
+      "answers": [
+        { "correct": true, "text": "La differenza di luminosità tra testo e sfondo, per garantire leggibilità" },
+        { "correct": false, "text": "Il numero di colori distinti usati in una pagina" },
+        { "correct": false, "text": "La risoluzione massima supportata dal monitor dell'utente" }
+      ]
+    },
+    {
+      "text": "Cosa si intende con 'dark pattern' nel design UX?",
+      "answers": [
+        { "correct": true, "text": "Scelte progettuali ingannevoli che manipolano l'utente a fare cose contro il suo interesse" },
+        { "correct": false, "text": "L'uso della modalità scura (dark mode) nelle interfacce" },
+        { "correct": false, "text": "Pattern decorativi su sfondo scuro" }
+      ]
+    },
+    {
+      "text": "Quale linguaggio di programmazione è usato principalmente per il comportamento interattivo delle pagine web?",
+      "answers": [
+        { "correct": true, "text": "JavaScript" },
+        { "correct": false, "text": "Python" },
+        { "correct": false, "text": "Ruby" }
+      ]
+    },
+    {
+      "text": "Cosa si intende per 'open source'?",
+      "answers": [
+        { "correct": true, "text": "Software il cui codice sorgente è pubblicamente disponibile e modificabile" },
+        { "correct": false, "text": "Software che si apre su qualsiasi sistema operativo" },
+        { "correct": false, "text": "Software gratuito ma non modificabile" }
+      ]
+    },
+    {
+      "text": "Cosa significa 'API' nel contesto dello sviluppo web?",
+      "answers": [
+        { "correct": true, "text": "Application Programming Interface: un insieme di regole che permette a software diversi di comunicare" },
+        { "correct": false, "text": "Archivio Pubblico di Immagini: una banca dati di foto stock" },
+        { "correct": false, "text": "Automated Page Index: un sistema di catalogazione automatica delle pagine web" }
+      ]
+    },
+    {
+      "text": "Cos'è WordPress?",
+      "answers": [
+        { "correct": true, "text": "Un CMS open source usato per creare e gestire siti web e blog" },
+        { "correct": false, "text": "Un software di videoscrittura con funzioni avanzate per giornalisti" },
+        { "correct": false, "text": "Un social network dedicato ai professionisti del design" }
+      ]
+    },
+    {
+      "text": "Cosa indica il termine 'SEO'?",
+      "answers": [
+        { "correct": true, "text": "Search Engine Optimization: tecniche per migliorare la visibilità di un sito sui motori di ricerca" },
+        { "correct": false, "text": "Social Engagement Optimizer: strumento per aumentare i follower" },
+        { "correct": false, "text": "Secure Encryption Online: protocollo di sicurezza per dati sensibili" }
+      ]
+    },
+    {
+      "text": "Cosa si intende per 'pixel art'?",
+      "answers": [
+        { "correct": true, "text": "Arte digitale creata a livello di singolo pixel, spesso ispirata alla grafica dei videogiochi retro" },
+        { "correct": false, "text": "Fotografia scattata con fotocamere di altissima risoluzione" },
+        { "correct": false, "text": "Design realizzato esclusivamente con forme circolari" }
+      ]
+    },
+    {
+      "text": "Qual è la risoluzione standard per immagini da schermo (web)?",
+      "answers": [
+        { "correct": true, "text": "72 PPI (pixels per inch)" },
+        { "correct": false, "text": "300 PPI, come per la stampa professionale" },
+        { "correct": false, "text": "600 PPI, il massimo supportato dai monitor 8K" }
+      ]
+    },
+    {
+      "text": "Nel graphic design, cosa significa 'bleeding' in un documento da stampa?",
+      "answers": [
+        { "correct": true, "text": "L'estensione degli elementi oltre i bordi del formato per evitare bordi bianchi dopo il taglio" },
+        { "correct": false, "text": "L'effetto di colore che sbava tra due aree adiacenti" },
+        { "correct": false, "text": "Un tipo di errore nei file PDF che causa perdita di dati" }
+      ]
+    },
+    {
+      "text": "Cosa si intende per 'moodboard'?",
+      "answers": [
+        { "correct": true, "text": "Una raccolta visiva di immagini, colori e riferimenti che definisce il tono di un progetto creativo" },
+        { "correct": false, "text": "Un pannello digitale per monitorare l'umore del team di design" },
+        { "correct": false, "text": "Una bacheca fisica con i task del progetto in stile Kanban" }
+      ]
+    },
+    {
+      "text": "Cosa distingue la fotografia analogica da quella digitale?",
+      "answers": [
+        { "correct": true, "text": "L'analogica cattura la luce su pellicola chimica; la digitale su sensori elettronici" },
+        { "correct": false, "text": "L'analogica è sempre in bianco e nero; la digitale supporta il colore" },
+        { "correct": false, "text": "L'analogica richiede Photoshop; la digitale usa Camera Raw" }
+      ]
+    },
+    {
+      "text": "La regola dei terzi in fotografia serve a:",
+      "answers": [
+        { "correct": true, "text": "Posizionare i soggetti nei punti di interesse della griglia 3x3 per creare composizioni più dinamiche" },
+        { "correct": false, "text": "Garantire che ogni foto occupi esattamente un terzo dello spazio su disco" },
+        { "correct": false, "text": "Scattare sempre tre foto identiche per sicurezza" }
+      ]
+    },
+    {
+      "text": "Cosa si intende per 'long exposure' in fotografia?",
+      "answers": [
+        { "correct": true, "text": "Tecnica che usa tempi lunghi di scatto per catturare il movimento, come scie luminose o acqua mossa" },
+        { "correct": false, "text": "Una campagna fotografica che dura più di una settimana" },
+        { "correct": false, "text": "Un tipo di stampa fotografica su tela di grandi dimensioni" }
+      ]
+    },
+    {
+      "text": "In cinematografia, cos'è il 'piano sequenza'?",
+      "answers": [
+        { "correct": true, "text": "Una ripresa continua senza tagli che si articola in più scene o movimenti" },
+        { "correct": false, "text": "La sequenza di piani di lavoro del team di produzione" },
+        { "correct": false, "text": "Un formato di sceneggiatura usato nel cinema italiano" }
+      ]
+    },
+    {
+      "text": "Nel cinema, cosa fa il 'direttore della fotografia'?",
+      "answers": [
+        { "correct": true, "text": "Determina la resa visiva del film: luci, inquadrature, colori e movimento di camera" },
+        { "correct": false, "text": "Si occupa della promozione fotografica del film sui social" },
+        { "correct": false, "text": "Gestisce l'archivio delle foto di scena" }
+      ]
+    },
+    {
+      "text": "Cos'è il 'color profile' sRGB?",
+      "answers": [
+        { "correct": true, "text": "Uno spazio colore standardizzato, ottimale per schermi e contenuti digitali" },
+        { "correct": false, "text": "Un profilo di sicurezza per immagini condivise online" },
+        { "correct": false, "text": "Un formato di file specifico di Samsung" }
+      ]
+    },
+    {
+      "text": "Cosa si intende con 'concept art'?",
+      "answers": [
+        { "correct": true, "text": "Illustrazioni che visualizzano idee e personaggi in pre-produzione di film, videogiochi o animazioni" },
+        { "correct": false, "text": "Arte venduta in gallerie concettuali senza cornice" },
+        { "correct": false, "text": "Schizzi preliminari di loghi per startup" }
+      ]
+    },
+    {
+      "text": "Nel mondo del fashion design, cosa si intende per 'upcycled fashion'?",
+      "answers": [
+        { "correct": true, "text": "Abbigliamento realizzato trasformando materiali dismessi o abiti vecchi in capi di valore" },
+        { "correct": false, "text": "Moda per categorie d'età superiori ai 60 anni" },
+        { "correct": false, "text": "Vestiti prodotti solo in edizioni limitate di lusso" }
+      ]
+    },
+    {
+      "text": "Cosa si intende per 'design thinking'?",
+      "answers": [
+        { "correct": true, "text": "Un approccio creativo alla risoluzione dei problemi centrato sull'essere umano e sulla prototipazione rapida" },
+        { "correct": false, "text": "Il processo di pensiero dei grafici durante la creazione di un logo" },
+        { "correct": false, "text": "Un corso accelerato di design industriale per manager" }
+      ]
+    },
+    {
+      "text": "Cosa si intende per 'white space' nel design?",
+      "answers": [
+        { "correct": true, "text": "Lo spazio vuoto intorno agli elementi, che migliora la leggibilità e la gerarchia visiva" },
+        { "correct": false, "text": "L'area di sfondo bianca di un documento vuoto" },
+        { "correct": false, "text": "Una tecnica di mascheratura in Photoshop" }
+      ]
+    },
+    {
+      "text": "Il formato SVG nel web design viene usato principalmente per:",
+      "answers": [
+        { "correct": true, "text": "Grafica vettoriale scalabile, come icone e loghi, che rimane nitida a qualsiasi dimensione" },
+        { "correct": false, "text": "Streaming video ottimizzato per mobile" },
+        { "correct": false, "text": "Salvataggio di grandi file fotografici in cloud" }
+      ]
+    },
+    {
+      "text": "Cosa si intende per 'affordance' nel design di prodotto?",
+      "answers": [
+        { "correct": true, "text": "La qualità di un oggetto che suggerisce intuitivamente come usarlo (es. un bottone invita a essere premuto)" },
+        { "correct": false, "text": "Il costo accessibile di un prodotto per il mercato di massa" },
+        { "correct": false, "text": "La compatibilità di un prodotto con sistemi diversi" }
+      ]
+    },
+    {
+      "text": "Nel mondo dell'arte contemporanea, cosa si intende per 'site-specific'?",
+      "answers": [
+        { "correct": true, "text": "Un'opera creata appositamente per uno spazio preciso, con cui interagisce in modo inscindibile" },
+        { "correct": false, "text": "Un'opera visibile solo tramite un sito web dedicato" },
+        { "correct": false, "text": "Una mostra organizzata in luoghi di interesse turistico" }
+      ]
+    },
+    {
+      "text": "Cosa fa un modello di 'text-to-video'?",
+      "answers": [
+        { "correct": true, "text": "Genera video partendo da una descrizione testuale, usando reti neurali generative" },
+        { "correct": false, "text": "Converte i sottotitoli di un video in un documento di testo" },
+        { "correct": false, "text": "Trascrive automaticamente il parlato nei video in testo scritto" }
+      ]
+    },
+    {
+      "text": "Cosa si intende per 'overfitting' in machine learning?",
+      "answers": [
+        { "correct": true, "text": "Quando un modello impara troppo bene i dati di addestramento e fallisce su dati nuovi" },
+        { "correct": false, "text": "Quando un'AI elabora troppi dati e va in crash" },
+        { "correct": false, "text": "Quando la dimensione del modello supera i limiti di memoria" }
+      ]
+    },
+    {
+      "text": "Cosa si intende per 'human in the loop' nell'AI?",
+      "answers": [
+        { "correct": true, "text": "Un sistema in cui l'essere umano supervisiona e corregge le decisioni dell'AI durante il processo" },
+        { "correct": false, "text": "Un gioco di realtà virtuale in cui l'utente è immerso nel mondo dell'AI" },
+        { "correct": false, "text": "Un modello di AI addestrato esclusivamente su comportamenti umani" }
+      ]
+    },
+    {
+      "text": "Cos'è ChatGPT in sintesi?",
+      "answers": [
+        { "correct": true, "text": "Un chatbot conversazionale basato su LLM, capace di rispondere a domande, scrivere e ragionare" },
+        { "correct": false, "text": "Un motore di ricerca alternativo a Google sviluppato da Microsoft" },
+        { "correct": false, "text": "Un'app di messaggistica istantanea con funzioni AI" }
+      ]
+    },
+    {
+      "text": "Quale tra questi è un framework CSS open source?",
+      "answers": [
+        { "correct": true, "text": "Tailwind CSS" },
+        { "correct": false, "text": "Adobe XD" },
+        { "correct": false, "text": "Canva Pro" }
+      ]
+    },
+    {
+      "text": "Cosa si intende per 'storyboard' nella produzione video?",
+      "answers": [
+        { "correct": true, "text": "Una sequenza di illustrazioni che pianifica visivamente le scene prima delle riprese" },
+        { "correct": false, "text": "Un documento Word con la sceneggiatura dettagliata del film" },
+        { "correct": false, "text": "Una board su Pinterest con riferimenti visivi per il mood del video" }
+      ]
+    },
+    {
+      "text": "Cosa si intende per 'immersive art'?",
+      "answers": [
+        { "correct": true, "text": "Esperienze artistiche che circondano lo spettatore, coinvolgendo più sensi e annullando il confine tra opera e pubblico" },
+        { "correct": false, "text": "Arte realizzata sott'acqua" },
+        { "correct": false, "text": "Mostre accessibili solo con visori VR" }
+      ]
+    },
+    {
+      "text": "Cosa fa Adobe After Effects?",
+      "answers": [
+        { "correct": true, "text": "Crea animazioni, effetti visivi e motion graphics per video e film" },
+        { "correct": false, "text": "Ritocca foto professionali con filtri avanzati" },
+        { "correct": false, "text": "Gestisce i file di archivio di Adobe Creative Cloud" }
+      ]
+    },
+    {
+      "text": "Nel design di prodotto, cosa si intende per 'form follows function'?",
+      "answers": [
+        { "correct": true, "text": "La forma di un oggetto deve essere dettata dalla sua funzione, non da decorazione fine a se stessa" },
+        { "correct": false, "text": "I moduli di contatto devono seguire le linee guida funzionali del sito" },
+        { "correct": false, "text": "Il design deve avere una forma organica ispirata alla natura" }
+      ]
+    },
+    {
+      "text": "Qual è uno dei principali vantaggi dell'AI nella produzione creativa?",
+      "answers": [
+        { "correct": true, "text": "Accelerare la fase di ideazione e generare molte varianti in poco tempo" },
+        { "correct": false, "text": "Sostituire completamente il giudizio estetico umano" },
+        { "correct": false, "text": "Eliminare la necessità di avere un brief creativo" }
+      ]
+    },
+    {
+      "text": "Cosa fa un 'creative director' in un'agenzia o studio creativo?",
+      "answers": [
+        { "correct": true, "text": "Guida la visione creativa del team e garantisce coerenza estetica e strategica nei progetti" },
+        { "correct": false, "text": "Si occupa esclusivamente della post-produzione fotografica" },
+        { "correct": false, "text": "Gestisce il budget e le risorse umane dell'agenzia" }
+      ]
+    },
+    {
+      "text": "Cos'è la 'psicologia del colore' nel design?",
+      "answers": [
+        { "correct": true, "text": "Lo studio di come i colori influenzano le emozioni e i comportamenti degli utenti" },
+        { "correct": false, "text": "Una tecnica per diagnosticare disturbi visivi tramite palette di colori" },
+        { "correct": false, "text": "L'analisi scientifica dei pigmenti usati dagli Old Masters" }
+      ]
+    },
+    {
+      "text": "Cosa si intende per 'phygital' nel design contemporaneo?",
+      "answers": [
+        { "correct": true, "text": "La fusione tra esperienze fisiche e digitali, come installazioni che mixano oggetti reali e schermi interattivi" },
+        { "correct": false, "text": "Un tipo di stampa tipografica ad alta fedeltà" },
+        { "correct": false, "text": "Un formato file ibrido tra PDF e JPEG" }
+      ]
+    },
+    {
+      "text": "Cos'è la 'realtà aumentata' (AR)?",
+      "answers": [
+        { "correct": true, "text": "Una tecnologia che sovrappone elementi digitali al mondo reale attraverso dispositivi come smartphone o visori" },
+        { "correct": false, "text": "Una tecnica di pittura che usa colori fluorescenti sotto luce UV" },
+        { "correct": false, "text": "Un effetto fotografico che aumenta la saturazione di un'immagine" }
+      ]
+    },
+    {
+      "text": "Qual è la principale preoccupazione degli artisti riguardo all'AI generativa?",
+      "answers": [
+        { "correct": true, "text": "Il rischio che i loro stili vengano replicati senza consenso e che la loro professione venga svalutata economicamente" },
+        { "correct": false, "text": "Che l'AI produca opere troppo brutte da rovinare il mercato dell'arte" },
+        { "correct": false, "text": "Che i modelli AI consumino troppa corrente elettrica nei data center" }
+      ]
+    },
+    {
+      "text": "Nel contesto di Cronache Disorganiche, il termine 'disorganico' suggerisce:",
+      "answers": [
+        { "correct": true, "text": "Una tensione tra il naturale e l'artificiale, tra il vivente e il sintetico" },
+        { "correct": false, "text": "Un approccio caotico e non pianificato all'organizzazione dell'evento" },
+        { "correct": false, "text": "L'uso esclusivo di materiali non biologici nelle opere esposte" }
+      ]
+    },
+    {
+      "text": "Cosa si intende per 'net art'?",
+      "answers": [
+        { "correct": true, "text": "Arte creata per e attraverso internet, spesso interattiva e accessibile via browser" },
+        { "correct": false, "text": "Arte che utilizza reti fisiche di cavi e fili come elemento visivo" },
+        { "correct": false, "text": "Arte finanziata attraverso campagne di crowdfunding online" }
+      ]
+    },
+    {
+      "text": "Cosa fa uno 'scenografo' in un contesto teatrale?",
+      "answers": [
+        { "correct": true, "text": "Progetta e realizza l'ambiente visivo dello spettacolo: scene, oggetti, luci e spazio" },
+        { "correct": false, "text": "Scrive la sceneggiatura del testo teatrale" },
+        { "correct": false, "text": "Dirige gli attori nelle scene più complesse" }
+      ]
+    },
+    {
+      "text": "Qual è la funzione della 'palette cromática' in un progetto di design?",
+      "answers": [
+        { "correct": true, "text": "Definire i colori primari e secondari del progetto per garantire coerenza visiva e comunicativa" },
+        { "correct": false, "text": "Elencare tutti i materiali fisici necessari alla produzione" },
+        { "correct": false, "text": "Stabilire i tempi di consegna del progetto" }
+      ]
+    },
+    {
+      "text": "Cosa si intende per 'brief creativo'?",
+      "answers": [
+        { "correct": true, "text": "Un documento che definisce obiettivi, target, tono e vincoli di un progetto creativo" },
+        { "correct": false, "text": "Un riassunto delle ultime tendenze estetiche del mercato" },
+        { "correct": false, "text": "Una riunione rapida tra designer e cliente" }
+      ]
+    },
+    {
+      "text": "Cos'è Processing nel mondo dell'arte digitale?",
+      "answers": [
+        { "correct": true, "text": "Un linguaggio di programmazione visuale usato da artisti e designer per creare grafica interattiva e generativa" },
+        { "correct": false, "text": "Un software di post-produzione fotografica open source" },
+        { "correct": false, "text": "Un plugin di After Effects per effetti di glitch artistico" }
+      ]
+    },
+    {
+      "text": "Cosa si intende con 'human-centered design'?",
+      "answers": [
+        { "correct": true, "text": "Un approccio che mette le esigenze, i comportamenti e i valori umani al centro del processo progettuale" },
+        { "correct": false, "text": "Design riservato esclusivamente a persone senza competenze tecniche" },
+        { "correct": false, "text": "La progettazione di avatar umani per ambienti virtuali" }
+      ]
+    },
+    {
+      "text": "Cosa si intende per 'rendering' nel 3D?",
+      "answers": [
+        { "correct": true, "text": "Il processo di calcolo che trasforma una scena 3D in un'immagine o video bidimensionale finale" },
+        { "correct": false, "text": "La fase di importazione di modelli 3D in Blender" },
+        { "correct": false, "text": "La preparazione di un modello 3D per la stampa fisica" }
+      ]
+    },
+    {
+      "text": "Qual è il principale vantaggio della collaborazione interdisciplinare in un'accademia?",
+      "answers": [
+        { "correct": true, "text": "Contaminare approcci e linguaggi diversi per produrre soluzioni creative più ricche e inaspettate" },
+        { "correct": false, "text": "Ridurre i costi di produzione condividendo le attrezzature tra dipartimenti" },
+        { "correct": false, "text": "Permettere a tutti gli studenti di laurearsi nello stesso momento" }
+      ]
+    },
+    {
+      "text": "Cosa si intende per 'glitch art'?",
+      "answers": [
+        { "correct": true, "text": "Arte che esplora e valorizza gli errori digitali e le imperfezioni tecnologiche come elemento estetico" },
+        { "correct": false, "text": "Arte realizzata esclusivamente con computer difettosi" },
+        { "correct": false, "text": "Un genere musicale elettronico legato alla cultura rave" }
+      ]
+    },
+    {
+      "text": "Cosa si intende per 'speculative design'?",
+      "answers": [
+        { "correct": true, "text": "Un approccio che usa il design per esplorare scenari futuri possibili e aprire riflessioni critiche" },
+        { "correct": false, "text": "Design di prodotti finanziari e investimenti alternativi" },
+        { "correct": false, "text": "La fase di brainstorming iniziale di un progetto commerciale" }
+      ]
+    },
+    {
+      "text": "In ambito AI, cosa fa un 'embeddings model'?",
+      "answers": [
+        { "correct": true, "text": "Converte testi o immagini in vettori numerici che catturano il significato semantico per il confronto e la ricerca" },
+        { "correct": false, "text": "Incorpora video pubblicitari all'interno di contenuti editoriali" },
+        { "correct": false, "text": "Comprime modelli AI di grandi dimensioni per ridurne il peso" }
+      ]
+    },
+    {
+      "text": "Cosa si intende per 'multimodale' riferito a un modello AI?",
+      "answers": [
+        { "correct": true, "text": "Un modello capace di elaborare e generare più tipi di media contemporaneamente, come testo, immagini e audio" },
+        { "correct": false, "text": "Un modello che opera su più dispositivi in parallelo" },
+        { "correct": false, "text": "Un modello disponibile in più lingue contemporaneamente" }
+      ]
+    },
+    {
+      "text": "Cosa fa uno 'screen printer' nella produzione di abbigliamento?",
+      "answers": [
+        { "correct": true, "text": "Stampa disegni su tessuto tramite serigrafia, usando matrici e inchiostri specifici" },
+        { "correct": false, "text": "Cattura screenshot del processo creativo per il portfolio" },
+        { "correct": false, "text": "Progetta schermi LED per sfilate di moda tecnologiche" }
+      ]
+    },
+    {
+      "text": "Nel design editoriale, cos'è una 'gabbia tipografica'?",
+      "answers": [
+        { "correct": true, "text": "La griglia strutturale invisibile che organizza testo e immagini in una pagina" },
+        { "correct": false, "text": "Un archivio di font protetti da copyright" },
+        { "correct": false, "text": "Un contenitore fisico per conservare i caratteri mobili della stampa a piombo" }
+      ]
+    },
+    {
+      "text": "Cos'è la 'typography pairing'?",
+      "answers": [
+        { "correct": true, "text": "L'abbinamento strategico di due o più font complementari per creare gerarchia e armonia tipografica" },
+        { "correct": false, "text": "La sincronizzazione di font tra dispositivi Apple" },
+        { "correct": false, "text": "Il confronto automatico tra versioni diverse dello stesso carattere" }
+      ]
+    },
+    {
+      "text": "Cos'è il 'Creative Commons'?",
+      "answers": [
+        { "correct": true, "text": "Un sistema di licenze che permette agli autori di condividere le loro opere con condizioni definite" },
+        { "correct": false, "text": "Un social network per creativi e artisti" },
+        { "correct": false, "text": "Un fondo di finanziamento europeo per le arti" }
+      ]
+    },
+    {
+      "text": "Cosa si intende per 'design sostenibile'?",
+      "answers": [
+        { "correct": true, "text": "Progettare tenendo conto dell'impatto ambientale, sociale ed economico del ciclo di vita del prodotto" },
+        { "correct": false, "text": "Realizzare design che rimangono di moda per molti anni" },
+        { "correct": false, "text": "Usare colori naturali ispirati alla flora locale" }
+      ]
+    },
+    {
+      "text": "Nel mondo dell'AI artistica, cosa è Stable Diffusion?",
+      "answers": [
+        { "correct": true, "text": "Un modello di generazione immagini open source che può essere eseguito localmente" },
+        { "correct": false, "text": "Un'app di editing fotografico mobile gratuita" },
+        { "correct": false, "text": "Un effetto di transizione per video in After Effects" }
+      ]
+    },
+    {
+      "text": "Cosa si intende per 'visual storytelling'?",
+      "answers": [
+        { "correct": true, "text": "L'uso di immagini, sequenze visive e composizioni per raccontare storie ed emozioni in modo non verbale" },
+        { "correct": false, "text": "La narrazione visiva nei fumetti Marvel e DC Comics" },
+        { "correct": false, "text": "La presentazione di PowerPoint animata per vendite commerciali" }
+      ]
+    },
+    {
+      "text": "Cosa si intende per 'interaction design'?",
+      "answers": [
+        { "correct": true, "text": "La disciplina che progetta il modo in cui gli utenti interagiscono con sistemi digitali o fisici" },
+        { "correct": false, "text": "Il design di eventi e fiere interattive" },
+        { "correct": false, "text": "La creazione di contenuti social che generano engagement" }
+      ]
+    },
+    {
+      "text": "Cosa significa 'iterare' nel processo creativo e di design?",
+      "answers": [
+        { "correct": true, "text": "Rifinire progressivamente un'idea attraverso cicli ripetuti di test, feedback e miglioramento" },
+        { "correct": false, "text": "Copiare un design di successo adattandolo a un nuovo contesto" },
+        { "correct": false, "text": "Presentare la stessa proposta a più clienti contemporaneamente" }
+      ]
+    }
+  ]
+}
