@@ -1,5 +1,6 @@
 <script setup>
 import { onBeforeUnmount, onMounted, ref, computed } from 'vue'
+import jsQR from 'jsqr'
 
 const emit = defineEmits(['detected', 'error', 'started', 'stopped', 'exit'])
 
@@ -22,10 +23,16 @@ const videoRef = ref(null)
 const streamRef = ref(null)
 const isScanning = ref(false)
 const isBusy = ref(false)
-const canUseBarcodeDetector = typeof window !== 'undefined' && 'BarcodeDetector' in window
-const detector = canUseBarcodeDetector ? new window.BarcodeDetector({ formats: ['qr_code'] }) : null
+const canUseBarcodeDetector =
+  typeof window !== 'undefined' && 'BarcodeDetector' in window
+const detector = canUseBarcodeDetector
+  ? new window.BarcodeDetector({ formats: ['qr_code'] })
+  : null
 
 let intervalId = null
+/** Canvas offscreen per jsQR (Safari iOS e browser senza BarcodeDetector) */
+let decodeCanvas = null
+let decodeCtx = null
 
 function stopStreamTracks() {
   if (!streamRef.value) return
@@ -35,24 +42,30 @@ function stopStreamTracks() {
   streamRef.value = null
 }
 
+async function openCamera() {
+  const base = { audio: false }
+  try {
+    return await navigator.mediaDevices.getUserMedia({
+      ...base,
+      video: { facingMode: { ideal: props.facingMode } },
+    })
+  } catch {
+    return await navigator.mediaDevices.getUserMedia({
+      ...base,
+      video: true,
+    })
+  }
+}
+
 async function start() {
   if (isScanning.value) return
   if (!navigator?.mediaDevices?.getUserMedia) {
     emit('error', new Error('Camera API non supportata dal browser'))
     return
   }
-  if (!canUseBarcodeDetector) {
-    emit('error', new Error('BarcodeDetector non supportato: usa Chrome/Edge mobile o desktop recente'))
-    return
-  }
 
   try {
-    const stream = await navigator.mediaDevices.getUserMedia({
-      video: {
-        facingMode: { ideal: props.facingMode },
-      },
-      audio: false,
-    })
+    const stream = await openCamera()
 
     streamRef.value = stream
     if (videoRef.value) {
@@ -79,17 +92,43 @@ function stop() {
 }
 
 async function scanFrame() {
-  if (!videoRef.value || !detector || isBusy.value) return
+  if (!videoRef.value || isBusy.value) return
   if (videoRef.value.readyState < HTMLMediaElement.HAVE_CURRENT_DATA) return
 
   isBusy.value = true
   try {
-    const barcodes = await detector.detect(videoRef.value)
-    const match = barcodes?.find((item) => item?.rawValue)
-    if (!match?.rawValue) return
+    if (detector) {
+      const barcodes = await detector.detect(videoRef.value)
+      const match = barcodes?.find((item) => item?.rawValue)
+      if (match?.rawValue) {
+        emit('detected', match.rawValue)
+        stop()
+      }
+      return
+    }
 
-    emit('detected', match.rawValue)
-    stop()
+    const v = videoRef.value
+    const w = v.videoWidth
+    const h = v.videoHeight
+    if (!w || !h) return
+
+    if (!decodeCanvas) {
+      decodeCanvas = document.createElement('canvas')
+      decodeCtx = decodeCanvas.getContext('2d', { willReadFrequently: true })
+    }
+    if (decodeCanvas.width !== w || decodeCanvas.height !== h) {
+      decodeCanvas.width = w
+      decodeCanvas.height = h
+    }
+    decodeCtx.drawImage(v, 0, 0, w, h)
+    const imageData = decodeCtx.getImageData(0, 0, w, h)
+    const result = jsQR(imageData.data, imageData.width, imageData.height, {
+      inversionAttempts: 'attemptBoth',
+    })
+    if (result?.data) {
+      emit('detected', result.data)
+      stop()
+    }
   } catch (error) {
     emit('error', error)
   } finally {
@@ -110,10 +149,7 @@ onBeforeUnmount(() => {
 defineExpose({ start, stop })
 
 const videoTransform = computed(() => {
-  // Flip horizontally for user ('user') camera
-  return props.facingMode === 'user'
-    ? 'none'
-    : 'scaleX(-1)'
+  return props.facingMode === 'user' ? 'none' : 'scaleX(-1)'
 })
 </script>
 
@@ -127,7 +163,7 @@ const videoTransform = computed(() => {
       playsinline
       muted
     />
-    <div class="flex justify-center mb-8 z-20 absolute bottom-0 left-0 right-0"> 
+    <div class="flex justify-center mb-8 z-20 absolute bottom-0 left-0 right-0">
       <a href="#" class="btn btn-secondary " @click.prevent="emit('exit')">Esci</a>
     </div>
   </div>

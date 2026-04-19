@@ -12,6 +12,7 @@ import Scan from '../components/Scan.vue'
 
 const global = inject('global')
 const scanning = ref(false)
+const scanRef = ref(null)
 const points = computed(() => {
   //return 2; // testing
   return global.account?.qrcodes?.length ?? 0
@@ -35,17 +36,36 @@ const handleDetected = async (url) => {
   await utils.qrcodeHandle(code)
   scanning.value = false
 }
+
+/** iOS richiede che getUserMedia parta nello stesso “turno” del tap: start() subito dopo il click. */
+function beginScan() {
+  scanning.value = true
+  scanRef.value?.start()
+}
+
+function closeScanner() {
+  scanRef.value?.stop()
+  scanning.value = false
+}
+
+function onScanError(err) {
+  console.error('Scan error:', err)
+  closeScanner()
+}
 </script>
 
 
 <template>
-  <template v-if="scanning">
-    <Scan 
-      @detected="handleDetected" 
-      @exit="()=> { scanning = false }" 
+  <div class="relative flex min-h-[60vh] flex-1 flex-col">
+    <Scan
+      v-show="scanning"
+      ref="scanRef"
+      :auto-start="false"
+      @detected="handleDetected"
+      @error="onScanError"
+      @exit="closeScanner"
     />
-  </template>
-  <div v-else class="flex-1 flex flex-col space-y-8">
+    <div v-show="!scanning" class="flex flex-1 flex-col space-y-8">
 
     <template v-if="codesToScan > 0">
       <header class="flex flex-col items-center justify-center text-center px-12">
@@ -56,9 +76,7 @@ const handleDetected = async (url) => {
         <button
           class="btn btn-primary flex! items-center justify-center gap-2"
           type="button"
-          @click="()=> {
-          scanning = true
-        }"
+          @click="beginScan"
         >
           <CameraIcon class="size-6 shrink-0" aria-hidden="true" />
           Scansiona QRcode
@@ -84,5 +102,6 @@ const handleDetected = async (url) => {
     </template>
 
     <Glass :points="points" />
+    </div>
   </div>
 </template>
