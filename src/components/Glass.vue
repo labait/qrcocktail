@@ -32,8 +32,8 @@ defineProps({
         </g>
 
         <!-- Suddivisioni del bicchiere (sempre visibili) -->
-        <line x1="0" y1="90" x2="200" y2="90" stroke="rgba(255,255,255,0.4)" stroke-width="3" stroke-dasharray="5,4" />
-        <line x1="0" y1="50" x2="200" y2="50" stroke="rgba(255,255,255,0.4)" stroke-width="3" stroke-dasharray="5,4" />
+        <line x1="30" y1="90" x2="170" y2="90" stroke="rgba(255,255,255,0.4)" stroke-width="3" stroke-dasharray="5,4" />
+        <line x1="30" y1="50" x2="170" y2="50" stroke="rgba(255,255,255,0.4)" stroke-width="3" stroke-dasharray="5,4" />
 
         <!-- Contorno bicchiere (stroke arancione, sempre visibile) -->
         <polygon
