@@ -97,11 +97,11 @@
       ]
     },
     {
-      "text": "Quale rivista è prodotta da LABA?",
+      "text": "Come si chiama la serie a episodi in stile web series anni ’90 prodotta dai bienni di Digital e di Cinema?",
       "answers": [
-        { "correct": true, "text": "Moltobene" },
-        { "correct": false, "text": "Domus" },
-        { "correct": false, "text": "Abitare" }
+        { "correct": false, "text": "Coinquilini cercasi" },
+        { "correct": true, "text": "Casa Laba" },
+        { "correct": false, "text": "La casa di Marta" }
       ]
     },
     {
