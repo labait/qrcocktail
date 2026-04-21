@@ -1,7 +1,28 @@
 import { inject } from 'vue'
 import { useRouter } from 'vue-router'
-import { updateDoc, doc, getDoc, collection, getDocs } from 'firebase/firestore'
+import {
+  updateDoc,
+  doc,
+  getDoc,
+  collection,
+  getDocs,
+  query,
+} from 'firebase/firestore'
 import { db } from '../firebase'
+
+/** @param {{ query?: unknown[] }} [options] Firestore `query()` constraints, e.g. `where(...)` */
+export async function qrcodesGet({ query: queryConstraints = [] } = {}) {
+  const qrcodesRef = collection(db, 'qrcodes')
+  const q =
+    queryConstraints.length > 0
+      ? query(qrcodesRef, ...queryConstraints)
+      : qrcodesRef
+  const snap = await getDocs(q)
+  return snap.docs.map((d) => ({
+    id: d.id,
+    ...d.data(),
+  }))
+}
 
 export function useUtils() {
   const global = inject('global')
@@ -82,6 +103,20 @@ export function useUtils() {
     return snap.data()
   }
 
+  /** @param {{ query?: unknown[] }} [options] Firestore `query()` constraints, e.g. `where(...)` */
+  const accountsGet = async ({ query: queryConstraints = [] } = {}) => {
+    const accountsRef = collection(db, 'accounts')
+    const q =
+      queryConstraints.length > 0
+        ? query(accountsRef, ...queryConstraints)
+        : accountsRef
+    const snap = await getDocs(q)
+    return snap.docs.map((d) => ({
+      uid: d.id,
+      ...d.data(),
+    }))
+  }
+
   const accountUpdate = async (data) => {
     await updateDoc(doc(db, 'accounts', global.account.uid), data)
     global.account = {
@@ -159,11 +194,13 @@ export function useUtils() {
     isManager,
     isRedeemer,
     getAbsoluteUrl,
+    qrcodesGet,
     qrcodeHandle,
     qrcodeLatestSet,
     qrcodeLatestGet,
     qrcodeLatestDelete,
     accountGet,
+    accountsGet,
     accountUpdate,
     accountUpdateByUid,
     accountCanRedeem,

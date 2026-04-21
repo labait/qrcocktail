@@ -3,6 +3,7 @@ import { inject, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { collection, addDoc, doc, getDoc, updateDoc } from 'firebase/firestore'
 import { db } from '../firebase'
+import { qrcodesGet } from '../composables/useUtils'
 import { RouterLink } from 'vue-router'
 import { onMounted } from 'vue'
 
@@ -18,19 +19,20 @@ const props = defineProps({
   },
 })
 
-const global = inject('global')
 const reloadQrCodes = inject('reloadQrCodes', async () => {})
 
 const router = useRouter()
 const name = ref('')
 const code = ref('')
+const enabled = ref(true)
 const isSaving = ref(false)
 const isLoadingDoc = ref(false)
 const loadError = ref('')
 
-function isCodeTakenByOther(candidate, excludeDocumentId) {
+async function isCodeTakenByOther(candidate, excludeDocumentId) {
   const c = String(candidate)
-  return global.qrcodes.some(
+  const all = await qrcodesGet()
+  return all.some(
     (q) => q.id !== excludeDocumentId && String(q.code) === c,
   )
 }
@@ -43,7 +45,7 @@ async function submit() {
   const codeTrimmed = code.value.trim()
   if (!codeTrimmed) { loadError.value = 'Inserisci un codice.'; return }
 
-  if (isCodeTakenByOther(codeTrimmed, props.documentId)) {
+  if (await isCodeTakenByOther(codeTrimmed, props.documentId)) {
     loadError.value = 'Questo codice è già in uso.'
     return
   }
@@ -51,9 +53,17 @@ async function submit() {
   isSaving.value = true
   try {
     if (props.mode === 'create') {
-      await addDoc(collection(db, 'qrcodes'), { name: trimmed, code: codeTrimmed })
+      await addDoc(collection(db, 'qrcodes'), {
+        name: trimmed,
+        code: codeTrimmed,
+        enabled: enabled.value,
+      })
     } else if (props.documentId) {
-      await updateDoc(doc(db, 'qrcodes', props.documentId), { name: trimmed, code: codeTrimmed })
+      await updateDoc(doc(db, 'qrcodes', props.documentId), {
+        name: trimmed,
+        code: codeTrimmed,
+        enabled: enabled.value,
+      })
     }
     await reloadQrCodes()
     router.push({ name: 'admin_qrcodes_list' })
@@ -74,6 +84,7 @@ onMounted(async () => {
       const data = snap.data()
       name.value = data.name != null ? String(data.name) : ''
       code.value = data.code != null ? String(data.code) : ''
+      enabled.value = data.enabled !== false
     } else {
       loadError.value = 'Documento non trovato.'
     }
@@ -120,6 +131,19 @@ onMounted(async () => {
             :disabled="isSaving || isLoadingDoc"
             placeholder="Es. ABC123"
           />
+        </div>
+
+        <div class="flex items-center gap-3">
+          <input
+            id="qrcode-enabled"
+            v-model="enabled"
+            type="checkbox"
+            class="size-4 border border-slate-300 text-indigo-600 focus:ring-indigo-500"
+            :disabled="isSaving || isLoadingDoc"
+          />
+          <label for="qrcode-enabled" class="text-base text-slate-700">
+            Attivo (visibile per la scansione pubblica)
+          </label>
         </div>
 
         <p v-if="loadError" class="text-base text-red-600">{{ loadError }}</p>
