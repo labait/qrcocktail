@@ -149,7 +149,7 @@ onBeforeUnmount(() => {
 defineExpose({ start, stop })
 
 const videoTransform = computed(() => {
-  return props.facingMode === 'user' ? 'none' : 'scaleX(-1)'
+  return props.facingMode === 'user' ? 'none' : 'scaleX(1)'
 })
 </script>
 
