@@ -19,6 +19,42 @@ const points = computed(() => {
 })
 const codesToScan = computed(() => global.settings.qrcodes.required - points.value)
 
+/**
+ * Messaggi durante la raccolta QR: la prima regola il cui `when(ctx)` è vero vince.
+ * `ctx` = { points, required, remaining } con remaining = required - points.
+ */
+const scanMessageRules = [
+  {
+    when: ({ points: p }) => p === 0,
+    text: ({ remaining }) =>
+      `Inizia a scansionare i QR-code, ne mancano ${remaining}.`,
+  },
+  {
+    when: ({ remaining }) => remaining === 1,
+    text: () => 'Ci sei quasi, manca ancora solo un codice.',
+  },
+  {
+    when: () => true,
+    text: ({ remaining }) =>
+      `Trova e scansiona ancora ${remaining} QR-code`,
+  },
+]
+
+const scanHeadline = computed(() => {
+  const required = global.settings.qrcodes.required
+  const pts = points.value
+  const remaining = required - pts
+  if (remaining <= 0) return ''
+  const ctx = { points: pts, required, remaining }
+  const rule = scanMessageRules.find((r) => r.when(ctx))
+  return rule ? rule.text(ctx) : ''
+})
+
+const quizReadyHeadline = computed(() => {
+  const n = global.settings.qrcodes.required
+  return `Bene! Hai trovato tutti i ${n} QR-code, ora puoi completare il quiz.`
+})
+
 onMounted(async () => {
   global.bgColor = '#4F485F'
   // check if there is a latest qrcode in local storage
@@ -69,7 +105,7 @@ function onScanError(err) {
 
     <template v-if="codesToScan > 0">
       <header class="flex flex-col items-center justify-center text-center px-12">
-        <h2 class="text-3xl font-bold text-white">Cerca {{ points > 0 ?  'ancora' : 'almeno' }} {{ codesToScan }} QR-code per sbloccare il quiz.</h2>
+        <h2 class="text-3xl font-bold text-white">{{ scanHeadline }}</h2>
       </header>
 
       <div class="flex items-center flex-col justify-center">
@@ -85,7 +121,7 @@ function onScanError(err) {
     </template>
     <template v-else>
       <header class="flex flex-col items-center justify-center text-center px-12">
-        <h2 class="text-3xl font-bold text-white">Bene! Hai trovato tutti i {{ global.settings.qrcodes.required }} QR-code, ora puoi completare il quiz.</h2>
+        <h2 class="text-3xl font-bold text-white">{{ quizReadyHeadline }}</h2>
       </header>
       <div class="flex items-center flex-col justify-center"> 
         <button

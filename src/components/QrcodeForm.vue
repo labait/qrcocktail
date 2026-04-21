@@ -142,7 +142,7 @@ onMounted(async () => {
             :disabled="isSaving || isLoadingDoc"
           />
           <label for="qrcode-enabled" class="text-base text-slate-700">
-            Attivo (visibile per la scansione pubblica)
+            Enabled
           </label>
         </div>
 

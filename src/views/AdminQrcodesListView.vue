@@ -1,11 +1,12 @@
 <script setup>
-import { inject, onMounted, ref } from 'vue'
+import { inject, onMounted, ref, computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import { deleteDoc, doc } from 'firebase/firestore'
 import { db } from '../firebase'
 
 import Qrcode from '../components/Qrcode.vue'
 import RedeemStatus from '../components/RedeemStatus.vue'
+import Paginator from '../components/Paginator.vue'
 
 import { useAdminGuard } from '../composables/useAdminGuard.js'
 import { qrcodesGet } from '../composables/useUtils'
@@ -15,6 +16,16 @@ const global = inject('global')
 const reloadQrCodes = inject('reloadQrCodes', async () => {})
 
 const qrList = ref([])
+
+/** Elementi per pagina (griglia 3 colonne: 3×3). */
+const QR_PAGE_SIZE = 9
+
+const qrPage = ref(1)
+
+const qrListPage = computed(() => {
+  const start = (qrPage.value - 1) * QR_PAGE_SIZE
+  return qrList.value.slice(start, start + QR_PAGE_SIZE)
+})
 
 async function refreshQrList() {
   qrList.value = await qrcodesGet()
@@ -52,11 +63,16 @@ async function removeRow(id) {
       </RouterLink>
     </div>
 
-    <section class="">
+    <section class="flex flex-col gap-4">
+      <Paginator
+        v-model="qrPage"
+        :total-items="qrList.length"
+        :page-size="QR_PAGE_SIZE"
+      />
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <div
-          v-for="row in qrList"
+          v-for="row in qrListPage"
           :key="row.id"
           class="flex flex-col gap-2 items-center bg-white p-4 rounded-lg border border-slate-200"
         >
@@ -108,6 +124,12 @@ async function removeRow(id) {
           Nessun QR-code. Aggiungine uno con «+ Nuovo».
         </div>
       </div>
+
+      <Paginator
+        v-model="qrPage"
+        :total-items="qrList.length"
+        :page-size="QR_PAGE_SIZE"
+      />
     </section>
   </div>
 </template>
