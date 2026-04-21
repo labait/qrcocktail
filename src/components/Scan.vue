@@ -149,7 +149,11 @@ onBeforeUnmount(() => {
 defineExpose({ start, stop })
 
 const videoTransform = computed(() => {
-  return props.facingMode === 'user' ? 'none' : 'scaleX(-1)'
+  // Flip only on desktop (min-width: 768px)
+  if (props.facingMode === 'user') return 'none'
+  // Only apply flip if width is >= 768px (desktop)
+  if (window.innerWidth >= 768) return 'scaleX(-1)'
+  return 'none'
 })
 </script>
 
