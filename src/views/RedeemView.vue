@@ -76,6 +76,7 @@ const cancelRedeem = async () => {
 
 onMounted(async () => {
   global.bgColor = '#aaa'
+  //global.bgColor = '#FEC606'
   const uid = route.params.uid
   console.log('uid', uid)
   account.value = await utils.accountGet(uid)
@@ -105,7 +106,7 @@ watch(global, (newVal) => {
 
 <template v-if="account">
   <div v-if="utils.isRedeemer()" class="flex flex-col items-center gap-4 px-4 py-8">
-    <RedeemStatus class="text-white text-2xl mb-8 " />
+    <RedeemStatus class="text-2xl mb-8 " />
     <template v-if="alreadyRedeemed">
       <div class="flex size-64 shrink-0 items-center justify-center" aria-hidden="true">
         <ExclamationCircleIcon class="size-42 text-red-600" />
@@ -119,7 +120,7 @@ watch(global, (newVal) => {
       <div class="flex rounded-full bg-red-600 size-64 shrink-0 items-center justify-center" aria-hidden="true">
         <XMarkIcon class="size-42 text-white" />
       </div>
-      <p class="m-0 max-w-md text-center text-white text-2xl">
+      <p class="m-0 max-w-md text-center  text-2xl">
         L'utente non ha diritto al premio.
       </p>
     </template>
