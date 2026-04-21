@@ -25,7 +25,7 @@ export const global = reactive({
       },
     },
     redeem: {
-      max: 100,
+      max: 130,
     },
   },
   account: null,

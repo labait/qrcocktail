@@ -52,7 +52,7 @@ async function removeRow(id) {
 </script>
 
 <template>
-  <div class="mx-auto ">
+  <div class="mx-auto mb-8">
     <RedeemStatus class="text-white text-xl mb-8 text-center" />
     <div class="mb-4 flex justify-center">
       <RouterLink
