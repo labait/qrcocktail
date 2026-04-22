@@ -13,6 +13,8 @@ import Scan from '../components/Scan.vue'
 const global = inject('global')
 const scanning = ref(false)
 const scanRef = ref(null)
+/** `null` = verifica in corso; `true` = ancora posti; `false` = contest chiuso */
+const redeemAvailable = ref(null)
 const points = computed(() => {
   //return 2; // testing
   return global.account?.qrcodes?.length ?? 0
@@ -57,6 +59,13 @@ const quizReadyHeadline = computed(() => {
 
 onMounted(async () => {
   global.bgColor = '#4F485F'
+  redeemAvailable.value = await utils.redeemAvailable()
+  if (redeemAvailable.value === false) {
+    global.dialog = {
+      text: 'Contest non più disponibile',
+      confirmText: 'OK',
+    }
+  }
   // check if there is a latest qrcode in local storage
   const latest = await utils.qrcodeLatestGet()
   if (latest) {
@@ -75,6 +84,7 @@ const handleDetected = async (url) => {
 
 /** iOS richiede che getUserMedia parta nello stesso “turno” del tap: start() subito dopo il click. */
 function beginScan() {
+  if (redeemAvailable.value !== true) return
   scanning.value = true
   scanRef.value?.start()
 }
@@ -91,7 +101,7 @@ function onScanError(err) {
 </script>
 
 
-<template>
+<template> 
   <div class=" flex min-h-[60vh] flex-1 flex-col">
     <Scan
       v-show="scanning"
@@ -110,8 +120,9 @@ function onScanError(err) {
 
       <div class="flex items-center flex-col justify-center">
         <button
-          class="btn btn-primary flex! items-center justify-center gap-2"
+          class="btn btn-primary flex! items-center justify-center gap-2 disabled:pointer-events-none disabled:opacity-45"
           type="button"
+          :disabled="redeemAvailable !== true"
           @click="beginScan"
         >
           <CameraIcon class="size-6 shrink-0" aria-hidden="true" />

@@ -7,6 +7,7 @@ import {
   collection,
   getDocs,
   query,
+  where,
 } from 'firebase/firestore'
 import { db } from '../firebase'
 
@@ -117,6 +118,18 @@ export function useUtils() {
     }))
   }
 
+  /**
+   * @returns {Promise<boolean>} `true` se ci sono ancora “slot” di riscatto (conteggio riscatti &lt; `settings.redeem.max`), altrimenti `false`.
+   */
+  const redeemAvailable = async () => {
+    const max = Number(global.settings?.redeem?.max)
+    //if (!Number.isFinite(max) || max <= 0) return true
+    const redeemed = await accountsGet({
+      query: [where('redeemed_at', '!=', null)],
+    })
+    return redeemed.length < max
+  }
+
   const accountUpdate = async (data) => {
     await updateDoc(doc(db, 'accounts', global.account.uid), data)
     global.account = {
@@ -157,6 +170,13 @@ export function useUtils() {
   }
 
   const qrcodeHandle = async (code) => {
+    if (!(await redeemAvailable())) {
+      global.dialog = {
+        text: 'Contest non più disponibile',
+        confirmText: 'OK',
+      }
+      return
+    }
     const qrcode = global.qrcodes.find((item) => String(item.code) === String(code))
     // check if the qrcode exists
     if (qrcode) {
@@ -201,6 +221,7 @@ export function useUtils() {
     qrcodeLatestDelete,
     accountGet,
     accountsGet,
+    redeemAvailable,
     accountUpdate,
     accountUpdateByUid,
     accountCanRedeem,
