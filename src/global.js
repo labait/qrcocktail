@@ -17,6 +17,7 @@ export const global = reactive({
         latest: 'qrcocktail-qrcode-latest-scanned',
       },
       required: 5,
+      participation_threshold: 4,
       size: 400,
     },
     quiz: {
