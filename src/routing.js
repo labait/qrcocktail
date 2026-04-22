@@ -13,6 +13,7 @@ import QrcodeView from './views/QrcodeView.vue'
 import AdminQrcodesList from './views/AdminQrcodesListView.vue'
 import AdminQrcodeNewView from './views/AdminQrcodesNewView.vue'
 import AdminQrcodeEditView from './views/AdminQrcodesEditView.vue'
+import AccountsView from './views/AccountsView.vue'
 
 export class Routing {
   static createRouter() {
@@ -70,6 +71,11 @@ export class Routing {
           path: '/admin/qrcodes',
           name: 'admin_qrcodes_list',
           component: AdminQrcodesList,
+        },
+        {
+          path: '/admin/accounts',
+          name: 'admin_accounts',
+          component: AccountsView,
         },
       ],
     })

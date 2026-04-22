@@ -13,7 +13,8 @@ const global = inject('global')
 
 <template>
   <div class="flex flex-row gap-4 bg-white/80 p-4 rounded-lg">
-    <RouterLink :to="{ name: 'admin_qrcodes_list' }" class=" underline-offset-2 hover:underline">Admin</RouterLink>
+    <RouterLink :to="{ name: 'admin_qrcodes_list' }" class="underline-offset-2 hover:underline">QR-code</RouterLink>
+    <RouterLink :to="{ name: 'admin_accounts' }" class="underline-offset-2 hover:underline">Account</RouterLink>
     <button
         class="cursor-pointer hover:underline"
         type="button"

@@ -76,6 +76,7 @@ onMounted(() => {
             'redeem',
             'qrcode',
             'admin_qrcodes_list',
+            'admin_accounts',
           ]
           if (!doNotRedirectRoutes.includes(router.currentRoute.value.name)) {
             utils.redirectToPhase()
