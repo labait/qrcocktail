@@ -16,6 +16,7 @@ import HelpIcon from './components/HelpIcon.vue'
 import AdminLinks from './components/AdminLinks.vue'
 import Dialog from './components/Dialog.vue'
 import Auth from './components/Auth.vue'
+import ParticipationStatus from './components/ParticipationStatus.vue'
 
 import { global } from './global'
 
@@ -63,6 +64,7 @@ onMounted(async () => {
     >
       <Header class="z-2 mt-4" />
       <Auth v-if="$route.name !== 'login'"/>
+      <ParticipationStatus v-if="$route.name !== 'login'" class="mb-4"/>
       <RouterView class="" />
       <div v-if="global.account" class="mb-8 text-center text-white">
         {{ global.account.uid }}
