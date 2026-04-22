@@ -60,6 +60,7 @@ async function openCamera() {
 async function start() {
   if (isScanning.value) return
   if (!navigator?.mediaDevices?.getUserMedia) {
+    console.log("emit error: Camera API non supportata dal browser")
     emit('error', new Error('Camera API non supportata dal browser'))
     return
   }
@@ -75,8 +76,10 @@ async function start() {
 
     isScanning.value = true
     intervalId = window.setInterval(scanFrame, props.scanIntervalMs)
+    console.log("emit started")
     emit('started')
   } catch (error) {
+    console.log("emit error: ", error)
     emit('error', error)
   }
 }
@@ -88,6 +91,7 @@ function stop() {
   }
   isScanning.value = false
   stopStreamTracks()
+  console.log("emit stopped")
   emit('stopped')
 }
 
@@ -102,6 +106,7 @@ async function scanFrame() {
       const match = barcodes?.find((item) => item?.rawValue)
       if (match?.rawValue) {
         stop()
+        console.log("emit detected: ", match.rawValue)
         emit('detected', match.rawValue)
         
       }
@@ -127,10 +132,12 @@ async function scanFrame() {
       inversionAttempts: 'attemptBoth',
     })
     if (result?.data) {
+      console.log("emit detected: ", result.data)
       emit('detected', result.data)
       stop()
     }
   } catch (error) {
+    console.log("emit error: ", error)
     emit('error', error)
   } finally {
     isBusy.value = false
