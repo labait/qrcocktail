@@ -108,7 +108,6 @@ async function scanFrame() {
         stop()
         console.log("emit detected: ", match.rawValue)
         emit('detected', match.rawValue)
-        
       }
       return
     }
@@ -133,8 +132,8 @@ async function scanFrame() {
     })
     if (result?.data) {
       console.log("emit detected: ", result.data)
-      emit('detected', result.data)
       stop()
+      emit('detected', result.data)
     }
   } catch (error) {
     console.log("emit error: ", error)
