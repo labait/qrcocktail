@@ -114,13 +114,16 @@ async function logout() {
     </template>
     <template v-else>
       <div class="flex items-center justify-center w-full gap-4 px-6 py-2">
-        <div class="avatar flex items-center gap-3 text-white">
+        <div 
+          class="avatar flex items-center gap-3 text-white"
+        >
           <img
             v-if="global.user.photoURL"
             :src="global.user.photoURL"
             :alt="global.user.displayName || 'Avatar'"
             class="h-10 w-10 rounded-full object-cover ring-2 shadow-sm"
             referrerpolicy="no-referrer"
+            alt="Avatar"
           />
           <div
             v-else

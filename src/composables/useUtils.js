@@ -180,6 +180,12 @@ export function useUtils() {
     const qrcode = global.qrcodes.find((item) => String(item.code) === String(code))
     // check if the qrcode exists
     if (qrcode) {
+      // Add the code to the account qrcodes_scanned array
+      if (!global.account.qrcodes_scanned) global.account.qrcodes_scanned = []
+      global.account.qrcodes_scanned.push(qrcode.code)
+      await updateDoc(doc(db, 'accounts', global.account.uid), {
+        qrcodes_scanned: global.account.qrcodes_scanned,
+      })
       // Check if the code has already been scanned
       if (global.account.qrcodes.includes(qrcode.code) && !isAdmin()) {
         global.dialog = {
@@ -188,10 +194,8 @@ export function useUtils() {
         }
         return
       }
-      
-      // Add the code to the account
+      // Add the VALID code to the account
       global.account.qrcodes.push(qrcode.code)
-      // Save the account
       await updateDoc(doc(db, 'accounts', global.account.uid), {
         qrcodes: global.account.qrcodes,
       })
