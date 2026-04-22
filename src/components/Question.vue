@@ -1,4 +1,11 @@
 <script setup>
+
+import { inject } from 'vue'
+const global = inject('global')
+
+import { useUtils } from '../composables/useUtils'
+const utils = useUtils()
+
 defineProps({
   question: {
     type: Object,
@@ -22,6 +29,8 @@ const emit = defineEmits(['update:modelValue'])
 function isSelected(modelValue, answer) {
   return modelValue != null && modelValue.text === answer.text
 }
+
+
 </script>
 
 <template>
@@ -44,7 +53,7 @@ function isSelected(modelValue, answer) {
           :checked="isSelected(modelValue, answer)"
           @change="emit('update:modelValue', answer)"
         />
-        <span class="text-md font-medium leading-[1.4] " :class="{ 'underline': answer.correct }">
+        <span class="text-md font-medium leading-[1.4] " :class="{ 'underline': answer.correct && utils.isAdmin()  }">
           {{ answer.text }}
         </span>
       </label>
