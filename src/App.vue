@@ -56,7 +56,10 @@ onMounted(async () => {
     <div class="max-w-4xl mx-auto min-h-screen flex flex-col gap-3">
       <Header class="z-2 mt-4" />
       <Auth v-if="$route.name !== 'login'"/>
-      <RouterView />
+      <RouterView class="" />
+      <div v-if="global.account" class="mb-8 text-center text-white">
+        {{ global.account.uid }}
+      </div>
     </div>
     <HelpIcon v-if="$route.name !== 'home'" class="fixed bottom-4 right-4 z-50" />
     <AdminLinks v-if="global.account?.roles?.includes('admin')" class="fixed bottom-4 left-4 z-50" />

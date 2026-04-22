@@ -148,7 +148,7 @@ function onScanError(err) {
       </div>
     </template>
 
-    <Glass :points="points" />
+    <Glass :points="points" class="mb-8"   />
     </div>
   </div>
 </template>
