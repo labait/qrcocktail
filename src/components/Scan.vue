@@ -101,8 +101,9 @@ async function scanFrame() {
       const barcodes = await detector.detect(videoRef.value)
       const match = barcodes?.find((item) => item?.rawValue)
       if (match?.rawValue) {
-        emit('detected', match.rawValue)
         stop()
+        emit('detected', match.rawValue)
+        
       }
       return
     }
