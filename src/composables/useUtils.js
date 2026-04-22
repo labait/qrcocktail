@@ -172,13 +172,13 @@ export function useUtils() {
 
   const qrcodeHandle = async (code) => {
     console.log('qrcodeHandle code', code)
-    if (!(await redeemAvailable())) {
-      global.dialog = {
-        text: 'Contest non più disponibile',
-        confirmText: 'OK',
-      }
-      return
-    }
+    // if (!(await redeemAvailable())) {
+    //   global.dialog = {
+    //     text: 'Contest non più disponibile',
+    //     confirmText: 'OK',
+    //   }
+    //   return
+    // }
     const qrcode = global.qrcodes.find((item) => String(item.code) === String(code))
     // check if the qrcode exists
     if (qrcode) {
