@@ -80,6 +80,7 @@ export function useUtils() {
     global.account.qrcodes = []
     await updateDoc(doc(db, 'accounts', global.account.uid), {
       qrcodes: [],
+      qrcodes_scanned: [],
       questionsAnswered: [],
       redeemed_at: null,
       phase: 'qrcodes',
