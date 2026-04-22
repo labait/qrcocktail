@@ -23,7 +23,9 @@ const global = inject('global')
           global.dialog = {
             text: 'Reset, sei sicuro?',
             confirmText: 'Reset',
+            cancelText: 'Annulla',
             onConfirm: utils.reset,
+            onCancel: () => {},
           }
         }"
       >
