@@ -55,7 +55,7 @@ onMounted(async () => {
   <main class="mx-auto min-h-screen" :style="{ backgroundColor: global.bgColor }"  >
     <div class="max-w-4xl mx-auto min-h-screen flex flex-col gap-3">
       <Header class="z-2 mt-4" />
-      <Auth />
+      <Auth v-if="$route.name !== 'login'"/>
       <RouterView />
     </div>
     <HelpIcon v-if="$route.name !== 'home'" class="fixed bottom-4 right-4 z-50" />

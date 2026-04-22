@@ -19,7 +19,7 @@ onMounted(() => {
       <div class="font-bold rounded-full text-xl bg-white text-black w-12 h-12 flex items-center justify-center">
         1
       </div>
-      Accedi con il tuo account Google
+      Accedi con il tuo account Google o Microsoft
     </li>
     <li class="text-lg flex flex-col items-center gap-2">
       <div class="font-bold rounded-full text-xl bg-white text-black w-12 h-12 flex items-center justify-center">

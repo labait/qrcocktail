@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app'
-import { getAuth, GoogleAuthProvider } from 'firebase/auth'
+import { getAuth, GoogleAuthProvider, OAuthProvider } from 'firebase/auth'
 import { getFirestore, doc, getDoc, setDoc, updateDoc } from 'firebase/firestore'
 
 /**
@@ -18,10 +18,26 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig)
 
-/** Istanza Auth (Google Sign-In va abilitato in Firebase Console → Authentication → Sign-in method) */
+/** Istanza Auth (Google e Microsoft vanno abilitati in Firebase Console → Authentication) */
 export const auth = getAuth(app)
 
 export const googleProvider = new GoogleAuthProvider()
+
+/**
+ * Microsoft — abilitare in Firebase Console → Authentication → Microsoft.
+ * Se in Azure l’app è solo per un tenant (es. LABA) e NON è “multitenant”, Firebase usa
+ * l’endpoint /common e Azure risponde AADSTS50194: imposta allora `VITE_MICROSOFT_TENANT_ID`
+ * nel `.env` con il GUID del tenant oppure il dominio Azure AD (es. `laba.edu` o `xxx.onmicrosoft.com`).
+ * In alternativa: Portale Azure → registrazioni app → tipi di account supportati → “Multitenant”.
+ */
+export const microsoftProvider = new OAuthProvider('microsoft.com')
+{
+  const raw = import.meta.env.VITE_MICROSOFT_TENANT_ID
+  const tenant = typeof raw === 'string' ? raw.trim() : ''
+  const params = { prompt: 'select_account' }
+  if (tenant) params.tenant = tenant
+  microsoftProvider.setCustomParameters(params)
+}
 
 export const db = getFirestore(app)
 
@@ -44,21 +60,29 @@ export async function ensureAccountExists(uid) {
 }
 
 /**
- * Aggiorna accounts/{uid} con email e nome da Google (dopo signInWithPopup).
- * Usa firstname/lastname se Google espone given_name e family_name, altrimenti name.
+ * Aggiorna accounts/{uid} con email e nome dopo sign-in OAuth (Google o Microsoft).
  */
-export async function syncAccountFromGoogleProfile(uid, user, additionalUserInfo) {
+export async function syncAccountFromAuthProfile(uid, user, additionalUserInfo) {
   await ensureAccountExists(uid)
   const profile = additionalUserInfo?.profile ?? {}
   const payload = {}
 
-  const email = user.email ?? profile.email
+  const email =
+    (typeof user.email === 'string' && user.email.trim()) ||
+    (typeof profile.email === 'string' && profile.email.trim()) ||
+    (typeof profile.mail === 'string' && profile.mail.trim()) ||
+    (typeof profile.userPrincipalName === 'string' &&
+      profile.userPrincipalName.trim())
   if (email) payload.email = email
 
+  const givenRaw =
+    profile.given_name ?? profile.givenName ?? profile.first_name
+  const familyRaw =
+    profile.family_name ?? profile.surname ?? profile.last_name
   const given =
-    typeof profile.given_name === 'string' ? profile.given_name.trim() : ''
+    typeof givenRaw === 'string' ? givenRaw.trim() : ''
   const family =
-    typeof profile.family_name === 'string' ? profile.family_name.trim() : ''
+    typeof familyRaw === 'string' ? familyRaw.trim() : ''
   if (given && family) {
     payload.firstname = given
     payload.lastname = family

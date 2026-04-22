@@ -7,13 +7,9 @@ const utils = useUtils()
 import { RouterLink, useRouter } from 'vue-router'
 const router = useRouter()
 
-import {
-  onAuthStateChanged,
-  signInWithPopup,
-  signOut as firebaseSignOut,
-} from 'firebase/auth'
+import { onAuthStateChanged, signOut as firebaseSignOut } from 'firebase/auth'
 import { doc, getDoc, onSnapshot } from 'firebase/firestore'
-import { auth, db, googleProvider, ensureAccountExists, syncAccountFromGoogleProfile } from '../firebase'
+import { auth, db, ensureAccountExists } from '../firebase'
 import { accountHasRedeemedAt } from '../utils/accountRedeem'
 
 const global = inject('global')
@@ -91,20 +87,13 @@ onMounted(() => {
 
         }
       } else {
-        router.push({ name: 'home' })
+        if (router.currentRoute.value.name !== 'login') {
+          router.push({ name: 'home' })
+        }
       }
     })()
   })
 })
-
-async function connectGoogle() {
-  const result = await signInWithPopup(auth, googleProvider)
-  await syncAccountFromGoogleProfile(
-    result.user.uid,
-    result.user,
-    result.additionalUserInfo,
-  )
-}
 
 async function logout() {
   await firebaseSignOut(auth)
@@ -116,13 +105,12 @@ async function logout() {
 <template>
   <div class="flex justify-center w-full flex-none mb-8">
     <template v-if="!global.user">
-      <button
-        type="button"
+      <RouterLink
+        :to="{ name: 'login' }"
         class="btn btn-primary"
-        @click="connectGoogle"
       >
-        Accedi con Google
-      </button>
+        Accedi
+      </RouterLink>
     </template>
     <template v-else>
       <div class="flex items-center justify-center w-full gap-4 px-6 py-2">

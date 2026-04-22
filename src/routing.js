@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 
 import HomeView from './views/HomeView.vue'
+import LoginView from './views/LoginView.vue'
 import QrcodesView from './views/QrcodesView.vue'
 import QuizView from './views/QuizView.vue'
 import RedeemView from './views/RedeemView.vue'
@@ -22,6 +23,11 @@ export class Routing {
           path: '/',
           name: 'home',
           component: HomeView,
+        },
+        {
+          path: '/login',
+          name: 'login',
+          component: LoginView,
         },
         {
           path: '/qrcodes',
