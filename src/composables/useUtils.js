@@ -171,6 +171,7 @@ export function useUtils() {
   }
 
   const qrcodeHandle = async (code) => {
+    console.log('qrcodeHandle code', code)
     if (!(await redeemAvailable())) {
       global.dialog = {
         text: 'Contest non più disponibile',
@@ -184,11 +185,13 @@ export function useUtils() {
       // Add the code to the account qrcodes_scanned array
       if (!global.account.qrcodes_scanned) global.account.qrcodes_scanned = []
       global.account.qrcodes_scanned.push(qrcode.code)
+      console.log('update account qrcodes_scanned')
       await updateDoc(doc(db, 'accounts', global.account.uid), {
         qrcodes_scanned: global.account.qrcodes_scanned,
       })
       // Check if the code has already been scanned
       if (global.account.qrcodes.includes(qrcode.code) && !isAdmin()) {
+        console.log('code already scanned')
         global.dialog = {
           text: `Codice <strong>GIA' SCANSIONATO</strong>, RIPROVA!`,
           confirmText: 'Continua',
@@ -196,6 +199,7 @@ export function useUtils() {
         return
       }
       // Add the VALID code to the account
+      console.log('code is valid, adding code to account qrcodes')
       global.account.qrcodes.push(qrcode.code)
       await updateDoc(doc(db, 'accounts', global.account.uid), {
         qrcodes: global.account.qrcodes,

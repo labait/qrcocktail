@@ -77,7 +77,7 @@ onMounted(async () => {
 
 const handleDetected = async (url) => {
   const code = url.split('/').pop()
-  console.log('url', url, 'code', code)
+  console.log('handleDetected url', url, 'code', code)
   await utils.qrcodeHandle(code)
   scanning.value = false
 }
