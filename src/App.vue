@@ -1,8 +1,8 @@
 <script setup>
 import { onMounted, provide } from 'vue'
 import { RouterView } from 'vue-router'
-import { useRouter } from 'vue-router'
-const router = useRouter()
+import { useRoute } from 'vue-router'
+const route = useRoute()
 
 import Loading from './components/Loading.vue'
 
@@ -53,7 +53,14 @@ onMounted(async () => {
 <template>
   <Loading v-if="global.loading > 0" />
   <main class="mx-auto min-h-screen" :style="{ backgroundColor: global.bgColor }"  >
-    <div class="max-w-4xl mx-auto min-h-screen flex flex-col gap-3">
+    <div
+      class="min-h-screen flex w-full flex-col gap-3"
+      :class="
+        route.name === 'admin_accounts'
+          ? 'max-w-none px-3 sm:px-5 md:px-8 lg:px-12'
+          : 'mx-auto max-w-4xl'
+      "
+    >
       <Header class="z-2 mt-4" />
       <Auth v-if="$route.name !== 'login'"/>
       <RouterView class="" />

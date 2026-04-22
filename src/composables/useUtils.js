@@ -11,6 +11,15 @@ import {
 } from 'firebase/firestore'
 import { db } from '../firebase'
 
+function accountDisplayName(row) {
+  if (typeof row.name === 'string' && row.name.trim()) return row.name.trim()
+  const fn = typeof row.firstname === 'string' ? row.firstname.trim() : ''
+  const ln = typeof row.lastname === 'string' ? row.lastname.trim() : ''
+  if (fn || ln) return [fn, ln].filter(Boolean).join(' ')
+  if (typeof row.email === 'string' && row.email.trim()) return row.email.trim()
+  return '—'
+}
+
 /** @param {{ query?: unknown[] }} [options] Firestore `query()` constraints, e.g. `where(...)` */
 export async function qrcodesGet({ query: queryConstraints = [] } = {}) {
   const qrcodesRef = collection(db, 'qrcodes')
@@ -119,6 +128,18 @@ export function useUtils() {
     }))
   }
 
+  /** Dopo `getDocs`, filtra per UID o nome (anche parziale, case-insensitive). */
+  const accountsSearch = async (search = '') => {
+    const all = await accountsGet()
+    const needle = String(search).trim().toLowerCase()
+    if (!needle) return all
+    return all.filter((row) => {
+      const uid = String(row.uid ?? '').toLowerCase()
+      const name = accountDisplayName(row).toLowerCase()
+      return uid.includes(needle) || name.includes(needle)
+    })
+  }
+
   /**
    * @returns {Promise<boolean>} `true` se ci sono ancora “slot” di riscatto (conteggio riscatti &lt; `settings.redeem.max`), altrimenti `false`.
    */
@@ -223,6 +244,8 @@ export function useUtils() {
     qrcodeLatestDelete,
     accountGet,
     accountsGet,
+    accountsSearch,
+    accountDisplayName,
     redeemAvailable,
     accountUpdate,
     accountUpdateByUid,
