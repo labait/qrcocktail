@@ -59,6 +59,11 @@ function validCount(row) {
   return Array.isArray(row.qrcodes) ? row.qrcodes.length : 0
 }
 
+function rowEmail(row) {
+  if (typeof row.email === 'string' && row.email.trim()) return row.email.trim()
+  return '—'
+}
+
 function escapeCsvCell(val) {
   const s = String(val ?? '')
   if (/[",\n\r]/.test(s)) return `"${s.replace(/"/g, '""')}"`
@@ -67,10 +72,11 @@ function escapeCsvCell(val) {
 
 async function exportFullCsv() {
   const all = await utils.accountsGet()
-  const headers = ['uid', 'name', 'qrcode_scansionati', 'qrcode_validi']
+  const headers = ['uid', 'name', 'email', 'qrcode_scansionati', 'qrcode_validi']
   const rows = all.map((a) => [
     a.uid ?? '',
     utils.accountDisplayName(a),
+    typeof a.email === 'string' ? a.email : '',
     Array.isArray(a.qrcodes_scanned) ? a.qrcodes_scanned.length : 0,
     Array.isArray(a.qrcodes) ? a.qrcodes.length : 0,
   ])
@@ -165,6 +171,9 @@ onMounted(() => {
               <th scope="col" class="min-w-0 px-4 py-3 font-semibold text-slate-800">
                 Nome
               </th>
+              <th scope="col" class="min-w-0 max-w-xs px-4 py-3 font-semibold text-slate-800">
+                Email
+              </th>
               <th
                 scope="col"
                 class="w-[1%] shrink-0 whitespace-nowrap px-4 py-3 text-right font-semibold text-slate-800 tabular-nums"
@@ -185,17 +194,20 @@ onMounted(() => {
               <td class="min-w-0 wrap-break-word px-4 py-3 text-slate-900">
                 {{ utils.accountDisplayName(row) }}
               </td>
+              <td class="min-w-0 max-w-xs truncate px-4 py-3 text-sm text-slate-900" :title="rowEmail(row)">
+                {{ rowEmail(row) }}
+              </td>
               <td class="w-[1%] shrink-0 whitespace-nowrap px-4 py-3 text-right tabular-nums text-slate-900">
                 {{ scannedCount(row) }} / {{ validCount(row) }}
               </td>
             </tr>
             <tr v-if="!accountsList.length && !routeSearchQ">
-              <td colspan="3" class="px-4 py-8 text-center text-slate-600">
+              <td colspan="4" class="px-4 py-8 text-center text-slate-600">
                 Nessun account.
               </td>
             </tr>
             <tr v-else-if="!accountsList.length && routeSearchQ">
-              <td colspan="3" class="px-4 py-8 text-center text-slate-600">
+              <td colspan="4" class="px-4 py-8 text-center text-slate-600">
                 Nessun risultato per «{{ routeSearchQ }}».
               </td>
             </tr>
