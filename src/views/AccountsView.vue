@@ -51,11 +51,24 @@ function onSearchSubmit() {
   router.push({ name: 'admin_accounts', query: q ? { q } : {} })
 }
 
-function scannedCount(row) {
+function qrcodeNameForCode(code) {
+  const def = global.qrcodes?.find((q) => String(q.code) === String(code))
+  if (def && typeof def.name === 'string' && def.name.trim()) return def.name.trim()
+  return String(code)
+}
+
+/** Da `account.qrcodes` (codici validi): map → `name` dal catalogo, `Set` univoco, join con `, ` */
+function qrcodesNamesUniqueJoin(row) {
+  if (!Array.isArray(row?.qrcodes) || !row.qrcodes.length) return ''
+  const names = row.qrcodes.map((code) => qrcodeNameForCode(code))
+  return [...new Set(names)].join(', ')
+}
+
+function qrcodesCount(row) {
   return Array.isArray(row.qrcodes_scanned) ? row.qrcodes_scanned.length : 0
 }
 
-function validCount(row) {
+function qrcodesUniq(row) {
   return Array.isArray(row.qrcodes) ? row.qrcodes.length : 0
 }
 
@@ -72,13 +85,21 @@ function escapeCsvCell(val) {
 
 async function exportFullCsv() {
   const all = await utils.accountsGet()
-  const headers = ['uid', 'name', 'email', 'qrcode_scansionati', 'qrcode_validi']
+  const headers = [
+    'uid',
+    'name',
+    'email',
+    'qrcodes_names',
+    'qrcodes_count',
+    'qrcodes_uniq',
+  ]
   const rows = all.map((a) => [
     a.uid ?? '',
     utils.accountDisplayName(a),
     typeof a.email === 'string' ? a.email : '',
-    Array.isArray(a.qrcodes_scanned) ? a.qrcodes_scanned.length : 0,
-    Array.isArray(a.qrcodes) ? a.qrcodes.length : 0,
+    qrcodesNamesUniqueJoin(a),
+    qrcodesCount(a),
+    qrcodesUniq(a),
   ])
   const lines = [headers, ...rows].map((r) =>
     r.map(escapeCsvCell).join(','),
@@ -174,11 +195,20 @@ onMounted(() => {
               <th scope="col" class="min-w-0 max-w-xs px-4 py-3 font-semibold text-slate-800">
                 Email
               </th>
+              <th scope="col" class="min-w-0 max-w-md px-4 py-3 font-semibold text-slate-800">
+                QRCodes: nomi
+              </th>
               <th
                 scope="col"
                 class="w-[1%] shrink-0 whitespace-nowrap px-4 py-3 text-right font-semibold text-slate-800 tabular-nums"
               >
-                QR scansionati / validi
+                QRCodes: count
+              </th>
+              <th
+                scope="col"
+                class="w-[1%] shrink-0 whitespace-nowrap px-4 py-3 text-right font-semibold text-slate-800 tabular-nums"
+              >
+                QRCodes: uniq
               </th>
             </tr>
           </thead>
@@ -197,17 +227,26 @@ onMounted(() => {
               <td class="min-w-0 max-w-xs truncate px-4 py-3 text-sm text-slate-900" :title="rowEmail(row)">
                 {{ rowEmail(row) }}
               </td>
+              <td
+                class="min-w-0 max-w-md wrap-break-word px-4 py-3 text-sm text-slate-900"
+                :title="qrcodesNamesUniqueJoin(row) || undefined"
+              >
+                {{ qrcodesNamesUniqueJoin(row) || '—' }}
+              </td>
               <td class="w-[1%] shrink-0 whitespace-nowrap px-4 py-3 text-right tabular-nums text-slate-900">
-                {{ scannedCount(row) }} / {{ validCount(row) }}
+                {{ qrcodesCount(row) }}
+              </td>
+              <td class="w-[1%] shrink-0 whitespace-nowrap px-4 py-3 text-right tabular-nums text-slate-900">
+                {{ qrcodesUniq(row) }}
               </td>
             </tr>
             <tr v-if="!accountsList.length && !routeSearchQ">
-              <td colspan="4" class="px-4 py-8 text-center text-slate-600">
+              <td colspan="6" class="px-4 py-8 text-center text-slate-600">
                 Nessun account.
               </td>
             </tr>
             <tr v-else-if="!accountsList.length && routeSearchQ">
-              <td colspan="4" class="px-4 py-8 text-center text-slate-600">
+              <td colspan="6" class="px-4 py-8 text-center text-slate-600">
                 Nessun risultato per «{{ routeSearchQ }}».
               </td>
             </tr>
