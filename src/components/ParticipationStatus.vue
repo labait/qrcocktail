@@ -5,8 +5,8 @@ const global = inject('global')
 
 const scanned = computed(
   () =>
-    Array.isArray(global.account?.qrcodes_scanned)
-      ? global.account.qrcodes_scanned.length
+    Array.isArray(global.account?.qrcodes)
+      ? global.account.qrcodes.length
       : 0,
 )
 
