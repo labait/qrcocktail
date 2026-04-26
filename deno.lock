@@ -11,9 +11,12 @@
   "workspace": {
     "packageJson": {
       "dependencies": [
+        "npm:@heroicons/vue@^2.2.0",
         "npm:@tailwindcss/vite@^4.2.2",
         "npm:@vitejs/plugin-vue@^6.0.5",
+        "npm:canvas-confetti@^1.9.4",
         "npm:firebase@^12.11.0",
+        "npm:jsqr@^1.4.0",
         "npm:qrcode@^1.5.4",
         "npm:tailwindcss@^4.2.2",
         "npm:vite@^8.0.1",
